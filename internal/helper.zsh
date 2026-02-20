@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 
 function ai::internal::opencode::install {
-    if which opencode &> /dev/null; then
-        message_info "opencode is already installed"
+    if core::exists opencode; then
         return 0
     fi
 
