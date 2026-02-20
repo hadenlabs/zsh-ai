@@ -5,8 +5,7 @@ export AI_MESSAGE_BREW="Please install brew or use antibody bundle luismayta/zsh
 export AI_PACKAGE_NAME=ai
 
 export AI_TOOLS=(
-  sops
-
+  opencode
 )
 
 export AI_PACKAGES=(

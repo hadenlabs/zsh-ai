@@ -4,7 +4,14 @@
 function ai::internal::packages::install {
     message_info "Installing required ai packages"
     for package in "${AI_PACKAGES[@]}"; do
-        core::install "${package}"
+        case "${package}" in
+            opencode)
+                ai::internal::opencode::install
+                ;;
+            *)
+                core::install "${package}"
+                ;;
+        esac
     done
     message_success "Installed required ai packages"
 }
