@@ -168,7 +168,6 @@ tasks:
     cmds:
       - uv update
       - uv run pre-commit autoupdate
-      - task: pnpm:update
 
   setup:
     desc: Setup dependences of project
@@ -182,9 +181,7 @@ tasks:
   environment:
     desc: Setup environment of project
     cmds:
-      - task: terraform:environment
       - task: uv:environment
-      - task: pnpm:environment
 
   generate:
     desc: Generate files
