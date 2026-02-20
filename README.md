@@ -22,19 +22,122 @@ zsh-ai for project
 
 This is a list of plugins that need to be installed previously to enjoy all the goodies of this configuration:
 
+- [zsh-core](https://github.com/hadenlabs/zsh-core)
 - [gomplate](https://github.com/hairyhenderson/gomplate)
 - [python](https://www.python.org)
 - [taskfile](https://github.com/go-task/task)
 
+## Installation
+
+<!-- Space: Projects -->
+<!-- Parent: ZshAI -->
+<!-- Title: Installation Oh-My-Zsh ZshAI -->
+<!-- Label: ZshAI -->
+<!-- Label: Project -->
+<!-- Label: Installation -->
+<!-- Label: Oh-My-Zsh -->
+<!-- Include: docs/disclaimer.md -->
+<!-- Include: ac:toc -->
+
+### [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) users
+
+If you're using [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh), install this plugin by doing the following:
+
+1. Go to your oh-my-zsh custom plugins directory -`cd ~/.oh-my-zsh/custom/plugins`
+2. Clone the plugin `bash git clone https://github.com/hadenlabs/zsh-ai`bash
+3. Edit your `.zshrc` and add `plugins=( ... zsh-ai )` to your list of plugins
+4. Open a new terminal and enjoy!
+   <!-- Space: Projects -->
+   <!-- Parent: ZshAI -->
+   <!-- Title: Installation Antigen ZshAI -->
+   <!-- Label: ZshAI -->
+   <!-- Label: Project -->
+   <!-- Label: Installation -->
+   <!-- Label: Antigen -->
+   <!-- Include: docs/disclaimer.md -->
+   <!-- Include: ac:toc -->
+
+### [antigen](https://github.com/zsh-users/antigen) users
+
+If you're using [Antigen](https://github.com/zsh-users/antigen), install this plugin by doing the following:
+
+1. Add `antigen bundle hadenlabs/zsh-ai` to your `.zshrc` where you're adding your other plugins.
+2. Either open a new terminal to force zsh to load the new plugin, or run `antigen bundle hadenlabs/zsh-ai` in a running zsh session.
+3. Enjoy!
+   <!-- Space: Projects -->
+   <!-- Parent: ZshAI -->
+   <!-- Title: Installation Antibody ZshAI -->
+   <!-- Label: ZshAI -->
+   <!-- Label: Project -->
+   <!-- Label: Installation -->
+   <!-- Include: docs/disclaimer.md -->
+   <!-- Include: ac:toc -->
+
+### [antibody](https://github.com/getantibody/antibody) users
+
+If you're using [Antibody](https://github.com/getantibody/antibody), install this plugin by doing the following:
+
+1. Add :
+
+```{.sourceCode .bash}
+antibody bundle hadenlabs/zsh-ai
+```
+
+to your `.zshrc` where you're adding your other plugins.
+
+2. Either open a new terminal to force zsh to load the new plugin, or run `antibody bundle hadenlabs/zsh-ai` in a running zsh session.
+3. Enjoy!
+
 ## Usage
 
-# How to use this project
+# 🚀 How to use this project
 
-## Replace name project to New Project
+## Prerequisites
+
+Before getting started, ensure you have the following installed:
+
+- **Python** (3.11 or higher) - Check with `python --version`
+- **Task** (Taskfile runner) - Install with `brew install go-task/tap/go-task` or follow [official installation](https://taskfile.dev/installation/)
+
+## Quick Start
+
+### 1. First-time Setup
+
+When cloning the repository for the first time, you need to download the Taskfile dependencies:
 
 ```bash
-agr 'zsh-ai' 'new-project'
+task --yes
 ```
+
+This command downloads all the external Taskfile dependencies defined in the main `Taskfile.yml`.
+
+### 2. Environment Setup
+
+Set up the development environment with all necessary dependencies:
+
+```bash
+task environment
+```
+
+This command:
+
+- Sets up the Python virtual environment with `uv`
+- Prepares the development environment
+
+### 3. Project Setup
+
+Install all project dependencies and configure the development environment:
+
+```bash
+task setup
+```
+
+This command:
+
+- Creates `.env` file from `.env.example` if it doesn't exist
+- Installs Python dependencies with `uv`
+- Sets up pre-commit hooks
+- Configures Git hooks
 
 ## Examples
 
@@ -52,6 +155,15 @@ agr 'zsh-ai' 'new-project'
 ```bash
 task setup
 ```
+
+ <!-- Space: Projects -->
+<!-- Parent: ZshAI -->
+<!-- Title: Functions ZshAI -->
+<!-- Label: Functions -->
+<!-- Include: docs/disclaimer.md -->
+<!-- Include: ac:toc -->
+
+## Functions
 
 ## Help
 
