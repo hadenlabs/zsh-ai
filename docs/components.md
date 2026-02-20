@@ -1,7 +1,7 @@
 <!-- Space: Projects -->
-<!-- Parent: BaseTemplate -->
-<!-- Title: Components BaseTemplate -->
-<!-- Label: BaseTemplate -->
+<!-- Parent: ZshAI -->
+<!-- Title: Components ZshAI -->
+<!-- Label: ZshAI -->
 <!-- Label: Project -->
 <!-- Label: Components -->
 <!-- Include: disclaimer.md -->

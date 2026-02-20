@@ -3,5 +3,5 @@
 ## Replace name project to New Project
 
 ```bash
-agr 'base-template' 'new-project'
+agr 'zsh-ai' 'new-project'
 ```

@@ -1,6 +1,6 @@
 <!-- Space: Projects -->
-<!-- Parent: BaseTemplate -->
-<!-- Title: Examples BaseTemplate -->
+<!-- Parent: ZshAI -->
+<!-- Title: Examples ZshAI -->
 <!-- Label: Examples -->
 <!-- Include: ./../disclaimer.md -->
 <!-- Include: ac:toc -->

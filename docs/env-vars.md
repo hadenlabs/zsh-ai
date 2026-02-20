@@ -1,7 +1,7 @@
 <!-- Space: Projects -->
-<!-- Parent: BaseTemplate -->
-<!-- Title: EnvVars BaseTemplate -->
-<!-- Label: BaseTemplate -->
+<!-- Parent: ZshAI -->
+<!-- Title: EnvVars ZshAI -->
+<!-- Label: ZshAI -->
 <!-- Label: Project -->
 <!-- Label: EnvVars -->
 <!-- Include: disclaimer.md -->

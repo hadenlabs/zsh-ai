@@ -70,7 +70,7 @@ dotenv:
   - .env
 
 vars:
-  PROJECT_NAME: base-template
+  PROJECT_NAME: zsh-ai
   ORGANIZATION: hadenlabs
   USER: ubuntu
   DOCKER_PLATFORM: linux/amd64

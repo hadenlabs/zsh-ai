@@ -1,9 +1,9 @@
 # This is an example goreleaser.yaml file with some sane defaults.
 # Make sure to check the documentation at http://goreleaser.com
-project_name: base-template
+project_name: zsh-ai
 env:
   - GO111MODULE=on
-  - REPO=github.com/hadenlabs/base-template
+  - REPO=github.com/hadenlabs/zsh-ai
 before:
   hooks:
     - go mod download
@@ -68,7 +68,7 @@ changelog:
 release:
   github:
     owner: hadenlabs
-    name: base-template
+    name: zsh-ai
   draft: true
   prerelease: auto
   name_template: "{{.ProjectName}}-v{{.Version}}-{{.ShortCommit}}-{{.Date}}"
