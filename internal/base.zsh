@@ -15,6 +15,9 @@ function ai::internal::packages::install {
             fabric)
                 ai::internal::fabric::install
                 ;;
+            ollama)
+                ai::internal::ollama::install
+                ;;
             *)
                 core::install "${package}"
                 ;;

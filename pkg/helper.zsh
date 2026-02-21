@@ -16,3 +16,15 @@ function ai::fabric::patterns::sync {
 function ai::fabric::patterns::pull {
     ai::internal::fabric::patterns::pull
 }
+
+function ai::ollama::install {
+    ai::internal::ollama::install
+}
+
+function ai::ollama::models::list {
+    ai::internal::ollama::models::list
+}
+
+function ai::ollama::models::pull {
+    ai::internal::ollama::models::pull "${@}"
+}

@@ -73,6 +73,31 @@ Update fabric patterns from the official repository using `fabric --updatepatter
 ai::fabric::patterns::pull
 ```
 
+#### ai::ollama::install
+
+Install ollama CLI tool for running LLMs locally. Checks if ollama is already installed before attempting installation.
+
+```bash
+ai::ollama::install
+```
+
+#### ai::ollama::models::list
+
+List all installed ollama models.
+
+```bash
+ai::ollama::models::list
+```
+
+#### ai::ollama::models::pull
+
+Download a model from ollama registry.
+
+```bash
+ai::ollama::models::pull llama3.2
+ai::ollama::models::pull mistral
+```
+
 ### Internal Functions
 
 #### ai::internal::packages::install
@@ -123,6 +148,30 @@ Internal function for pulling patterns from fabric's official repository.
 ai::internal::fabric::patterns::pull
 ```
 
+#### ai::internal::ollama::install
+
+Internal function for ollama installation logic. Verifies if ollama exists before installing via curl.
+
+```bash
+ai::internal::ollama::install
+```
+
+#### ai::internal::ollama::models::list
+
+Internal function for listing installed ollama models.
+
+```bash
+ai::internal::ollama::models::list
+```
+
+#### ai::internal::ollama::models::pull
+
+Internal function for downloading ollama models.
+
+```bash
+ai::internal::ollama::models::pull llama3.2
+```
+
 ### Variables
 
 | Variable                         | Description                                                    |
@@ -135,7 +184,9 @@ ai::internal::fabric::patterns::pull
 | `AI_OPENCODE_BIN_PATH`           | Binary path for opencode (default: `~/.opencode/bin`)          |
 | `AI_FABRIC_PATTERNS_PATH`        | Path to fabric patterns (default: `~/.config/fabric/patterns`) |
 | `AI_FABRIC_PATTERNS_SYNC_SOURCE` | Source path for custom patterns (`ZSH_AI_PATH/patterns`)       |
+| `AI_OLLAMA_MODELS_PATH`          | Path to ollama models (default: `~/.ollama/models`)            |
 | `AI_INSTALL_URL_OPENCODE`        | Installation URL for opencode                                  |
 | `AI_INSTALL_URL_FABRIC`          | Installation URL for fabric                                    |
+| `AI_INSTALL_URL_OLLAMA`          | Installation URL for ollama                                    |
 | `AI_APPLICATION_PATH`            | Path to applications (macOS only)                              |
 | `AI_ARCHITECTURE_NAME`           | Architecture name (e.g., `darwin-arm64`, `linux-amd64`)        |
