@@ -19,3 +19,5 @@ function ai::internal::main::factory {
 }
 
 ai::internal::main::factory
+
+ai::internal::opencode::load

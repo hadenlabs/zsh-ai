@@ -47,6 +47,8 @@ Ver referencia completa: [docs/functions.md](docs/functions.md)
 | -------------------------------- | ------------------------------------------ |
 | `AI_TOOLS`                       | Lista de herramientas: `(opencode fabric)` |
 | `AI_PACKAGES`                    | Paquetes a instalar                        |
+| `AI_OPENCODE_ROOT_PATH`          | `~/.opencode`                              |
+| `AI_OPENCODE_BIN_PATH`           | `~/.opencode/bin`                          |
 | `AI_FABRIC_PATTERNS_PATH`        | `~/.config/fabric/patterns`                |
 | `AI_FABRIC_PATTERNS_SYNC_SOURCE` | `patterns/` local                          |
 | `AI_INSTALL_URL_OPENCODE`        | URL de instalación opencode                |
