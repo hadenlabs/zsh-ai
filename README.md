@@ -241,6 +241,14 @@ Internal function that iterates through `AI_PACKAGES` and installs each one with
 ai::internal::packages::install
 ```
 
+#### ai::internal::opencode::load
+
+Internal function that adds opencode binary path to PATH. Checks if `~/.opencode/bin` exists and prepends it to PATH.
+
+```bash
+ai::internal::opencode::load
+```
+
 #### ai::internal::opencode::install
 
 Internal function for opencode installation logic. Verifies if opencode exists before installing via curl.
@@ -281,6 +289,8 @@ ai::internal::fabric::patterns::pull
 | `AI_TOOLS`                       | Array of AI tools to install                                   |
 | `AI_PACKAGES`                    | Array of all packages (combines `AI_TOOLS`)                    |
 | `AI_MESSAGE_BREW`                | Message for brew requirement                                   |
+| `AI_OPENCODE_ROOT_PATH`          | Root path for opencode (default: `~/.opencode`)                |
+| `AI_OPENCODE_BIN_PATH`           | Binary path for opencode (default: `~/.opencode/bin`)          |
 | `AI_FABRIC_PATTERNS_PATH`        | Path to fabric patterns (default: `~/.config/fabric/patterns`) |
 | `AI_FABRIC_PATTERNS_SYNC_SOURCE` | Source path for custom patterns (`ZSH_AI_PATH/patterns`)       |
 | `AI_INSTALL_URL_OPENCODE`        | Installation URL for opencode                                  |
