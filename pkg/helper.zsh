@@ -1,6 +1,5 @@
 #!/usr/bin/env ksh
 # -*- coding: utf-8 -*-
-
 function ai::opencode::install {
     ai::internal::opencode::install
 }
@@ -27,4 +26,8 @@ function ai::ollama::models::list {
 
 function ai::ollama::models::pull {
     ai::internal::ollama::models::pull "${@}"
+}
+
+function ai::ollama::models::install {
+    ai::internal::ollama::models::install
 }

@@ -98,6 +98,14 @@ ai::ollama::models::pull llama3.2
 ai::ollama::models::pull mistral
 ```
 
+#### ai::ollama::models::install
+
+Install all default models defined in `AI_OLLAMA_MODELS` array.
+
+```bash
+ai::ollama::models::install
+```
+
 ### Internal Functions
 
 #### ai::internal::packages::install
@@ -172,6 +180,14 @@ Internal function for downloading ollama models.
 ai::internal::ollama::models::pull llama3.2
 ```
 
+#### ai::internal::ollama::models::install
+
+Internal function for installing all default models from `AI_OLLAMA_MODELS` array.
+
+```bash
+ai::internal::ollama::models::install
+```
+
 ### Variables
 
 | Variable                         | Description                                                    |
@@ -185,6 +201,7 @@ ai::internal::ollama::models::pull llama3.2
 | `AI_FABRIC_PATTERNS_PATH`        | Path to fabric patterns (default: `~/.config/fabric/patterns`) |
 | `AI_FABRIC_PATTERNS_SYNC_SOURCE` | Source path for custom patterns (`ZSH_AI_PATH/patterns`)       |
 | `AI_OLLAMA_MODELS_PATH`          | Path to ollama models (default: `~/.ollama/models`)            |
+| `AI_OLLAMA_MODELS`               | Array of default ollama models to install                      |
 | `AI_INSTALL_URL_OPENCODE`        | Installation URL for opencode                                  |
 | `AI_INSTALL_URL_FABRIC`          | Installation URL for fabric                                    |
 | `AI_INSTALL_URL_OLLAMA`          | Installation URL for ollama                                    |

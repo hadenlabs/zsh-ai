@@ -30,6 +30,12 @@ export AI_TOOLS=(
   ollama
 )
 
+export AI_OLLAMA_MODELS=(
+  deepseek-coder:6.7b
+  qwen2.5-coder:7b
+  codellama:13
+)
+
 export AI_PACKAGES=(
     "${AI_TOOLS[@]}"
 )

@@ -5,14 +5,14 @@ function ai::pkg::main::factory {
     # shellcheck source=/dev/null
     source "${ZSH_AI_PATH}"/pkg/base.zsh
     case "${OSTYPE}" in
-    darwin*)
-        # shellcheck source=/dev/null
-        source "${ZSH_AI_PATH}"/pkg/osx.zsh
-        ;;
-    linux*)
-        # shellcheck source=/dev/null
-        source "${ZSH_AI_PATH}"/pkg/linux.zsh
-      ;;
+        darwin*)
+            # shellcheck source=/dev/null
+            source "${ZSH_AI_PATH}"/pkg/osx.zsh
+            ;;
+        linux*)
+            # shellcheck source=/dev/null
+            source "${ZSH_AI_PATH}"/pkg/linux.zsh
+            ;;
     esac
     # shellcheck source=/dev/null
     source "${ZSH_AI_PATH}"/pkg/helper.zsh
