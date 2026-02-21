@@ -207,6 +207,30 @@ Install opencode CLI tool. Checks if opencode is already installed using `which`
 ai::opencode::install
 ```
 
+#### ai::fabric::install
+
+Install fabric CLI tool for AI patterns. Checks if fabric is already installed before attempting installation.
+
+```bash
+ai::fabric::install
+```
+
+#### ai::fabric::patterns::sync
+
+Sync custom patterns from local `patterns/` directory to fabric's patterns directory (`~/.config/fabric/patterns/`). Uses rsync for synchronization.
+
+```bash
+ai::fabric::patterns::sync
+```
+
+#### ai::fabric::patterns::pull
+
+Update fabric patterns from the official repository using `fabric --updatepatterns`.
+
+```bash
+ai::fabric::patterns::pull
+```
+
 ### Internal Functions
 
 #### ai::internal::packages::install
@@ -225,16 +249,44 @@ Internal function for opencode installation logic. Verifies if opencode exists b
 ai::internal::opencode::install
 ```
 
+#### ai::internal::fabric::install
+
+Internal function for fabric installation logic. Verifies if fabric exists before installing via curl.
+
+```bash
+ai::internal::fabric::install
+```
+
+#### ai::internal::fabric::patterns::sync
+
+Internal function for syncing patterns using rsync.
+
+```bash
+ai::internal::fabric::patterns::sync
+```
+
+#### ai::internal::fabric::patterns::pull
+
+Internal function for pulling patterns from fabric's official repository.
+
+```bash
+ai::internal::fabric::patterns::pull
+```
+
 ### Variables
 
-| Variable               | Description                                             |
-| ---------------------- | ------------------------------------------------------- |
-| `AI_PACKAGE_NAME`      | Name of the package (default: `ai`)                     |
-| `AI_TOOLS`             | Array of AI tools to install                            |
-| `AI_PACKAGES`          | Array of all packages (combines `AI_TOOLS`)             |
-| `AI_MESSAGE_BREW`      | Message for brew requirement                            |
-| `AI_APPLICATION_PATH`  | Path to applications (macOS only)                       |
-| `AI_ARCHITECTURE_NAME` | Architecture name (e.g., `darwin-arm64`, `linux-amd64`) |
+| Variable                         | Description                                                    |
+| -------------------------------- | -------------------------------------------------------------- |
+| `AI_PACKAGE_NAME`                | Name of the package (default: `ai`)                            |
+| `AI_TOOLS`                       | Array of AI tools to install                                   |
+| `AI_PACKAGES`                    | Array of all packages (combines `AI_TOOLS`)                    |
+| `AI_MESSAGE_BREW`                | Message for brew requirement                                   |
+| `AI_FABRIC_PATTERNS_PATH`        | Path to fabric patterns (default: `~/.config/fabric/patterns`) |
+| `AI_FABRIC_PATTERNS_SYNC_SOURCE` | Source path for custom patterns (`ZSH_AI_PATH/patterns`)       |
+| `AI_INSTALL_URL_OPENCODE`        | Installation URL for opencode                                  |
+| `AI_INSTALL_URL_FABRIC`          | Installation URL for fabric                                    |
+| `AI_APPLICATION_PATH`            | Path to applications (macOS only)                              |
+| `AI_ARCHITECTURE_NAME`           | Architecture name (e.g., `darwin-arm64`, `linux-amd64`)        |
 
 ## Help
 
