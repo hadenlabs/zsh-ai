@@ -8,6 +8,9 @@ function ai::internal::packages::install {
             opencode)
                 ai::internal::opencode::install
                 ;;
+            fabric)
+                ai::internal::fabric::install
+                ;;
             *)
                 core::install "${package}"
                 ;;

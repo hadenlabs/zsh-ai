@@ -18,7 +18,8 @@ zsh-ai.zsh (entry point)
     ├── config/     → Variables y configuración global
     ├── core/       → Funciones core (extensión futura)
     ├── internal/   → Lógica interna de instalación
-    └── pkg/        → API pública expuesta al usuario
+    ├── pkg/        → API pública expuesta al usuario
+    └── patterns/   → Custom patterns para fabric
 ```
 
 **Patrón:** Cada módulo usa `main.zsh` como factory que carga `base.zsh` + archivo específico del OS (`osx.zsh` | `linux.zsh`).
@@ -27,11 +28,14 @@ zsh-ai.zsh (entry point)
 
 ## API Principal
 
-| Función                 | Descripción                   |
-| ----------------------- | ----------------------------- |
-| `ai::install`           | Instala todos los paquetes AI |
-| `ai::opencode::install` | Instalar opencode CLI         |
-| `ai::upgrade`           | Actualizar (no implementado)  |
+| Función                      | Descripción                   |
+| ---------------------------- | ----------------------------- |
+| `ai::install`                | Instala todos los paquetes AI |
+| `ai::opencode::install`      | Instalar opencode CLI         |
+| `ai::fabric::install`        | Instalar fabric CLI           |
+| `ai::fabric::patterns::sync` | Sincronizar patterns locales  |
+| `ai::fabric::patterns::pull` | Actualizar patterns oficiales |
+| `ai::upgrade`                | Actualizar (no implementado)  |
 
 Ver referencia completa: [docs/functions.md](docs/functions.md)
 
@@ -39,12 +43,16 @@ Ver referencia completa: [docs/functions.md](docs/functions.md)
 
 ## Variables de Configuración
 
-| Variable               | Descripción                              |
-| ---------------------- | ---------------------------------------- |
-| `AI_TOOLS`             | Lista de herramientas: `(opencode sops)` |
-| `AI_PACKAGES`          | Paquetes a instalar                      |
-| `AI_APPLICATION_PATH`  | `/Applications` (macOS)                  |
-| `AI_ARCHITECTURE_NAME` | `darwin-arm64` / `linux-amd64`           |
+| Variable                         | Descripción                                |
+| -------------------------------- | ------------------------------------------ |
+| `AI_TOOLS`                       | Lista de herramientas: `(opencode fabric)` |
+| `AI_PACKAGES`                    | Paquetes a instalar                        |
+| `AI_FABRIC_PATTERNS_PATH`        | `~/.config/fabric/patterns`                |
+| `AI_FABRIC_PATTERNS_SYNC_SOURCE` | `patterns/` local                          |
+| `AI_INSTALL_URL_OPENCODE`        | URL de instalación opencode                |
+| `AI_INSTALL_URL_FABRIC`          | URL de instalación fabric                  |
+| `AI_APPLICATION_PATH`            | `/Applications` (macOS)                    |
+| `AI_ARCHITECTURE_NAME`           | `darwin-arm64` / `linux-amd64`             |
 
 ---
 
@@ -79,6 +87,28 @@ Ver guía completa: [docs/usage.md](docs/usage.md)
 
 ---
 
+## Patterns (Fabric)
+
+La carpeta `patterns/` contiene custom patterns para fabric.
+
+**Estructura:**
+
+```
+patterns/
+├── README.md
+└── pattern_name/
+    ├── system.md    # Requerido
+    └── user.md      # Opcional
+```
+
+**Sincronizar:**
+
+```bash
+ai::fabric::patterns::sync  # Local → ~/.config/fabric/patterns
+```
+
+---
+
 ## Documentación
 
 | Archivo                                            | Propósito               |
@@ -88,6 +118,7 @@ Ver guía completa: [docs/usage.md](docs/usage.md)
 | [docs/contributing.md](docs/contributing.md)       | Guía de contribución    |
 | [docs/testing.md](docs/testing.md)                 | Guía de testing         |
 | [docs/troubleshooting.md](docs/troubleshooting.md) | Solución de problemas   |
+| [patterns/README.md](patterns/README.md)           | Guía de patterns        |
 
 ---
 
@@ -97,7 +128,7 @@ El plugin requiere funciones externas (definidas en otros plugins):
 
 ```zsh
 message_info, message_success, message_warning, message_error
-core::install
+core::install, core::exists
 ```
 
 ---
