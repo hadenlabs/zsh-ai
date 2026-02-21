@@ -35,6 +35,9 @@ zsh-ai.zsh (entry point)
 | `ai::fabric::install`        | Instalar fabric CLI           |
 | `ai::fabric::patterns::sync` | Sincronizar patterns locales  |
 | `ai::fabric::patterns::pull` | Actualizar patterns oficiales |
+| `ai::ollama::install`        | Instalar ollama CLI           |
+| `ai::ollama::models::list`   | Listar modelos instalados     |
+| `ai::ollama::models::pull`   | Descargar modelo              |
 | `ai::upgrade`                | Actualizar (no implementado)  |
 
 Ver referencia completa: [docs/functions.md](docs/functions.md)
@@ -45,14 +48,16 @@ Ver referencia completa: [docs/functions.md](docs/functions.md)
 
 | Variable                         | Descripción                                |
 | -------------------------------- | ------------------------------------------ |
-| `AI_TOOLS`                       | Lista de herramientas: `(opencode fabric)` |
+| `AI_TOOLS`                       | Lista de herramientas: `(opencode fabric ollama)` |
 | `AI_PACKAGES`                    | Paquetes a instalar                        |
 | `AI_OPENCODE_ROOT_PATH`          | `~/.opencode`                              |
 | `AI_OPENCODE_BIN_PATH`           | `~/.opencode/bin`                          |
 | `AI_FABRIC_PATTERNS_PATH`        | `~/.config/fabric/patterns`                |
 | `AI_FABRIC_PATTERNS_SYNC_SOURCE` | `patterns/` local                          |
+| `AI_OLLAMA_MODELS_PATH`          | `~/.ollama/models`                         |
 | `AI_INSTALL_URL_OPENCODE`        | URL de instalación opencode                |
 | `AI_INSTALL_URL_FABRIC`          | URL de instalación fabric                  |
+| `AI_INSTALL_URL_OLLAMA`          | URL de instalación ollama                  |
 | `AI_APPLICATION_PATH`            | `/Applications` (macOS)                    |
 | `AI_ARCHITECTURE_NAME`           | `darwin-arm64` / `linux-amd64`             |
 
