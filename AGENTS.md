@@ -1,132 +1,105 @@
-# agents.md - Guía para Agentes de IA
+# AGENTS.md - Contexto del Proyecto para Agentes de IA
 
-## Información del Proyecto
-
-**Nombre:** base-template **Automatización:** Taskfile  
-**Documentación:** Sistema basado en templates (gomplate)
-
-## Arquitectura Clave
-
-## Estructura del Proyecto
-
-### Directorios Principales
-
-```
-base-template/
-├── docs/                  # Documentación
-│   ├── usage.md           # Guía de uso
-│   ├── examples/          # Ejemplos de código
-│   ├── contributing.md    # Guía de contribución
-│   └── path-aliases.md    # Guía de path aliases
-├── provision/             # Templates y generadores
-│   ├── generators/        # Configuraciones
-│   │   └── README.yaml    # Configuración README
-│   └── templates/         # Templates
-│       └── README.tpl.md  # Template README
-├── .ci/linters/           # Configuración de linters
-│   ├── .eslintrc.js       # Configuración ESLint
-│   └── prettier.config.cjs # Configuración Prettier
-```
-
-## Sistema de Documentación
-
-### Generación Automática
-
-**Archivos clave:**
-
-- `provision/generators/README.yaml` → Configuración central
-- `provision/templates/README.tpl.md` → Template README
-- `docs/usage.md` → Guía de uso principal
-- `docs/examples/common.md` → Ejemplos de código
-
-**Comando de generación:**
-
-```bash
-task readme  # Regenera README.md desde templates
-```
-
-**Características:**
-
-- Badges automáticos para CI, versiones, tecnologías
-- Secciones dinámicas desde archivos markdown
-- Formato consistente con Prettier
-- Integración con Taskfile
-
-## Configuración de Herramientas
-
-### ESLint (`.ci/linters/.eslintrc.js`)
-
-- TypeScript con type-checking
-- Reglas estrictas para promesas
-- Sin `any` explícito
-- Integración con Prettier
-
-### Prettier (`.ci/linters/prettier.config.cjs`)
-
-- Sin punto y coma
-- Comillas dobles
-- 2 espacios de indentación
-- 100 caracteres por línea
-
-### Taskfile (`Taskfile.yml`)
-
-- Automatización de workflows
-- Dependencias externas via includes
-- Comandos unificados para desarrollo
-
-## Convenciones de Desarrollo
-
-## Workflow de Desarrollo
-
-### Comandos Principales
-
-**Inicialización:**
-
-```bash
-task --yes       # Confiar en Taskfiles externos
-task setup       # Configurar entorno y dependencias
-task environment # Preparar variables de entorno
-```
-
-**Mantenimiento:**
-
-```bash
-task upgrade      # Actualizar dependencias
-task check        # Verificar dependencias
-task --list       # Listar todos los comandos
-```
-
-### Variables de Entorno
-
-**Archivos:**
-
-- `.env` → Variables desarrollo (no commit)
-- `.env.example` → Template para desarrollo
-
-## Dependencias Clave
-
-### Herramientas
-
-- `task` → Automatización (Taskfile)
-- `gomplate` → Generación de templates
-- `uv` → Gestor de entornos Python
-- `pre-commit` → Hooks Git
-
-## Guías de Referencia
-
-## Recursos Adicionales
-
-**Documentación:**
-
-- `README.md` → Visión general (generado)
-- `docs/usage.md` → Guía de uso detallada
-- `docs/contributing.md` → Guía de contribución
-
-**Configuraciones:**
-
-- `Taskfile.yml` → Automatización
+> **Proyecto:** zsh-ai - Plugin de Zsh para gestión de herramientas de IA  
+> **Automatización:** Taskfile | **Shell:** zsh/ksh | **Soporte:** macOS, Linux
 
 ---
 
-_Última actualización: $(date)_  
-_Mantener este archivo actualizado con cambios significativos en la arquitectura o herramientas del proyecto._
+## Descripción
+
+Plugin de Zsh modular para instalar y gestionar herramientas de IA. Implementa un patrón factory con carga condicional por OS.
+
+---
+
+## Arquitectura
+
+```
+zsh-ai.zsh (entry point)
+    ├── config/     → Variables y configuración global
+    ├── core/       → Funciones core (extensión futura)
+    ├── internal/   → Lógica interna de instalación
+    └── pkg/        → API pública expuesta al usuario
+```
+
+**Patrón:** Cada módulo usa `main.zsh` como factory que carga `base.zsh` + archivo específico del OS (`osx.zsh` | `linux.zsh`).
+
+---
+
+## API Principal
+
+| Función                 | Descripción                   |
+| ----------------------- | ----------------------------- |
+| `ai::install`           | Instala todos los paquetes AI |
+| `ai::opencode::install` | Instalar opencode CLI         |
+| `ai::upgrade`           | Actualizar (no implementado)  |
+
+Ver referencia completa: [docs/functions.md](docs/functions.md)
+
+---
+
+## Variables de Configuración
+
+| Variable               | Descripción                              |
+| ---------------------- | ---------------------------------------- |
+| `AI_TOOLS`             | Lista de herramientas: `(opencode sops)` |
+| `AI_PACKAGES`          | Paquetes a instalar                      |
+| `AI_APPLICATION_PATH`  | `/Applications` (macOS)                  |
+| `AI_ARCHITECTURE_NAME` | `darwin-arm64` / `linux-amd64`           |
+
+---
+
+## Convenciones
+
+- Funciones públicas: `ai::accion`
+- Funciones internas: `ai::internal::accion`
+- Variables: `AI_VARIABLE_NAME`
+- Archivos: `lowercase.zsh`
+
+---
+
+## Desarrollo
+
+```bash
+task --yes && task setup && task environment  # Setup inicial
+task --list                                   # Ver comandos
+source zsh-ai.zsh && ai::install              # Testing
+```
+
+Ver guía completa: [docs/usage.md](docs/usage.md)
+
+---
+
+## Agregar Nueva Herramienta
+
+1. Agregar a `AI_TOOLS` en `config/base.zsh`
+2. Crear `ai::internal::tool::install` en `internal/helper.zsh`
+3. Agregar case en `internal/base.zsh`
+4. Crear función pública en `pkg/helper.zsh`
+5. Documentar en `docs/functions.md`
+
+---
+
+## Documentación
+
+| Archivo                                            | Propósito               |
+| -------------------------------------------------- | ----------------------- |
+| [docs/functions.md](docs/functions.md)             | Referencia de funciones |
+| [docs/usage.md](docs/usage.md)                     | Guía de uso             |
+| [docs/contributing.md](docs/contributing.md)       | Guía de contribución    |
+| [docs/testing.md](docs/testing.md)                 | Guía de testing         |
+| [docs/troubleshooting.md](docs/troubleshooting.md) | Solución de problemas   |
+
+---
+
+## Dependencias Externas
+
+El plugin requiere funciones externas (definidas en otros plugins):
+
+```zsh
+message_info, message_success, message_warning, message_error
+core::install
+```
+
+---
+
+_Última actualización: 2026-02-20_

@@ -27,7 +27,7 @@ repos:
           - --ignore-words=.ci/linters/.codespell-ignores
         exclude: >
           (?x)^(
-            agents.md|
+            AGENTS.md|
             app/components/sections\/.*$|
             app/data\/.*$|
             app/ia/datasets\/.*$|
