@@ -18,16 +18,22 @@ export AI_FABRIC_PATTERNS_SYNC_SOURCE="${ZSH_AI_PATH}/patterns"
 
 export AI_OLLAMA_MODELS_PATH="${HOME}/.ollama/models"
 
+# shimmy
+
+export AI_SHIMMY_BIN_PATH="${HOME}/.local/bin"
+
 # installation urls
 
 export AI_INSTALL_URL_OPENCODE="https://opencode.ai/install"
 export AI_INSTALL_URL_FABRIC="https://raw.githubusercontent.com/danielmiessler/fabric/main/scripts/installer/install.sh"
 export AI_INSTALL_URL_OLLAMA="https://ollama.com/install.sh"
+export AI_INSTALL_URL_SHIMMY="https://github.com/Michael-A-Kuykendall/shimmy/releases/latest/download"
 
 export AI_TOOLS=(
   opencode
   fabric
   ollama
+  shimmy
 )
 
 export AI_OLLAMA_MODELS=(

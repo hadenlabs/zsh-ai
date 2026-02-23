@@ -5,6 +5,10 @@ function ai::internal::opencode::load {
     [ -e "${AI_OPENCODE_BIN_PATH}" ] && export PATH="${AI_OPENCODE_BIN_PATH}:${PATH}"
 }
 
+function ai::internal::shimmy::load {
+    [ -e "${AI_SHIMMY_BIN_PATH}" ] && export PATH="${AI_SHIMMY_BIN_PATH}:${PATH}"
+}
+
 function ai::internal::packages::install {
     message_info "Installing required ai packages"
     for package in "${AI_PACKAGES[@]}"; do
@@ -17,6 +21,9 @@ function ai::internal::packages::install {
                 ;;
             ollama)
                 ai::internal::ollama::install
+                ;;
+            shimmy)
+                ai::internal::shimmy::install
                 ;;
             *)
                 core::install "${package}"
@@ -64,6 +71,22 @@ function ai::internal::ollama::install {
         message_success "ollama installed successfully"
     else
         message_error "Failed to install ollama"
+        return 1
+    fi
+}
+
+function ai::internal::shimmy::install {
+    if core::exists shimmy; then
+        return 0
+    fi
+
+    mkdir -p "${AI_SHIMMY_BIN_PATH}"
+
+    if curl -fsSL "${AI_INSTALL_URL_SHIMMY}" -o "${AI_SHIMMY_BIN_PATH}/shimmy"; then
+        chmod +x "${AI_SHIMMY_BIN_PATH}/shimmy"
+        message_success "shimmy installed successfully"
+    else
+        message_error "Failed to install shimmy"
         return 1
     fi
 }

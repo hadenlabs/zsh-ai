@@ -5,14 +5,14 @@ function ai::internal::main::factory {
     # shellcheck source=/dev/null
     source "${ZSH_AI_PATH}"/internal/base.zsh
     case "${OSTYPE}" in
-    darwin*)
-        # shellcheck source=/dev/null
-        source "${ZSH_AI_PATH}"/internal/osx.zsh
-        ;;
-    linux*)
-        # shellcheck source=/dev/null
-        source "${ZSH_AI_PATH}"/internal/linux.zsh
-      ;;
+        darwin*)
+            # shellcheck source=/dev/null
+            source "${ZSH_AI_PATH}"/internal/osx.zsh
+            ;;
+        linux*)
+            # shellcheck source=/dev/null
+            source "${ZSH_AI_PATH}"/internal/linux.zsh
+            ;;
     esac
     # shellcheck source=/dev/null
     source "${ZSH_AI_PATH}"/internal/helper.zsh
@@ -21,3 +21,4 @@ function ai::internal::main::factory {
 ai::internal::main::factory
 
 ai::internal::opencode::load
+ai::internal::shimmy::load

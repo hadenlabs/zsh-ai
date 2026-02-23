@@ -1,5 +1,6 @@
 #!/usr/bin/env ksh
 # -*- coding: utf-8 -*-
+
 function ai::opencode::install {
     ai::internal::opencode::install
 }
@@ -30,4 +31,8 @@ function ai::ollama::models::pull {
 
 function ai::ollama::models::install {
     ai::internal::ollama::models::install
+}
+
+function ai::shimmy::install {
+    ai::internal::shimmy::install
 }
