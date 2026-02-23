@@ -1,6 +1,9 @@
 #!/usr/bin/env ksh
 # -*- coding: utf-8 -*-
 
+ARCH_NAME="$(uname -m)"
+export ARCH_NAME
+
 export AI_MESSAGE_BREW="Please install brew or use antibody bundle luismayta/zsh-brew"
 export AI_PACKAGE_NAME=ai
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env ksh
 # -*- coding: utf-8 -*-
 
+
 function ai::config::main::factory {
     # shellcheck source=/dev/null
     source "${ZSH_AI_PATH}"/config/base.zsh
