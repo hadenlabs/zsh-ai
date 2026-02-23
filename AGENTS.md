@@ -39,6 +39,7 @@ zsh-ai.zsh (entry point)
 | `ai::ollama::models::list`    | Listar modelos instalados     |
 | `ai::ollama::models::pull`    | Descargar modelo específico   |
 | `ai::ollama::models::install` | Instalar modelos por defecto  |
+| `ai::shimmy::install`         | Instalar shimmy CLI           |
 | `ai::upgrade`                 | Actualizar (no implementado)  |
 
 Ver referencia completa: [docs/functions.md](docs/functions.md)
@@ -47,21 +48,23 @@ Ver referencia completa: [docs/functions.md](docs/functions.md)
 
 ## Variables de Configuración
 
-| Variable                         | Descripción                                       |
-| -------------------------------- | ------------------------------------------------- |
-| `AI_TOOLS`                       | Lista de herramientas: `(opencode fabric ollama)` |
-| `AI_PACKAGES`                    | Paquetes a instalar                               |
-| `AI_OPENCODE_ROOT_PATH`          | `~/.opencode`                                     |
-| `AI_OPENCODE_BIN_PATH`           | `~/.opencode/bin`                                 |
-| `AI_FABRIC_PATTERNS_PATH`        | `~/.config/fabric/patterns`                       |
-| `AI_FABRIC_PATTERNS_SYNC_SOURCE` | `patterns/` local                                 |
-| `AI_OLLAMA_MODELS_PATH`          | `~/.ollama/models`                                |
-| `AI_OLLAMA_MODELS`               | Modelos por defecto a instalar                    |
-| `AI_INSTALL_URL_OPENCODE`        | URL de instalación opencode                       |
-| `AI_INSTALL_URL_FABRIC`          | URL de instalación fabric                         |
-| `AI_INSTALL_URL_OLLAMA`          | URL de instalación ollama                         |
-| `AI_APPLICATION_PATH`            | `/Applications` (macOS)                           |
-| `AI_ARCHITECTURE_NAME`           | `darwin-arm64` / `linux-amd64`                    |
+| Variable                         | Descripción                                 |
+| -------------------------------- | ------------------------------------------- |
+| `AI_TOOLS`                       | Lista: `(opencode fabric ollama shimmy)`    |
+| `AI_PACKAGES`                    | Paquetes a instalar                         |
+| `AI_OPENCODE_ROOT_PATH`          | `~/.opencode`                               |
+| `AI_OPENCODE_BIN_PATH`           | `~/.opencode/bin`                           |
+| `AI_FABRIC_PATTERNS_PATH`        | `~/.config/fabric/patterns`                 |
+| `AI_FABRIC_PATTERNS_SYNC_SOURCE` | `patterns/` local                           |
+| `AI_OLLAMA_MODELS_PATH`          | `~/.ollama/models`                          |
+| `AI_OLLAMA_MODELS`               | Modelos por defecto a instalar              |
+| `AI_SHIMMY_BIN_PATH`             | `~/.local/bin`                              |
+| `AI_INSTALL_URL_OPENCODE`        | URL de instalación opencode                 |
+| `AI_INSTALL_URL_FABRIC`          | URL de instalación fabric                   |
+| `AI_INSTALL_URL_OLLAMA`          | URL de instalación ollama                   |
+| `AI_INSTALL_URL_SHIMMY`          | URL de instalación shimmy (GitHub releases) |
+| `AI_APPLICATION_PATH`            | `/Applications` (macOS)                     |
+| `AI_ARCHITECTURE_NAME`           | `darwin-arm64` / `linux-amd64`              |
 
 ---
 
@@ -89,8 +92,8 @@ Ver guía completa: [docs/usage.md](docs/usage.md)
 ## Agregar Nueva Herramienta
 
 1. Agregar a `AI_TOOLS` en `config/base.zsh`
-2. Crear `ai::internal::tool::install` en `internal/helper.zsh`
-3. Agregar case en `internal/base.zsh`
+2. Crear `ai::internal::tool::install` en `internal/base.zsh`
+3. Agregar case en `ai::internal::packages::install`
 4. Crear función pública en `pkg/helper.zsh`
 5. Documentar en `docs/functions.md`
 
