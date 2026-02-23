@@ -264,6 +264,14 @@ Install all default models defined in `AI_OLLAMA_MODELS` array.
 ai::ollama::models::install
 ```
 
+#### ai::shimmy::install
+
+Install shimmy CLI tool for local LLM inference server. OpenAI API compatible. Downloads binary based on OS and architecture.
+
+```bash
+ai::shimmy::install
+```
+
 ### Internal Functions
 
 #### ai::internal::packages::install
@@ -346,6 +354,22 @@ Internal function for installing all default models from `AI_OLLAMA_MODELS` arra
 ai::internal::ollama::models::install
 ```
 
+#### ai::internal::shimmy::load
+
+Internal function that adds shimmy binary path to PATH. Checks if `~/.local/bin` exists and prepends it to PATH.
+
+```bash
+ai::internal::shimmy::load
+```
+
+#### ai::internal::shimmy::install
+
+Internal function for shimmy installation logic. Detects OS and architecture, downloads appropriate binary from GitHub releases.
+
+```bash
+ai::internal::shimmy::install
+```
+
 ### Variables
 
 | Variable                         | Description                                                    |
@@ -360,9 +384,11 @@ ai::internal::ollama::models::install
 | `AI_FABRIC_PATTERNS_SYNC_SOURCE` | Source path for custom patterns (`ZSH_AI_PATH/patterns`)       |
 | `AI_OLLAMA_MODELS_PATH`          | Path to ollama models (default: `~/.ollama/models`)            |
 | `AI_OLLAMA_MODELS`               | Array of default ollama models to install                      |
+| `AI_SHIMMY_BIN_PATH`             | Binary path for shimmy (default: `~/.local/bin`)               |
 | `AI_INSTALL_URL_OPENCODE`        | Installation URL for opencode                                  |
 | `AI_INSTALL_URL_FABRIC`          | Installation URL for fabric                                    |
 | `AI_INSTALL_URL_OLLAMA`          | Installation URL for ollama                                    |
+| `AI_INSTALL_URL_SHIMMY`          | Installation URL for shimmy (GitHub releases)                  |
 | `AI_APPLICATION_PATH`            | Path to applications (macOS only)                              |
 | `AI_ARCHITECTURE_NAME`           | Architecture name (e.g., `darwin-arm64`, `linux-amd64`)        |
 
