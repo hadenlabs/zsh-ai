@@ -272,6 +272,14 @@ Install shimmy CLI tool for local LLM inference server. OpenAI API compatible. D
 ai::shimmy::install
 ```
 
+#### ai::hf::install
+
+Install hf CLI tool (Hugging Face CLI). The new CLI for interacting with Hugging Face Hub - download models, upload files, manage cache, etc.
+
+```bash
+ai::hf::install
+```
+
 ### Internal Functions
 
 #### ai::internal::packages::install
@@ -370,6 +378,14 @@ Internal function for shimmy installation logic. Detects OS and architecture, do
 ai::internal::shimmy::install
 ```
 
+#### ai::internal::hf::install
+
+Internal function for hf CLI installation logic. Downloads and installs Hugging Face CLI from official installer.
+
+```bash
+ai::internal::hf::install
+```
+
 ### Variables
 
 | Variable                         | Description                                                    |
@@ -389,6 +405,7 @@ ai::internal::shimmy::install
 | `AI_INSTALL_URL_FABRIC`          | Installation URL for fabric                                    |
 | `AI_INSTALL_URL_OLLAMA`          | Installation URL for ollama                                    |
 | `AI_INSTALL_URL_SHIMMY`          | Installation URL for shimmy (GitHub releases)                  |
+| `AI_INSTALL_URL_HF`              | Installation URL for hf CLI                                    |
 | `AI_APPLICATION_PATH`            | Path to applications (macOS only)                              |
 | `AI_ARCHITECTURE_NAME`           | Architecture name (e.g., `darwin-arm64`, `linux-amd64`)        |
 
