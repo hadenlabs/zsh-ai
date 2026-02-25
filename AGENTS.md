@@ -28,19 +28,20 @@ zsh-ai.zsh (entry point)
 
 ## API Principal
 
-| Función                       | Descripción                   |
-| ----------------------------- | ----------------------------- |
-| `ai::install`                 | Instala todos los paquetes AI |
-| `ai::opencode::install`       | Instalar opencode CLI         |
-| `ai::fabric::install`         | Instalar fabric CLI           |
-| `ai::fabric::patterns::sync`  | Sincronizar patterns locales  |
-| `ai::fabric::patterns::pull`  | Actualizar patterns oficiales |
-| `ai::ollama::install`         | Instalar ollama CLI           |
-| `ai::ollama::models::list`    | Listar modelos instalados     |
-| `ai::ollama::models::pull`    | Descargar modelo específico   |
-| `ai::ollama::models::install` | Instalar modelos por defecto  |
-| `ai::shimmy::install`         | Instalar shimmy CLI           |
-| `ai::upgrade`                 | Actualizar (no implementado)  |
+| Función                       | Descripción                    |
+| ----------------------------- | ------------------------------ |
+| `ai::install`                 | Instala todos los paquetes AI  |
+| `ai::opencode::install`       | Instalar opencode CLI          |
+| `ai::fabric::install`         | Instalar fabric CLI            |
+| `ai::fabric::patterns::sync`  | Sincronizar patterns locales   |
+| `ai::fabric::patterns::pull`  | Actualizar patterns oficiales  |
+| `ai::ollama::install`         | Instalar ollama CLI            |
+| `ai::ollama::models::list`    | Listar modelos instalados      |
+| `ai::ollama::models::pull`    | Descargar modelo específico    |
+| `ai::ollama::models::install` | Instalar modelos por defecto   |
+| `ai::shimmy::install`         | Instalar shimmy CLI            |
+| `ai::hf::install`             | Instalar hf CLI (Hugging Face) |
+| `ai::upgrade`                 | Actualizar (no implementado)   |
 
 Ver referencia completa: [docs/functions.md](docs/functions.md)
 
@@ -50,7 +51,7 @@ Ver referencia completa: [docs/functions.md](docs/functions.md)
 
 | Variable                         | Descripción                                 |
 | -------------------------------- | ------------------------------------------- |
-| `AI_TOOLS`                       | Lista: `(opencode fabric ollama shimmy)`    |
+| `AI_TOOLS`                       | Lista: `(opencode fabric ollama shimmy hf)` |
 | `AI_PACKAGES`                    | Paquetes a instalar                         |
 | `AI_OPENCODE_ROOT_PATH`          | `~/.opencode`                               |
 | `AI_OPENCODE_BIN_PATH`           | `~/.opencode/bin`                           |
@@ -63,6 +64,7 @@ Ver referencia completa: [docs/functions.md](docs/functions.md)
 | `AI_INSTALL_URL_FABRIC`          | URL de instalación fabric                   |
 | `AI_INSTALL_URL_OLLAMA`          | URL de instalación ollama                   |
 | `AI_INSTALL_URL_SHIMMY`          | URL de instalación shimmy (GitHub releases) |
+| `AI_INSTALL_URL_HF`              | URL de instalación hf CLI                   |
 | `AI_APPLICATION_PATH`            | `/Applications` (macOS)                     |
 | `AI_ARCHITECTURE_NAME`           | `darwin-arm64` / `linux-amd64`              |
 
