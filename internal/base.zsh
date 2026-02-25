@@ -25,6 +25,9 @@ function ai::internal::packages::install {
             shimmy)
                 ai::internal::shimmy::install
                 ;;
+            hf)
+                ai::internal::hf::install
+                ;;
             *)
                 core::install "${package}"
                 ;;
@@ -87,6 +90,20 @@ function ai::internal::shimmy::install {
         message_success "shimmy installed successfully"
     else
         message_error "Failed to install shimmy"
+        return 1
+    fi
+}
+
+function ai::internal::hf::install {
+    if core::exists hf; then
+        return 0
+    fi
+
+    message_info "Installing hf CLI..."
+    if curl -fsSL "${AI_INSTALL_URL_HF}" | bash; then
+        message_success "hf installed successfully"
+    else
+        message_error "Failed to install hf"
         return 1
     fi
 }

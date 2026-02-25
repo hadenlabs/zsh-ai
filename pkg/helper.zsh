@@ -36,3 +36,7 @@ function ai::ollama::models::install {
 function ai::shimmy::install {
     ai::internal::shimmy::install
 }
+
+function ai::hf::install {
+    ai::internal::hf::install
+}

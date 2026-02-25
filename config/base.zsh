@@ -31,12 +31,14 @@ export AI_INSTALL_URL_OPENCODE="https://opencode.ai/install"
 export AI_INSTALL_URL_FABRIC="https://raw.githubusercontent.com/danielmiessler/fabric/main/scripts/installer/install.sh"
 export AI_INSTALL_URL_OLLAMA="https://ollama.com/install.sh"
 export AI_INSTALL_URL_SHIMMY="https://github.com/Michael-A-Kuykendall/shimmy/releases/latest/download"
+export AI_INSTALL_URL_HF="https://hf.co/cli/install.sh"
 
 export AI_TOOLS=(
   opencode
   fabric
   ollama
   shimmy
+  hf
 )
 
 export AI_OLLAMA_MODELS=(
