@@ -189,6 +189,11 @@ tasks:
       - task: go:mockery
       - task: go:generate
 
+  validate:
+    desc: "Run validate on all files"
+    cmds:
+      - uv run pre-commit run --all-files
+
   help:
     cmds:
       - cmd: |
