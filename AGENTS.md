@@ -96,23 +96,49 @@ For detailed development guidelines, code conventions, and contribution workflow
 6. **Document the function** - Add entry in `docs/functions.md`
 7. **Test** - Run `source zsh-ai.zsh && ai::toolname::install`
 
-### Example for OpenClaw:
+### Example for Ollama:
 
 ```zsh
 # In config/base.zsh
-AI_TOOLS=(opencode fabric ollama shimmy hf openclaw)
-AI_OPENCLAW_BIN_PATH="${HOME}/.local/bin"
-AI_INSTALL_URL_OPENCLAW="https://github.com/openclaw-ai/openclaw/releases/latest/download/openclaw"
+AI_TOOLS=(opencode fabric ollama shimmy hf)
+AI_OLLAMA_MODELS_PATH="${HOME}/.ollama/models"
+AI_INSTALL_URL_OLLAMA="https://ollama.com/install.sh"
+AI_OLLAMA_MODELS=(
+    deepseek-coder:6.7b
+    qwen2.5-coder:7b
+    codellama:13
+)
 
 # In internal/base.zsh
-function ai::internal::openclaw::install {
-    message_info "Installing openclaw..."
-    # Download binary implementation
+function ai::internal::ollama::install {
+    if core::exists ollama; then
+        return 0
+    fi
+
+    message_info "Installing ollama..."
+    if curl -fsSL "${AI_INSTALL_URL_OLLAMA}" | sh; then
+        message_success "ollama installed successfully"
+    else
+        message_error "Failed to install ollama"
+        return 1
+    fi
 }
 
 # In pkg/helper.zsh
-function ai::openclaw::install {
-    ai::internal::packages::install "openclaw"
+function ai::ollama::install {
+    ai::internal::ollama::install
+}
+
+function ai::ollama::models::list {
+    ai::internal::ollama::models::list
+}
+
+function ai::ollama::models::pull {
+    ai::internal::ollama::models::pull "${@}"
+}
+
+function ai::ollama::models::install {
+    ai::internal::ollama::models::install
 }
 ```
 
@@ -156,7 +182,7 @@ function ai::example::function {
 
 ## Agregar Nueva Herramienta
 
-### Pasos para implementar una nueva herramienta (ejemplo: openclaw)
+### Pasos para implementar una nueva herramienta (ejemplo: ollama)
 
 1. **Actualizar configuración base** - Agregar a `AI_TOOLS` en `config/base.zsh`:
 
@@ -174,9 +200,14 @@ function ai::example::function {
 2. **Definir variables de configuración** - Agregar en `config/base.zsh`:
 
    ```zsh
-   # OpenClaw configuration
-   AI_OPENCLAW_BIN_PATH="${HOME}/.local/bin"
-   AI_INSTALL_URL_OPENCLAW="https://github.com/openclaw-ai/openclaw/releases/latest/download/openclaw"
+   # Ollama configuration
+   AI_OLLAMA_MODELS_PATH="${HOME}/.ollama/models"
+   AI_INSTALL_URL_OLLAMA="https://ollama.com/install.sh"
+   AI_OLLAMA_MODELS=(
+       deepseek-coder:6.7b
+       qwen2.5-coder:7b
+       codellama:13
+   )
    ```
 
 3. **Implementar función interna** - Agregar en `internal/base.zsh`:
@@ -184,29 +215,18 @@ function ai::example::function {
    ```zsh
    #!/usr/bin/env ksh
 
-   function ai::internal::openclaw::install {
-       message_info "Installing openclaw..."
-
-       if ! core::exists curl; then
-           message_error "curl is required to install openclaw"
-           return 1
+   function ai::internal::ollama::install {
+       if core::exists ollama; then
+           return 0
        fi
 
-       local install_path="${AI_OPENCLAW_BIN_PATH}/openclaw"
-
-       # Download openclaw binary
-       if ! curl -L "${AI_INSTALL_URL_OPENCLAW}" -o "${install_path}"; then
-           message_error "Failed to download openclaw"
+       message_info "Installing ollama..."
+       if curl -fsSL "${AI_INSTALL_URL_OLLAMA}" | sh; then
+           message_success "ollama installed successfully"
+       else
+           message_error "Failed to install ollama"
            return 1
        fi
-
-       # Make executable
-       if ! chmod +x "${install_path}"; then
-           message_error "Failed to make openclaw executable"
-           return 1
-       fi
-
-       message_success "openclaw installed successfully at ${install_path}"
    }
    ```
 
@@ -245,22 +265,58 @@ function ai::example::function {
    ```zsh
    #!/usr/bin/env ksh
 
-   function ai::openclaw::install {
-       ai::internal::packages::install "openclaw"
+   function ai::ollama::install {
+       ai::internal::ollama::install
+   }
+
+   function ai::ollama::models::list {
+       ai::internal::ollama::models::list
+   }
+
+   function ai::ollama::models::pull {
+       ai::internal::ollama::models::pull "${@}"
+   }
+
+   function ai::ollama::models::install {
+       ai::internal::ollama::models::install
    }
    ```
 
 6. **Documentar la función** - Agregar en `docs/functions.md`:
 
    ````markdown
-   ### ai::openclaw::install
+   ### ai::ollama::install
 
-   Instala openclaw CLI descargando el binario desde GitHub Releases.
+   Instala ollama CLI ejecutando el script de instalación oficial.
 
    **Ejemplo:**
 
    ```zsh
-   ai::openclaw::install
+   ai::ollama::install
+   ```
+
+   ### ai::ollama::models::list
+
+   Lista todos los modelos de ollama instalados.
+
+   ```zsh
+   ai::ollama::models::list
+   ```
+
+   ### ai::ollama::models::pull
+
+   Descarga un modelo específico desde el registro de ollama.
+
+   ```zsh
+   ai::ollama::models::pull llama3.2
+   ```
+
+   ### ai::ollama::models::install
+
+   Instala todos los modelos por defecto definidos en `AI_OLLAMA_MODELS`.
+
+   ```zsh
+   ai::ollama::models::install
    ```
    ````
 
@@ -268,8 +324,13 @@ function ai::example::function {
 
 ```bash
 # Probar la instalación
+task validate
+```
+
+```bash
+# Probar la instalación
 source zsh-ai.zsh
-ai::openclaw::install
+ai::ollama::install
 ```
 
 ---
