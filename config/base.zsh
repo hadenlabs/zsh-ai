@@ -25,6 +25,10 @@ export AI_OLLAMA_MODELS_PATH="${HOME}/.ollama/models"
 
 export AI_SHIMMY_BIN_PATH="${HOME}/.local/bin"
 
+# openclaw
+
+export AI_OPENCLAW_BIN_PATH="${HOME}/.local/bin"
+
 # installation urls
 
 export AI_INSTALL_URL_OPENCODE="https://opencode.ai/install"
@@ -32,6 +36,7 @@ export AI_INSTALL_URL_FABRIC="https://raw.githubusercontent.com/danielmiessler/f
 export AI_INSTALL_URL_OLLAMA="https://ollama.com/install.sh"
 export AI_INSTALL_URL_SHIMMY="https://github.com/Michael-A-Kuykendall/shimmy/releases/latest/download"
 export AI_INSTALL_URL_HF="https://hf.co/cli/install.sh"
+export AI_INSTALL_URL_OPENCLAW="https://openclaw.ai/install.sh"
 
 export AI_TOOLS=(
   opencode
@@ -39,6 +44,7 @@ export AI_TOOLS=(
   ollama
   shimmy
   hf
+  openclaw
 )
 
 export AI_OLLAMA_MODELS=(

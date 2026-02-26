@@ -40,3 +40,7 @@ function ai::shimmy::install {
 function ai::hf::install {
     ai::internal::hf::install
 }
+
+function ai::openclaw::install {
+    ai::internal::openclaw::install
+}

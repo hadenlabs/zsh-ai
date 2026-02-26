@@ -122,6 +122,14 @@ Install hf CLI tool (Hugging Face CLI). The new CLI for interacting with Hugging
 ai::hf::install
 ```
 
+#### ai::openclaw::install
+
+Install openclaw CLI tool for AI-powered code analysis and refactoring. Checks if openclaw is already installed before attempting installation.
+
+```bash
+ai::openclaw::install
+```
+
 ### Internal Functions
 
 #### ai::internal::packages::install
@@ -228,6 +236,22 @@ Internal function for hf CLI installation logic. Downloads and installs Hugging 
 ai::internal::hf::install
 ```
 
+#### ai::internal::openclaw::load
+
+Internal function that adds openclaw binary path to PATH. Checks if `~/.local/bin` exists and prepends it to PATH.
+
+```bash
+ai::internal::openclaw::load
+```
+
+#### ai::internal::openclaw::install
+
+Internal function for openclaw installation logic. Downloads the appropriate binary for the current architecture from GitHub releases.
+
+```bash
+ai::internal::openclaw::install
+```
+
 ### Variables
 
 | Variable                         | Description                                                    |
@@ -243,10 +267,12 @@ ai::internal::hf::install
 | `AI_OLLAMA_MODELS_PATH`          | Path to ollama models (default: `~/.ollama/models`)            |
 | `AI_OLLAMA_MODELS`               | Array of default ollama models to install                      |
 | `AI_SHIMMY_BIN_PATH`             | Binary path for shimmy (default: `~/.local/bin`)               |
+| `AI_OPENCLAW_BIN_PATH`           | Binary path for openclaw (default: `~/.local/bin`)             |
 | `AI_INSTALL_URL_OPENCODE`        | Installation URL for opencode                                  |
 | `AI_INSTALL_URL_FABRIC`          | Installation URL for fabric                                    |
 | `AI_INSTALL_URL_OLLAMA`          | Installation URL for ollama                                    |
 | `AI_INSTALL_URL_SHIMMY`          | Installation URL for shimmy (GitHub releases)                  |
 | `AI_INSTALL_URL_HF`              | Installation URL for hf CLI                                    |
+| `AI_INSTALL_URL_OPENCLAW`        | Installation URL for openclaw (GitHub releases)                |
 | `AI_APPLICATION_PATH`            | Path to applications (macOS only)                              |
 | `AI_ARCHITECTURE_NAME`           | Architecture name (e.g., `darwin-arm64`, `linux-amd64`)        |

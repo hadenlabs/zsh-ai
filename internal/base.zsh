@@ -9,6 +9,10 @@ function ai::internal::shimmy::load {
     [ -e "${AI_SHIMMY_BIN_PATH}" ] && export PATH="${AI_SHIMMY_BIN_PATH}:${PATH}"
 }
 
+function ai::internal::openclaw::load {
+    [ -e "${AI_OPENCLAW_BIN_PATH}" ] && export PATH="${AI_OPENCLAW_BIN_PATH}:${PATH}"
+}
+
 function ai::internal::packages::install {
     message_info "Installing required ai packages"
     for package in "${AI_PACKAGES[@]}"; do
@@ -27,6 +31,9 @@ function ai::internal::packages::install {
                 ;;
             hf)
                 ai::internal::hf::install
+                ;;
+            openclaw)
+                ai::internal::openclaw::install
                 ;;
             *)
                 core::install "${package}"
@@ -104,6 +111,23 @@ function ai::internal::hf::install {
         message_success "hf installed successfully"
     else
         message_error "Failed to install hf"
+        return 1
+    fi
+}
+
+function ai::internal::openclaw::install {
+    if core::exists openclaw; then
+        return 0
+    fi
+
+    mkdir -p "${AI_OPENCLAW_BIN_PATH}"
+
+    message_info "Installing openclaw..."
+
+    if curl -fsSL "${AI_INSTALL_URL_OPENCLAW}" | bash; then
+        message_success "openclaw installed successfully"
+    else
+        message_error "Failed to install openclaw"
         return 1
     fi
 }
