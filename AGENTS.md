@@ -51,8 +51,6 @@ See complete reference: [docs/functions.md](docs/functions.md)
 
 ## Configuration Variables
 
-## Configuration Variables
-
 For a complete list of all environment variables and their descriptions, see [docs/env-vars.md](docs/env-vars.md).
 
 Key variables include:
