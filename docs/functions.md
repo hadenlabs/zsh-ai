@@ -59,7 +59,7 @@ ai::fabric::install
 
 #### ai::fabric::patterns::sync
 
-Sync custom patterns from local `patterns/` directory to fabric's patterns directory (`~/.config/fabric/patterns/`). Uses rsync for synchronization.
+Sync custom patterns from local `data/patterns/` directory to fabric's patterns directory (`~/.config/fabric/patterns/`). Uses rsync for synchronization.
 
 ```bash
 ai::fabric::patterns::sync
@@ -263,7 +263,7 @@ ai::internal::openclaw::install
 | `AI_OPENCODE_ROOT_PATH`          | Root path for opencode (default: `~/.opencode`)                |
 | `AI_OPENCODE_BIN_PATH`           | Binary path for opencode (default: `~/.opencode/bin`)          |
 | `AI_FABRIC_PATTERNS_PATH`        | Path to fabric patterns (default: `~/.config/fabric/patterns`) |
-| `AI_FABRIC_PATTERNS_SYNC_SOURCE` | Source path for custom patterns (`ZSH_AI_PATH/patterns`)       |
+| `AI_FABRIC_PATTERNS_SYNC_SOURCE` | Source path for custom patterns (`ZSH_AI_PATH/data/patterns`)  |
 | `AI_OLLAMA_MODELS_PATH`          | Path to ollama models (default: `~/.ollama/models`)            |
 | `AI_OLLAMA_MODELS`               | Array of default ollama models to install                      |
 | `AI_SHIMMY_BIN_PATH`             | Binary path for shimmy (default: `~/.local/bin`)               |

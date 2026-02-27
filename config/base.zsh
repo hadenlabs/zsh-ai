@@ -15,7 +15,7 @@ export AI_OPENCODE_BIN_PATH="${AI_OPENCODE_ROOT_PATH}/bin"
 # fabric
 
 export AI_FABRIC_PATTERNS_PATH="${HOME}/.config/fabric/patterns"
-export AI_FABRIC_PATTERNS_SYNC_SOURCE="${ZSH_AI_PATH}/patterns"
+export AI_FABRIC_PATTERNS_SYNC_SOURCE="${ZSH_AI_PATH}/data/patterns"
 
 # ollama
 

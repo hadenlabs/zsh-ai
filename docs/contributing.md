@@ -39,7 +39,7 @@ The zsh-ai plugin follows a modular architecture with clear separation between:
 - **Configuration** (`config/`): Variables and OS-specific settings
 - **Internal logic** (`internal/`): Installation functions
 - **Public API** (`pkg/`): User-facing functions
-- **Patterns** (`patterns/`): Custom patterns for fabric
+- **Patterns** (`data/patterns/`): Custom patterns for fabric
 
 ### Step-by-Step Guide
 
@@ -305,10 +305,10 @@ For tools that need more than just installation (like model management, configur
 
 If your tool works with fabric patterns:
 
-1. Create pattern directory in `patterns/`:
+1. Create pattern directory in `data/patterns/`:
 
    ```
-   patterns/
+   data/patterns/
    └── newtool-pattern/
        ├── system.md
        └── user.md

@@ -19,7 +19,7 @@ zsh-ai.zsh (entry point)
     ├── core/       → Funciones core (extensión futura)
     ├── internal/   → Lógica interna de instalación
     ├── pkg/        → API pública expuesta al usuario
-    └── patterns/   → Custom patterns para fabric
+    └── data/patterns/ → Custom patterns para fabric
 ```
 
 **Pattern:** Each module uses `main.zsh` as a factory that loads `base.zsh` + OS-specific file (`osx.zsh` | `linux.zsh`).
@@ -335,12 +335,12 @@ ai::ollama::install
 
 ## Patterns (Fabric)
 
-The `patterns/` folder contains custom patterns for fabric.
+The `data/patterns/` folder contains custom patterns for fabric.
 
 **Structure:**
 
 ```
-patterns/
+data/patterns/
 ├── README.md
 └── pattern_name/
     ├── system.md    # Requerido
@@ -364,7 +364,7 @@ ai::fabric::patterns::sync  # Local → ~/.config/fabric/patterns
 | [docs/contributing.md](docs/contributing.md)       | Contribution guide    |
 | [docs/testing.md](docs/testing.md)                 | Testing guide         |
 | [docs/troubleshooting.md](docs/troubleshooting.md) | Troubleshooting guide |
-| [patterns/README.md](patterns/README.md)           | Patterns guide        |
+| [data/patterns/README.md](data/patterns/README.md) | Patterns guide        |
 
 ---
 

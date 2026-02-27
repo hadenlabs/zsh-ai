@@ -31,7 +31,7 @@ The zsh-ai plugin uses environment variables to configure AI tool installations 
 | `AI_OPENCODE_ROOT_PATH`          | Root directory for opencode         | `~/.opencode`               |
 | `AI_OPENCODE_BIN_PATH`           | Binary path for opencode            | `~/.opencode/bin`           |
 | `AI_FABRIC_PATTERNS_PATH`        | Directory for fabric patterns       | `~/.config/fabric/patterns` |
-| `AI_FABRIC_PATTERNS_SYNC_SOURCE` | Local patterns source directory     | `patterns/`                 |
+| `AI_FABRIC_PATTERNS_SYNC_SOURCE` | Local patterns source directory     | `data/patterns/`            |
 | `AI_OLLAMA_MODELS_PATH`          | Directory for ollama models         | `~/.ollama/models`          |
 | `AI_SHIMMY_BIN_PATH`             | Binary path for shimmy              | `~/.local/bin`              |
 | `AI_OPENCLAW_BIN_PATH`           | Binary path for openclaw            | `~/.local/bin`              |

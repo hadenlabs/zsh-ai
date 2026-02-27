@@ -7,7 +7,7 @@ This directory contains custom patterns for [fabric](https://github.com/danielmi
 Each pattern is a directory with a `system.md` file:
 
 ```
-patterns/
+data/patterns/
 ├── pattern_name/
 │   ├── system.md    # Required: AI instructions
 │   └── user.md      # Optional: Documentation
@@ -29,7 +29,7 @@ fabric --updatepatterns
 
 ## Create a Pattern
 
-1. Create a directory: `mkdir -p patterns/my_pattern`
+1. Create a directory: `mkdir -p data/patterns/my_pattern`
 2. Create `system.md`:
 
 ```markdown
