@@ -32,6 +32,7 @@ repos:
           app/data\/.*$|
           app/ia/datasets\/.*$|
           app/routes\/.*$|
+          data/patterns\/.*$|
           go.mod|
           go.sum|
           openapi.yaml|
