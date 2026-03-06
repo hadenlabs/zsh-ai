@@ -40,6 +40,7 @@ export AI_INSTALL_URL_OLLAMA="https://ollama.com/install.sh"
 export AI_INSTALL_URL_SHIMMY="https://github.com/Michael-A-Kuykendall/shimmy/releases/latest/download"
 export AI_INSTALL_URL_HF="https://hf.co/cli/install.sh"
 export AI_INSTALL_URL_OPENCLAW="https://openclaw.ai/install.sh"
+export AI_INSTALL_URL_TMUXAI="https://get.tmuxai.dev"
 
 export AI_TOOLS=(
   opencode
@@ -48,6 +49,7 @@ export AI_TOOLS=(
   shimmy
   hf
   openclaw
+  tmuxai
 )
 
 export AI_OLLAMA_MODELS=(

@@ -48,3 +48,7 @@ function ai::hf::install {
 function ai::openclaw::install {
     ai::internal::openclaw::install
 }
+
+function ai::tmuxai::install {
+    ai::internal::tmuxai::install
+}

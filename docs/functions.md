@@ -138,6 +138,14 @@ Install openclaw CLI tool for AI-powered code analysis and refactoring. Checks i
 ai::openclaw::install
 ```
 
+#### ai::tmuxai::install
+
+Install tmuxai CLI tool. Checks if tmuxai is already installed before attempting installation.
+
+```bash
+ai::tmuxai::install
+```
+
 ### Internal Functions
 
 #### ai::internal::packages::install
@@ -258,6 +266,14 @@ Internal function for openclaw installation logic. Downloads the appropriate bin
 
 ```bash
 ai::internal::openclaw::install
+```
+
+#### ai::internal::tmuxai::install
+
+Internal function for tmuxai installation logic. Verifies if tmuxai exists before installing via curl.
+
+```bash
+ai::internal::tmuxai::install
 ```
 
 ### Variables
