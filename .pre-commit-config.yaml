@@ -91,10 +91,11 @@ repos:
           - --config=.ci/linters/markdown-link-config.json
         exclude: >
           (?x)^(
-            .+\.docs/env-vars.md$|
-            docs/env-vars.md$|
-            docs\/include\/terraform.md$|
-            .+\.tpl.md$|
+          .+\.docs/env-vars.md$|
+          .+\.tpl.md$|
+          data/patterns\/.*$|
+          docs/env-vars.md$|
+          docs\/include\/terraform.md$|
           )$
 
   - repo: https://github.com/hadenlabs/pre-commit-hooks
