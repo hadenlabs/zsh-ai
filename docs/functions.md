@@ -49,6 +49,14 @@ Install opencode CLI tool. Checks if opencode is already installed using `which`
 ai::opencode::install
 ```
 
+#### ai::opencode::sync
+
+Sync opencode configuration from local `data/opencode/` directory to opencode config directory (`~/.config/opencode/`). Uses rsync for synchronization.
+
+```bash
+ai::opencode::sync
+```
+
 #### ai::fabric::install
 
 Install fabric CLI tool for AI patterns. Checks if fabric is already installed before attempting installation.

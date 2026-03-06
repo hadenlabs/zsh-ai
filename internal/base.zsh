@@ -57,6 +57,24 @@ function ai::internal::opencode::install {
     fi
 }
 
+function ai::internal::opencode::sync {
+    if ! core::exists rsync; then
+        message_error "rsync is not installed"
+        return 1
+    fi
+
+    message_info "Syncing opencode config from ${AI_OPENCODE_CONFIG_SOURCE_PATH} to ${AI_OPENCODE_CONFIG_PATH}..."
+
+    mkdir -p "${AI_OPENCODE_CONFIG_PATH}"
+
+    if rsync -av "${AI_OPENCODE_CONFIG_SOURCE_PATH}/" "${AI_OPENCODE_CONFIG_PATH}/"; then
+        message_success "opencode config synced successfully"
+    else
+        message_error "Failed to sync opencode config"
+        return 1
+    fi
+}
+
 function ai::internal::fabric::install {
     if core::exists fabric; then
         return 0

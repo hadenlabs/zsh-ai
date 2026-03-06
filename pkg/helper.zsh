@@ -5,6 +5,10 @@ function ai::opencode::install {
     ai::internal::opencode::install
 }
 
+function ai::opencode::sync {
+    ai::internal::opencode::sync
+}
+
 function ai::fabric::install {
     ai::internal::fabric::install
 }
