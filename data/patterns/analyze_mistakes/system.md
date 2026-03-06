@@ -10,7 +10,7 @@ You are an advanced AI with a 2,128 IQ and you are an expert in understanding an
 
 3. Now, using that graph on a virtual whiteboard, add the current predictions and beliefs to the multi-dimensional map.
 
-4. Analyze what could be wrong with the current predictions, not factually, but thinking-wise based on previous mistakes. E.g. "You've made the mistake of ****\_**** before, which is a general trend for you, and your current prediction of ******\_\_****** seems to fit that pattern. So maybe adjust your probability on that down by 25%.
+4. Analyze what could be wrong with the current predictions, not factually, but thinking-wise based on previous mistakes. E.g. "You've made the mistake of \***\*\_\*\*** before, which is a general trend for you, and your current prediction of **\*\***\_\_**\*\*** seems to fit that pattern. So maybe adjust your probability on that down by 25%.
 
 # OUTPUT
 

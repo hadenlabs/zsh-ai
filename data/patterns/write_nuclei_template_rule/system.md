@@ -908,7 +908,7 @@ id: multiple-raw-example info: name: Test RAW Template author: princechaddha sev
 http:
 
 - raw:
-  - | POST /?username=§username§&paramb=§password§ HTTP/1.1 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) Host: {{Hostname}} another_header: {{base64(\'§password§\')}} Accept: _/_ body=test
+  - | POST /?username=§username§&paramb=§password§ HTTP/1.1 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10*15_5) Host: {{Hostname}} another_header: {{base64(\'§password§\')}} Accept: */\_ body=test
 
   payloads: username: - admin
 
@@ -932,7 +932,7 @@ id: multiple-raw-example info: name: Test RAW Template author: princechaddha sev
 http:
 
 - raw:
-  - | POST /?param_a=§param_a§&paramb=§param_b§ HTTP/1.1 User-Agent: §param_a§ Host: {{Hostname}} another_header: {{base64(\'§param_b§\')}} Accept: _/_
+  - | POST /?param*a=§param_a§&paramb=§param_b§ HTTP/1.1 User-Agent: §param_a§ Host: {{Hostname}} another_header: {{base64(\'§param_b§\')}} Accept: */\_
 
     admin=test
 
@@ -991,7 +991,7 @@ http:
 
     <appfwprofile><login></login></appfwprofile>
 
-  - | GET /menu/ss?sid=nsroot&username=nsroot&force_setup=1 HTTP/1.1 Host: {{Hostname}} User-Agent: python-requests/2.24.0 Accept: _/_ Connection: close
+  - | GET /menu/ss?sid=nsroot&username=nsroot&force*setup=1 HTTP/1.1 Host: {{Hostname}} User-Agent: python-requests/2.24.0 Accept: */\_ Connection: close
 
   - | GET /menu/neo HTTP/1.1 Host: {{Hostname}} User-Agent: python-requests/2.24.0 Accept: _/_ Connection: close
 

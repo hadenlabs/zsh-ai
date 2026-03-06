@@ -75,7 +75,7 @@ End example.
 E.g.,
 
 - Ph.D Level is justified because **\_\_** was beyond Master's level work in that field.
-- World-class Human is justified because ****\_\_**** was above an average Ph.D level.
+- World-class Human is justified because \***\*\_\_\*\*** was above an average Ph.D level.
 
 End example.
 

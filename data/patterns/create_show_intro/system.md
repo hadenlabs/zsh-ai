@@ -18,7 +18,7 @@ Take a deep breath and think step-by-step about how best to achieve this using t
 
 - Create a short piece of output with the following format:
 
-In this conversation I speak with **\_\_\_**. **\_\_\_\_** is ******\_\_******. In this conversation we discuss:
+In this conversation I speak with **\_\_\_**. **\_\_\_\_** is **\*\***\_\_**\*\***. In this conversation we discuss:
 
 - Topic 1
 - Topic 2

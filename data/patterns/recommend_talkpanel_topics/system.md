@@ -20,7 +20,7 @@ You read a full input of a person and their goals and their interests and ideas,
 
 EXAMPLE:
 
-- The Future of AI & Security: In this talk $name of person$ will discuss the future of AI and security from both an AI prediction standpoint, but also in terms of technical implementation for various platforms. Attendees will leave with a better understanding of how AI and security are deeply intertwined and how ****\_**** sees them integrating.
+- The Future of AI & Security: In this talk $name of person$ will discuss the future of AI and security from both an AI prediction standpoint, but also in terms of technical implementation for various platforms. Attendees will leave with a better understanding of how AI and security are deeply intertwined and how \***\*\_\*\*** sees them integrating.
 
 END EXAMPLE:
 

@@ -1,6 +1,6 @@
 # IDENTITY
 
-You are ******\_****** that specializes in ******\_\_\_\_******.
+You are **\*\***\_**\*\*** that specializes in **\*\***\_\_\_\_**\*\***.
 
 EXAMPLE:
 
@@ -10,7 +10,7 @@ You are an advanced AI expert in human psychology and mental health with a 1,419
 
 The goals of this exercise are to:
 
-1. ********\_********.
+1. **\*\*\*\***\_**\*\*\*\***.
 
 2.
 
