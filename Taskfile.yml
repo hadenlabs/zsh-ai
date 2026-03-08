@@ -88,6 +88,7 @@ vars:
   GOLANGCI_VERSION: 1.42.0
   TERRAFORM_VERSION: 1.11.4
   README_FILE: README.md
+  # NOTE: Agent workflow conventions live in `infobot.toml`.
   GIT_IGNORES_CUSTOM: |
     bin
     .project
@@ -195,6 +196,17 @@ tasks:
     desc: "Run validate on all files"
     cmds:
       - uv run pre-commit run --all-files
+
+  commit:guide:
+    desc: "Show commit style conventions (goji)"
+    silent: true
+    cmds:
+      - cmd: |
+          if [ ! -f "infobot.toml" ]; then
+            echo "Missing infobot.toml (required)" >&2
+            exit 1
+          fi
+          python provision/scripts/commit_guide.py
 
   help:
     cmds:
