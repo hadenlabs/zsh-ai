@@ -5,6 +5,152 @@
   "model": "openai/gpt-5.2",
   "small_model": "openai/gpt-4o-mini",
   "instructions": ["AGENTS.md"],
+  "agent": {
+    "plan": {
+      "mode": "primary",
+      "model": "openai/gpt-5.2"
+    },
+    "build": {
+      "mode": "primary",
+      "model": "openai/gpt-5.2"
+    },
+    "OpenAgent": {
+      "mode": "primary",
+      "model": "openai/gpt-5.2"
+    },
+    "OpenCoder": {
+      "mode": "primary",
+      "model": "openai/gpt-5.2"
+    },
+    "OpenSystemBuilder": {
+      "mode": "primary",
+      "model": "openai/gpt-5.2"
+    },
+    "OpenRepoManager": {
+      "mode": "primary",
+      "model": "openai/gpt-5.2"
+    },
+    "OpenTechnicalWriter": {
+      "mode": "primary",
+      "model": "openai/gpt-5.2"
+    },
+    "OpenCopywriter": {
+      "mode": "primary",
+      "model": "openai/gpt-5.2"
+    },
+    "OpenDataAnalyst": {
+      "mode": "primary",
+      "model": "openai/gpt-5.2"
+    },
+    "CodeReviewer": {
+      "mode": "subagent",
+      "model": "openrouter/deepseek/deepseek-v3.2"
+    },
+    "BuildAgent": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "CoderAgent": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "TestEngineer": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "ContractManager": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "StoryMapper": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "ADRManager": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "ArchitectureAnalyzer": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "PrioritizationEngine": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "OpenFrontendSpecialist": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "OpenDevopsSpecialist": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "ContextScout": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "ExternalScout": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "DocWriter": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "ContextManager": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "BatchExecutor": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "Context Retriever": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "StageOrchestrator": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "TaskManager": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "WorkflowDesigner": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "ContextOrganizer": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "DomainAnalyzer": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "CommandCreator": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "AgentGenerator": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "Image Specialist": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "Eval Runner": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    "Simple Responder": {
+      "mode": "subagent",
+      "model": "openai/gpt-5.2"
+    }
+  },
   "mcp": {
     "serena": {
       "type": "local",
@@ -247,6 +393,33 @@
         "textVerbosity": "medium",
         "include": ["reasoning.encrypted_content"],
         "store": false
+      }
+    },
+    "openrouter": {
+      "name": "OpenRouter",
+      "models": {
+        "deepseek/deepseek-r1": {
+          "name": "DeepSeek R1",
+          "limit": {
+            "context": 128000,
+            "output": 16384
+          },
+          "modalities": {
+            "input": ["text"],
+            "output": ["text"]
+          }
+        },
+        "deepseek/deepseek-v3.2": {
+          "name": "DeepSeek V3.2",
+          "limit": {
+            "context": 163840,
+            "output": 65536
+          },
+          "modalities": {
+            "input": ["text"],
+            "output": ["text"]
+          }
+        }
       }
     }
   }
