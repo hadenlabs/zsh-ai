@@ -1,9 +1,50 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "openai/gpt-5.2",
-  "small_model": "openai/gpt-4o-mini",
-  "instructions": ["AGENTS.md"],
+  "autoupdate": true,
+  "plugin": ["@franlol/opencode-md-table-formatter@0.0.3"],
   "mcp": {
+    "serena": {
+      "type": "local",
+      "command": ["uvx", "--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server"],
+      "enabled": true
+    },
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true
+    },
+    "sequential-thinking": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "enabled": true
+    },
+    "awslabs.aws-knowledge": {
+      "type": "remote",
+      "url": "https://knowledge-mcp.global.api.aws",
+      "enabled": false
+    },
+    "awslabs.aws-terraform": {
+      "type": "local",
+      "command": ["uvx", "awslabs.terraform-mcp-server@latest"],
+      "environment": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "enabled": false
+    },
+    "hashicorp.terraform": {
+      "type": "local",
+      "command": ["docker", "run", "-i", "--rm", "hashicorp/terraform-mcp-server:latest"],
+      "enabled": true
+    },
+    "grafana": {
+      "type": "local",
+      "command": ["uvx", "mcp-grafana"],
+      "environment": {
+        "GRAFANA_URL": "{env:GRAFANA_URL}",
+        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "{env:GRAFANA_SERVICE_ACCOUNT_TOKEN}"
+      },
+      "enabled": true
+    },
     "filesystem": {
       "type": "local",
       "command": ["npx", "-y", "@modelcontextprotocol/server-filesystem"],
@@ -25,6 +66,185 @@
       "url": "{env:JIRA_MCP_URL}",
       "enabled": true,
       "oauth": {}
+    }
+  },
+  "provider": {
+    "openai": {
+      "name": "OpenAI",
+      "models": {
+        "gpt-5.2": {
+          "name": "GPT-5.2",
+          "limit": {
+            "context": 200000,
+            "output": 100000
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
+        },
+        "gpt-5.1-codex": {
+          "name": "GPT-5.1 Codex",
+          "limit": {
+            "context": 200000,
+            "output": 100000
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
+        },
+        "gpt-5.2-codex": {
+          "name": "GPT-5.2 Codex",
+          "limit": {
+            "context": 200000,
+            "output": 100000
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
+        },
+        "gpt-5.1-codex-mini": {
+          "name": "GPT-5.1 Codex Mini",
+          "limit": {
+            "context": 200000,
+            "output": 65536
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
+        },
+        "gpt-5.1-codex-max": {
+          "name": "GPT-5.1 Codex Max",
+          "limit": {
+            "context": 200000,
+            "output": 100000
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
+        },
+        "gpt-4o": {
+          "name": "GPT-4o",
+          "limit": {
+            "context": 128000,
+            "output": 16384
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
+        },
+        "gpt-4o-mini": {
+          "name": "GPT-4o Mini",
+          "limit": {
+            "context": 128000,
+            "output": 16384
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
+        },
+        "gpt-4-turbo": {
+          "name": "GPT-4 Turbo",
+          "limit": {
+            "context": 128000,
+            "output": 4096
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
+        },
+        "gpt-4": {
+          "name": "GPT-4",
+          "limit": {
+            "context": 8192,
+            "output": 4096
+          },
+          "modalities": {
+            "input": ["text"],
+            "output": ["text"]
+          }
+        },
+        "gpt-3.5-turbo": {
+          "name": "GPT-3.5 Turbo",
+          "limit": {
+            "context": 16385,
+            "output": 4096
+          },
+          "modalities": {
+            "input": ["text"],
+            "output": ["text"]
+          }
+        },
+        "o1": {
+          "name": "o1",
+          "limit": {
+            "context": 200000,
+            "output": 100000
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
+        },
+        "o1-mini": {
+          "name": "o1 Mini",
+          "limit": {
+            "context": 128000,
+            "output": 65536
+          },
+          "modalities": {
+            "input": ["text"],
+            "output": ["text"]
+          }
+        },
+        "o1-preview": {
+          "name": "o1 Preview",
+          "limit": {
+            "context": 128000,
+            "output": 32768
+          },
+          "modalities": {
+            "input": ["text"],
+            "output": ["text"]
+          }
+        },
+        "o3": {
+          "name": "o3",
+          "limit": {
+            "context": 200000,
+            "output": 100000
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
+        },
+        "o3-mini": {
+          "name": "o3 Mini",
+          "limit": {
+            "context": 200000,
+            "output": 100000
+          },
+          "modalities": {
+            "input": ["text"],
+            "output": ["text"]
+          }
+        }
+      },
+      "options": {
+        "reasoningEffort": "medium",
+        "reasoningSummary": "auto",
+        "textVerbosity": "medium",
+        "include": ["reasoning.encrypted_content"],
+        "store": false
+      }
     }
   }
 }
