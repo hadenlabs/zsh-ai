@@ -8,7 +8,12 @@ from typing import NoReturn
 
 
 def _now_iso() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    return (
+        datetime.now(timezone.utc)
+        .replace(microsecond=0)
+        .isoformat()
+        .replace("+00:00", "Z")
+    )
 
 
 def _die(msg: str, code: int = 2) -> NoReturn:
