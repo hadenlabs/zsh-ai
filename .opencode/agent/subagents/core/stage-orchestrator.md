@@ -177,8 +177,8 @@ The StageOrchestrator manages complex feature development through 8 systematic s
 
 **Outputs**:
 
-- `.tmp/tasks/{feature}/task.json`
-- `.tmp/tasks/{feature}/subtask_NN.json` files
+- `.infobot/.tmp/tasks/{feature}/task.json`
+- `.infobot/.tmp/tasks/{feature}/subtask_NN.json` files
 - Task dependency graph
 - Parallel batch identification
 
@@ -648,7 +648,7 @@ task(
          - Dependency mapping
          - Parallel batch identification
 
-         Output: .tmp/tasks/{feature}/ with task.json and subtask_NN.json files"
+         Output: .infobot/.tmp/tasks/{feature}/ with task.json and subtask_NN.json files"
 )
 ```
 

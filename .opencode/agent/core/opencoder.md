@@ -225,7 +225,7 @@ Code Standards
 
                  Read the context file for full requirements, standards, and constraints.
                  Break this feature into atomic JSON subtasks.
-                 Create .tmp/tasks/{feature-slug}/task.json + subtask_NN.json files.
+                 Create .infobot/.tmp/tasks/{feature-slug}/task.json + subtask_NN.json files.
 
                  IMPORTANT:
                  - context_files in each subtask = ONLY standards paths (from ## Context Files section)
@@ -234,7 +234,7 @@ Code Standards
                  - Mark isolated tasks as parallel: true."
        )
        ```
-    2. TaskManager creates `.tmp/tasks/{feature}/` with task.json + subtask JSONs.
+    2. TaskManager creates `.infobot/.tmp/tasks/{feature}/` with task.json + subtask JSONs.
     3. Present the task plan to user for confirmation before execution begins.
 
     **If executing directly:**
@@ -252,7 +252,7 @@ Code Standards
     <step id="5.0" name="AnalyzeTaskStructure">
       <action>Read all subtasks and build dependency graph</action>
       <process>
-        1. Read task.json from `.tmp/tasks/{feature}/`
+        1. Read task.json from `.infobot/.tmp/tasks/{feature}/`
         2. Read all subtask_NN.json files
         3. Build dependency graph from `depends_on` fields
         4. Identify tasks with `parallel: true` flag
@@ -319,7 +319,7 @@ Code Standards
 
               3. Validate batch completion:
                  ```bash
-                 bash .opencode/skills/task-management/router.sh status {feature}
+                 bash .infobot/skills/task-management/router.sh status {feature}
                  ```
                  - Check all subtasks in batch have status: "completed"
                  - Verify deliverables exist
@@ -342,7 +342,7 @@ Code Standards
                            Session Context: .tmp/sessions/{session-id}/context.md
 
                            Instructions:
-                           1. Read all subtask JSONs from .tmp/tasks/{feature}/
+                           1. Read all subtask JSONs from .infobot/.tmp/tasks/{feature}/
                            2. Validate parallel safety (no inter-dependencies)
                            3. Delegate to CoderAgent for each subtask simultaneously
                            4. Monitor all tasks until complete

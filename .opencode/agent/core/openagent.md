@@ -266,17 +266,17 @@ task(
        Execute tasks in parallel batches using TaskManager's dependency structure.
        
        <trigger>
-         This step activates when TaskManager has created task files in `.tmp/tasks/{feature}/`
+          This step activates when TaskManager has created task files in `.infobot/.tmp/tasks/{feature}/`
        </trigger>
        
        <process>
          1. **Identify Parallel Batches** (use task-cli.ts):
             ```bash
             # Get all parallel-ready tasks
-            bash .opencode/skills/task-management/router.sh parallel {feature}
+             bash .infobot/skills/task-management/router.sh parallel {feature}
             
             # Get next eligible tasks
-            bash .opencode/skills/task-management/router.sh next {feature}
+             bash .infobot/skills/task-management/router.sh next {feature}
             ```
          
          2. **Build Execution Plan**:
@@ -296,17 +296,17 @@ task(
             // Delegate ALL simultaneously - these run in parallel
             task(subagent_type="CoderAgent", description="Task 01", 
                  prompt="Load context from .tmp/sessions/{session-id}/context.md
-                         Execute subtask: .tmp/tasks/{feature}/subtask_01.json
+                          Execute subtask: .infobot/.tmp/tasks/{feature}/subtask_01.json
                          Mark as complete when done.")
             
             task(subagent_type="CoderAgent", description="Task 02", 
                  prompt="Load context from .tmp/sessions/{session-id}/context.md
-                         Execute subtask: .tmp/tasks/{feature}/subtask_02.json
+                          Execute subtask: .infobot/.tmp/tasks/{feature}/subtask_02.json
                          Mark as complete when done.")
             
             task(subagent_type="CoderAgent", description="Task 03", 
                  prompt="Load context from .tmp/sessions/{session-id}/context.md
-                         Execute subtask: .tmp/tasks/{feature}/subtask_03.json
+                          Execute subtask: .infobot/.tmp/tasks/{feature}/subtask_03.json
                          Mark as complete when done.")
             ```
             
@@ -314,7 +314,7 @@ task(
          
          4. **Verify Batch 1 Complete**:
             ```bash
-            bash .opencode/skills/task-management/router.sh status {feature}
+             bash .infobot/skills/task-management/router.sh status {feature}
             ```
             Confirm tasks 01, 02, 03 all show status: "completed"
          
@@ -322,7 +322,7 @@ task(
             ```javascript
             task(subagent_type="CoderAgent", description="Task 04",
                  prompt="Load context from .tmp/sessions/{session-id}/context.md
-                         Execute subtask: .tmp/tasks/{feature}/subtask_04.json
+                          Execute subtask: .infobot/.tmp/tasks/{feature}/subtask_04.json
                          This depends on tasks 01+02+03 being complete.")
             ```
             
@@ -368,7 +368,7 @@ task(
        
        <integration_with_opencoder>
          When OpenCoder delegates to TaskManager:
-         1. TaskManager creates `.tmp/tasks/{feature}/` with parallel flags
+          1. TaskManager creates `.infobot/.tmp/tasks/{feature}/` with parallel flags
          2. OpenCoder reads task structure
          3. OpenCoder executes using this parallel batch pattern
          4. Results flow back through standard completion signals
@@ -416,7 +416,7 @@ task(
 
 <execute_directly_when> <condition trigger="single_file_simple_change"/> <condition trigger="straightforward_enhancement"/> <condition trigger="clear_bug_fix"/> </execute_directly_when>
 
-<specialized_routing> <route to="TaskManager" when="complex_feature_breakdown"> <trigger>Complex feature requiring task breakdown OR multi-step dependencies OR user requests task planning</trigger> <context_bundle> Create .tmp/sessions/{timestamp}-{task-slug}/context.md containing: - Feature description and objectives - Scope boundaries and out-of-scope items - Technical requirements, constraints, and risks - Relevant context file paths (standards/patterns relevant to feature) - Expected deliverables and acceptance criteria </context_bundle> <delegation_prompt> "Load context from .tmp/sessions/{timestamp}-{task-slug}/context.md. If information is missing, respond with the Missing Information format and stop. Otherwise, break down this feature into JSON subtasks and create .tmp/tasks/{feature}/task.json + subtask_NN.json files. Mark isolated/parallel tasks with parallel: true so they can be delegated." </delegation_prompt> <expected_return> - .tmp/tasks/{feature}/task.json - .tmp/tasks/{feature}/subtask_01.json, subtask_02.json... - Next suggested task to start with - Parallel/isolated tasks clearly flagged - If missing info: Missing Information block + suggested prompt </expected_return> </route>
+<specialized_routing> <route to="TaskManager" when="complex_feature_breakdown"> <trigger>Complex feature requiring task breakdown OR multi-step dependencies OR user requests task planning</trigger> <context_bundle> Create .tmp/sessions/{timestamp}-{task-slug}/context.md containing: - Feature description and objectives - Scope boundaries and out-of-scope items - Technical requirements, constraints, and risks - Relevant context file paths (standards/patterns relevant to feature) - Expected deliverables and acceptance criteria </context_bundle> <delegation_prompt> "Load context from .tmp/sessions/{timestamp}-{task-slug}/context.md. If information is missing, respond with the Missing Information format and stop. Otherwise, break down this feature into JSON subtasks and create .infobot/.tmp/tasks/{feature}/task.json + subtask_NN.json files. Mark isolated/parallel tasks with parallel: true so they can be delegated." </delegation_prompt> <expected_return> - .infobot/.tmp/tasks/{feature}/task.json - .infobot/.tmp/tasks/{feature}/subtask_01.json, subtask_02.json... - Next suggested task to start with - Parallel/isolated tasks clearly flagged - If missing info: Missing Information block + suggested prompt </expected_return> </route>
 
      <route to="Specialist" when="simple_specialist_task">
        <trigger>Simple task (1-3 files, <30min) requiring specialist knowledge (testing, review, documentation)</trigger>

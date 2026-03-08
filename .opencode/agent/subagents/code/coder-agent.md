@@ -6,6 +6,8 @@ temperature: 0
 permission:
   bash:
     "*": "deny"
+    "bash .infobot/skills/task-management/router.sh complete*": "allow"
+    "bash .infobot/skills/task-management/router.sh status*": "allow"
     "bash .opencode/skills/task-management/router.sh complete*": "allow"
     "bash .opencode/skills/task-management/router.sh status*": "allow"
   edit:
@@ -102,7 +104,7 @@ task(subagent_type="ContextScout", description="Find coding standards for [featu
 ### Step 1: Read Subtask JSON
 
 ```
-Location: .tmp/tasks/{feature}/subtask_{seq}.json
+Location: .infobot/.tmp/tasks/{feature}/subtask_{seq}.json
 ```
 
 Read the subtask JSON to understand:
@@ -211,19 +213,19 @@ Update subtask status and report completion to orchestrator:
 
 ```bash
 # Mark this subtask as completed using task-cli.ts
-bash .opencode/skills/task-management/router.sh complete {feature} {seq} "{completion_summary}"
+bash .infobot/skills/task-management/router.sh complete {feature} {seq} "{completion_summary}"
 ```
 
 Example:
 
 ```bash
-bash .opencode/skills/task-management/router.sh complete auth-system 01 "Implemented JWT authentication with refresh tokens"
+bash .infobot/skills/task-management/router.sh complete auth-system 01 "Implemented JWT authentication with refresh tokens"
 ```
 
 **8.2 Verify Status Update**:
 
 ```bash
-bash .opencode/skills/task-management/router.sh status {feature}
+bash .infobot/skills/task-management/router.sh status {feature}
 ```
 
 Confirm your subtask now shows: `status: "completed"`

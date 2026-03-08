@@ -7,6 +7,8 @@ permission:
   bash:
     "*": "deny"
     "npx ts-node*task-cli*": "allow"
+    "mkdir -p .infobot/.tmp/tasks*": "allow"
+    "mv .infobot/.tmp/tasks*": "allow"
     "mkdir -p .tmp/tasks*": "allow"
     "mv .tmp/tasks*": "allow"
   edit:
@@ -90,7 +92,7 @@ WHY THIS MATTERS:
       <prerequisites>Context loaded (Stage 0 complete)</prerequisites>
       <process>
         1. Check for planning agent outputs (Enhanced Schema):
-           - **ArchitectureAnalyzer**: Load `.tmp/tasks/{feature}/contexts.json` if exists
+           - **ArchitectureAnalyzer**: Load `.infobot/.tmp/tasks/{feature}/contexts.json` if exists
              - Extract `bounded_context` and `module` fields for task.json
              - Map subtasks to appropriate bounded contexts
            - **StoryMapper**: Load `.tmp/planning/{feature}/map.json` if exists
@@ -169,7 +171,7 @@ WHY THIS MATTERS:
       <prerequisites>Plan complete with sufficient detail</prerequisites>
       <process>
         1. Create directory:
-           `.tmp/tasks/{feature-slug}/`
+           `.infobot/.tmp/tasks/{feature-slug}/`
 
           2. Create task.json:
              ```json
@@ -265,7 +267,7 @@ WHY THIS MATTERS:
            ```
            ## Tasks Created
 
-           Location: .tmp/tasks/{feature}/
+           Location: .infobot/.tmp/tasks/{feature}/
            Files: task.json + {N} subtasks
 
            Next available: Run `task-cli.ts next {feature}`
@@ -314,7 +316,7 @@ WHY THIS MATTERS:
 
         2. If completed_count == subtask_count:
            - Update task.json: status → "completed", add completed_at
-           - Move folder: `.tmp/tasks/{feature}/` → `.tmp/tasks/completed/{feature}/`
+           - Move folder: `.infobot/.tmp/tasks/{feature}/` → `.infobot/.tmp/tasks/completed/{feature}/`
 
         3. Report:
            ```
@@ -322,7 +324,7 @@ WHY THIS MATTERS:
 
            Feature: {feature}
            Completed: {timestamp}
-           Location: .tmp/tasks/completed/{feature}/
+           Location: .infobot/.tmp/tasks/completed/{feature}/
            ```
       </process>
       <checkpoint>Feature archived to completed/</checkpoint>
@@ -346,10 +348,10 @@ WHY THIS MATTERS:
   </naming>
 
   <structure>
-    <directory>.tmp/tasks/{feature}/</directory>
+    <directory>.infobot/.tmp/tasks/{feature}/</directory>
     <task_file>task.json</task_file>
     <subtask_files>subtask_01.json, subtask_02.json, ...</subtask_files>
-    <archive>.tmp/tasks/completed/{feature}/</archive>
+    <archive>.infobot/.tmp/tasks/completed/{feature}/</archive>
   </structure>
 
 <status_flow> <pending>Initial state, waiting for deps</pending> <in_progress>Working agent picked up task</in_progress> <completed>TaskManager verified completion</completed> <blocked>Issue found, cannot proceed</blocked> </status_flow> </conventions>
@@ -358,7 +360,7 @@ WHY THIS MATTERS:
 
 <line_number_precision> <purpose>Reduce cognitive load by pointing agents to exact sections of large files</purpose> <format> `json       "context_files": [         {           "path": ".opencode/context/core/standards/code-quality.md",           "lines": "53-95",           "reason": "Pure function patterns for service layer"         },         {           "path": ".opencode/context/core/standards/security-patterns.md",           "lines": "120-145,200-220",           "reason": "JWT validation and token refresh patterns"         }       ]       ` </format> <when_to_use> - File is >100 lines - Only specific sections are relevant to the subtask - Want to reduce agent reading time </when_to_use> <backward_compatibility> Both formats are valid and can be mixed: - String: (example: `".opencode/context/file.md"`) - read entire file - Object: `{"path": "...", "lines": "10-50", "reason": "..."}` (read specific lines) </backward_compatibility> </line_number_precision>
 
-<planning_agent_integration> <architecture_analyzer> <input_file>.tmp/tasks/{feature}/contexts.json</input_file> <fields_extracted> - bounded_context: DDD bounded context (e.g., "authentication", "billing") - module: Module/package name (e.g., "@app/auth", "payment-service") </fields_extracted> <usage> When ArchitectureAnalyzer output exists: 1. Load contexts.json 2. Extract bounded_context for task.json 3. Map subtasks to appropriate bounded contexts 4. Set module field for each subtask based on context mapping </usage> </architecture_analyzer>
+<planning_agent_integration> <architecture_analyzer> <input_file>.infobot/.tmp/tasks/{feature}/contexts.json</input_file> <fields_extracted> - bounded_context: DDD bounded context (e.g., "authentication", "billing") - module: Module/package name (e.g., "@app/auth", "payment-service") </fields_extracted> <usage> When ArchitectureAnalyzer output exists: 1. Load contexts.json 2. Extract bounded_context for task.json 3. Map subtasks to appropriate bounded contexts 4. Set module field for each subtask based on context mapping </usage> </architecture_analyzer>
 
     <story_mapper>
       <input_file>.tmp/planning/{feature}/map.json</input_file>
@@ -420,7 +422,7 @@ WHY THIS MATTERS:
 
 </planning_agent_integration>
 
-<populating_enhanced_fields> <step_1>Check for planning agent outputs in .tmp/tasks/, .tmp/planning/, .tmp/contracts/, docs/adr/</step_1> <step_2>Load available outputs and extract relevant fields</step_2> <step_3>Populate task.json with extracted fields (all optional)</step_3> <step_4>Map fields to subtasks where relevant (e.g., bounded_context, contracts, related_adrs)</step_4> <step_5>Maintain backward compatibility: omit fields if planning agent outputs don't exist</step_5> </populating_enhanced_fields>
+<populating_enhanced_fields> <step_1>Check for planning agent outputs in .infobot/.tmp/tasks/, .tmp/planning/, .tmp/contracts/, docs/adr/</step_1> <step_2>Load available outputs and extract relevant fields</step_2> <step_3>Populate task.json with extracted fields (all optional)</step_3> <step_4>Map fields to subtasks where relevant (e.g., bounded_context, contracts, related_adrs)</step_4> <step_5>Maintain backward compatibility: omit fields if planning agent outputs don't exist</step_5> </populating_enhanced_fields>
 
 <example_enhanced_task> `json     {       "id": "user-authentication",       "name": "User Authentication System",       "status": "active",       "objective": "Implement JWT-based authentication with refresh tokens",       "context_files": [         {           "path": ".opencode/context/core/standards/code-quality.md",           "lines": "53-95",           "reason": "Pure function patterns for auth service"         },         {           "path": ".opencode/context/core/standards/security-patterns.md",           "lines": "120-145",           "reason": "JWT validation rules"         }       ],       "reference_files": ["src/middleware/auth.middleware.ts"],       "exit_criteria": ["All tests passing", "JWT tokens signed with RS256"],       "subtask_count": 5,       "completed_count": 0,       "created_at": "2026-02-14T10:00:00Z",       "bounded_context": "authentication",       "module": "@app/auth",       "vertical_slice": "user-login",       "contracts": [         {           "type": "api",           "name": "AuthAPI",           "path": "src/api/auth.contract.ts",           "status": "defined",           "description": "REST endpoints for login, logout, refresh"         }       ],       "related_adrs": [         {           "id": "ADR-003",           "path": "docs/adr/003-jwt-authentication.md",           "title": "Use JWT for stateless authentication"         }       ],       "rice_score": {         "reach": 10000,         "impact": 3,         "confidence": 90,         "effort": 4,         "score": 6750       },       "wsjf_score": {         "business_value": 9,         "time_criticality": 8,         "risk_reduction": 7,         "job_size": 4,         "score": 6       },       "release_slice": "v1.0.0"     }     ` </example_enhanced_task>
 

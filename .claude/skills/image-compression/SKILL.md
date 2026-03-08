@@ -50,7 +50,6 @@ If the user explicitly requests overwriting, replace the original after compress
 3. Compress
 
 - Call the MCP tool:
-
   - `urls`: the provided local file path (no URL prefix).
   - `format`: infer from extension when obvious (e.g., `png`, `jpg`, `webp`). If unclear, omit.
 

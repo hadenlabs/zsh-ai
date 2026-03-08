@@ -7,6 +7,7 @@ permission:
   bash:
     "*": "deny"
     "mkdir -p .tmp/architecture*": "allow"
+    "mkdir -p .infobot/.tmp/tasks/*/module-briefs*": "allow"
     "mkdir -p .tmp/tasks/*/module-briefs*": "allow"
   edit:
     "**/*.env*": "deny"
@@ -372,13 +373,13 @@ Order Management (Publisher) → Notification (Subscriber)
 }
 ```
 
-**Location**: `.tmp/tasks/{feature}/contexts.json`
+**Location**: `.infobot/.tmp/tasks/{feature}/contexts.json`
 
 ### Step 10: Create Module Briefs
 
 **For each bounded context**, create a module brief:
 
-**Location**: `.tmp/tasks/{feature}/module-briefs/{context-name}.md`
+**Location**: `.infobot/.tmp/tasks/{feature}/module-briefs/{context-name}.md`
 
 **Template**:
 
@@ -543,7 +544,7 @@ Orchestrator:
        prompt="Create implementation tasks for {feature}.
                Use contexts.json for module boundaries.
                Reference module-briefs/ for implementation guidance.
-               Context: .tmp/tasks/{feature}/contexts.json"
+               Context: .infobot/.tmp/tasks/{feature}/contexts.json"
      )
 ```
 

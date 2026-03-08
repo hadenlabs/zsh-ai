@@ -7,6 +7,7 @@ permission:
   bash:
     "*": "deny"
     "npx ts-node*task-cli*": "allow"
+    "bash .infobot/skills/task-management/router.sh*": "allow"
     "bash .opencode/skills/task-management/router.sh*": "allow"
   edit:
     "**/*.env*": "deny"
@@ -77,7 +78,7 @@ Report batch completion status.
 Read all subtask JSONs to understand requirements:
 
 ```
-.tmp/tasks/{feature}/
+.infobot/.tmp/tasks/{feature}/
 ├── subtask_01.json
 ├── subtask_02.json
 └── subtask_03.json
@@ -122,7 +123,7 @@ task(
   description="Execute auth-system subtask 01",
   prompt="Load context from .tmp/sessions/2026-02-03-auth/context.md
 
-          Execute subtask: .tmp/tasks/auth-system/subtask_01.json
+          Execute subtask: .infobot/.tmp/tasks/auth-system/subtask_01.json
 
           This is part of Batch 1 running in parallel with subtasks 02 and 03.
           Mark subtask as complete when done using task-cli.ts."
@@ -134,7 +135,7 @@ task(
   description="Execute auth-system subtask 02",
   prompt="Load context from .tmp/sessions/2026-02-03-auth/context.md
 
-          Execute subtask: .tmp/tasks/auth-system/subtask_02.json
+          Execute subtask: .infobot/.tmp/tasks/auth-system/subtask_02.json
 
           This is part of Batch 1 running in parallel with subtasks 01 and 03.
           Mark subtask as complete when done using task-cli.ts."
@@ -146,7 +147,7 @@ task(
   description="Execute auth-system subtask 03",
   prompt="Load context from .tmp/sessions/2026-02-03-auth/context.md
 
-          Execute subtask: .tmp/tasks/auth-system/subtask_03.json
+          Execute subtask: .infobot/.tmp/tasks/auth-system/subtask_03.json
 
           This is part of Batch 1 running in parallel with subtasks 01 and 02.
           Mark subtask as complete when done using task-cli.ts."
@@ -170,7 +171,7 @@ While waiting, you can optionally:
 
 ```bash
 # Check status of all subtasks in this batch
-bash .opencode/skills/task-management/router.sh status {feature}
+bash .infobot/skills/task-management/router.sh status {feature}
 ```
 
 Expected output:
@@ -242,7 +243,7 @@ Batch 2 depends on: 01, 02, 03 (all now satisfied).
 1. **Detect failure** from CoderAgent return
 2. **Check status** of other tasks in batch:
    ```bash
-   bash .opencode/skills/task-management/router.sh status {feature}
+   bash .infobot/skills/task-management/router.sh status {feature}
    ```
 3. **Report to orchestrator**:
 
@@ -269,7 +270,7 @@ If CoderAgent reports completion but status doesn't show completed:
 2. **Check if CoderAgent actually ran task-cli.ts complete**
 3. **Manually mark complete** if needed:
    ```bash
-   bash .opencode/skills/task-management/router.sh complete {feature} {seq} "{summary}"
+   bash .infobot/skills/task-management/router.sh complete {feature} {seq} "{summary}"
    ```
 4. **Report discrepancy** to orchestrator
 
