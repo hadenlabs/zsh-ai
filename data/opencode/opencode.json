@@ -265,6 +265,75 @@
         "GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_PERSONAL_ACCESS_TOKEN}"
       }
     },
+    "gitlab": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-gitlab"],
+      "enabled": false,
+      "environment": {
+        "GITLAB_PERSONAL_ACCESS_TOKEN": "{env:GITLAB_PERSONAL_ACCESS_TOKEN}",
+        "GITLAB_API_URL": "https://gitlab.com/api/v4"
+      }
+    },
+    "bitbucket": {
+      "type": "local",
+      "command": ["npx", "-y", "bitbucket-mcp@latest"],
+      "enabled": false,
+      "environment": {
+        "BITBUCKET_URL": "https://api.bitbucket.org/2.0",
+        "BITBUCKET_WORKSPACE": "{env:BITBUCKET_WORKSPACE}",
+        "BITBUCKET_USERNAME": "{env:BITBUCKET_USERNAME}",
+        "BITBUCKET_PASSWORD": "{env:BITBUCKET_PASSWORD}",
+        "BITBUCKET_TOKEN": "{env:BITBUCKET_TOKEN}"
+      }
+    },
+    "notion": {
+      "type": "local",
+      "command": ["npx", "-y", "@notionhq/notion-mcp-server"],
+      "enabled": false,
+      "environment": {
+        "NOTION_TOKEN": "{env:NOTION_TOKEN}"
+      }
+    },
+    "docker": {
+      "type": "local",
+      "command": ["npx", "-y", "docker-mcp"],
+      "enabled": false,
+      "environment": {
+        "DOCKER_MCP_LOCAL": "true",
+        "DOCKER_MCP_HOST": "{env:DOCKER_MCP_HOST}",
+        "DOCKER_MCP_USERNAME": "{env:DOCKER_MCP_USERNAME}",
+        "DOCKER_MCP_PRIVATE_KEY": "{env:DOCKER_MCP_PRIVATE_KEY}",
+        "DOCKER_MCP_PORT": "{env:DOCKER_MCP_PORT}",
+        "DOCKER_MCP_PASSPHRASE": "{env:DOCKER_MCP_PASSPHRASE}"
+      }
+    },
+    "kubernetes": {
+      "type": "local",
+      "command": ["npx", "-y", "mcp-server-kubernetes"],
+      "enabled": false,
+      "environment": {
+        "ALLOW_ONLY_NON_DESTRUCTIVE_TOOLS": "true"
+      }
+    },
+    "sentry": {
+      "type": "local",
+      "command": ["uvx", "mcp-server-sentry"],
+      "enabled": false,
+      "environment": {
+        "SENTRY_AUTH_TOKEN": "{env:SENTRY_AUTH_TOKEN}"
+      }
+    },
+    "supabase": {
+      "type": "local",
+      "command": ["npx", "-y", "supabase-mcp@latest", "supabase-mcp-claude"],
+      "enabled": false,
+      "environment": {
+        "SUPABASE_URL": "{env:SUPABASE_URL}",
+        "SUPABASE_ANON_KEY": "{env:SUPABASE_ANON_KEY}",
+        "SUPABASE_SERVICE_ROLE_KEY": "{env:SUPABASE_SERVICE_ROLE_KEY}",
+        "MCP_API_KEY": "{env:SUPABASE_MCP_API_KEY}"
+      }
+    },
     "jira": {
       "type": "remote",
       "url": "{env:JIRA_MCP_URL}",
