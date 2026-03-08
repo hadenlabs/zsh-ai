@@ -20,6 +20,8 @@ This section describes the MCP (Model Context Protocol) servers configured in Op
 | `awslabs.aws-terraform` | local | Terraform assistance (awslabs terraform-mcp-server) | no | `uvx` + Python | `docs/opencode/mcp/awslabs.aws-terraform.md` |
 | `hashicorp.terraform` | local | Terraform assistance via official HashiCorp container | yes | `docker` | `docs/opencode/mcp/hashicorp.terraform.md` |
 | `grafana` | local | Grafana queries and operations | yes | `uvx` + `GRAFANA_*` env vars | `docs/opencode/mcp/grafana.md` |
+| `tinypng` | remote | Image compression via TinyPNG (Pipedream MCP) | no | Pipedream MCP account | `docs/opencode/mcp/tinypng.md` |
+| `image-compression` | local | Image compression (local MCP server) | yes | `npx`/Node | `docs/opencode/mcp/image-compression.md` |
 | `filesystem` | local | Filesystem read/write (scoped by `ROOT`) | yes | `npx`/Node | `docs/opencode/mcp/filesystem.md` |
 | `github` | local | GitHub API access (issues/PRs/repos) | yes | `npx`/Node + `GITHUB_PERSONAL_ACCESS_TOKEN` | `docs/opencode/mcp/github.md` |
 | `jira` | remote | Jira access via remote MCP | yes | `JIRA_MCP_URL` + OAuth (per your gateway) | `docs/opencode/mcp/jira.md` |
