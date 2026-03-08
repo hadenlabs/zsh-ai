@@ -1,5 +1,6 @@
 ---
 description: Validate a PR for errors/vulnerabilities (asks for PR; lists assigned PRs)
+agent: OpenRepoManager
 ---
 
 1. Load skill: validate-pr

@@ -1,5 +1,6 @@
 ---
 description: Run a release bump using the release skill (major/minor/patch)
+agent: OpenRepoManager
 ---
 
 1. Load skill: release

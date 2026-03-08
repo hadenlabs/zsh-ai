@@ -1,5 +1,6 @@
 ---
 description: Prepare PR with description
+agent: OpenRepoManager
 ---
 
 1. Run `git diff main...HEAD --stat` to see changed files

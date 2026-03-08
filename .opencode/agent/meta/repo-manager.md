@@ -5,6 +5,15 @@ mode: primary
 temperature: 0.2
 permission:
   bash:
+    "*": "ask"
+    "gh *": "allow"
+    "task validate": "allow"
+    "task validate *": "allow"
+    "git status*": "allow"
+    "git diff*": "allow"
+    "git log*": "allow"
+    "git rev-parse*": "allow"
+    "git push *": "allow"
     "rm -rf *": "ask"
     "rm -rf /*": "deny"
     "sudo *": "deny"

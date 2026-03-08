@@ -26,7 +26,24 @@
     },
     "OpenRepoManager": {
       "mode": "primary",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.2",
+      "permission": {
+        "bash": {
+          "*": "ask",
+          "gh *": "allow",
+          "task validate": "allow",
+          "task validate *": "allow",
+          "git status*": "allow",
+          "git diff*": "allow",
+          "git log*": "allow",
+          "git rev-parse*": "allow",
+          "git push *": "allow",
+          "rm -rf *": "ask",
+          "rm -rf /*": "deny",
+          "sudo *": "deny",
+          "> /dev/*": "deny"
+        }
+      }
     },
     "OpenTechnicalWriter": {
       "mode": "primary",
