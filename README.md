@@ -18,6 +18,10 @@
 
 zsh-ai for project
 
+## Screenshots
+
+![Project hero](assets/images/project-hero.png) _zsh-ai hero image_
+
 ## Requirements
 
 This is a list of plugins that need to be installed previously to enjoy all the goodies of this configuration:

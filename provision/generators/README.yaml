@@ -56,6 +56,11 @@ requirements: |-
 description: |-
   zsh-ai for project
 
+screenshots:
+  - name: Project hero
+    url: assets/images/project-hero.png
+    description: zsh-ai hero image
+
 installation:
   - "docs/include/installation/oh-my-zsh.md"
   - "docs/include/installation/antigen.md"
