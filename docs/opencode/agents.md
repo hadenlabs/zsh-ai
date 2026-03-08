@@ -18,7 +18,7 @@ Agent files are Markdown with YAML frontmatter. The key fields you will see are:
 
 Notes:
 
-- Some agent templates mention `.opencode/config/agent-metadata.json`, but this repository does not include that file; treat those references as upstream/template notes.
+- Some agent templates mention `.opencode/config/agent-metadata.json`. This repository includes a minimal version to keep agent references consistent.
 - Category files like `/.opencode/agent/*/0-category.json` describe intended groupings and shared defaults, but they may not exactly match the on-disk filenames (see the “Name vs path” section).
 
 ## Directory layout
