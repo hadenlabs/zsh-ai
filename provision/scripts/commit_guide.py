@@ -59,7 +59,7 @@ def main():
         print(f"- Regex: {rx}")
         print(f"- Branch extract regex: {brx}")
         print("- Branch example: feature/123-short-desc")
-        print("- Example: fix(core): handle missing env var (#123)")
+        print("- Example: fix 🐛 (core): handle missing env var (#123)")
         print("- Optional body line: Fixes #123")
         return 0
 
@@ -70,7 +70,7 @@ def main():
         print(f"- Regex: {rx}")
         print(f"- Branch extract regex: {brx}")
         print("- Branch example: feature/123-short-desc")
-        print("- Example: fix(core): handle missing env var (#123)")
+        print("- Example: fix 🐛 (core): handle missing env var (#123)")
         print("- Optional body line: Closes #123")
         return 0
 
