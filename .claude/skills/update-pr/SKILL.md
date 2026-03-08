@@ -49,7 +49,7 @@ EOF
 )"
 ```
 
-   - Fallback:
+- Fallback:
 
 ```bash
 gh pr edit <PR_NUMBER> --body "$(cat <<'EOF'
