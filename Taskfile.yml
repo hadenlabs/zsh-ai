@@ -103,6 +103,7 @@ vars:
     *.lock
     *.lock.hcl
     .cq/
+    .tmp
     *.lock
     *.zip
     *.iml
