@@ -1,5 +1,6 @@
 ---
 description: Run goji smart commit (task validate, group changes, derive key/id from branch, commit with goji)
+agent: OpenRepoManager
 ---
 
 1. Load skill: goji-commit-smart
