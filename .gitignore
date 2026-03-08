@@ -569,6 +569,7 @@ build
 *.lock.hcl
 .cq/
 .tmp
+.infobot/.tmp
 *.lock
 *.zip
 *.iml
@@ -578,4 +579,3 @@ vendor
 !uv.lock
 /.react-router/
 .dev.vars
-

@@ -1,6 +1,6 @@
-# Task Management Skill (Local)
+# Task Management Skill (Infobot)
 
-This directory provides the minimal scripts referenced by bundled agents.
+This directory provides the task-management router used by Infobot.
 
 Commands:
 
@@ -10,10 +10,6 @@ Commands:
 - `bash .infobot/skills/task-management/router.sh next <feature>`
 - `bash .infobot/skills/task-management/router.sh parallel <feature>`
 - `bash .infobot/skills/task-management/router.sh complete <feature> <seq> "summary"`
-
-Backward compatibility:
-
-- `bash .opencode/skills/task-management/router.sh ...` still works (shim).
 
 Task files live under:
 
