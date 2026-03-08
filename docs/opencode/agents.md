@@ -127,6 +127,20 @@ Subagents are meant to be called by a primary agent (or by you explicitly) using
 
 ## Practical usage patterns
 
+## How we use agents in zsh-ai
+
+Use these as defaults:
+
+- Repo/PR workflows and slash commands in `.opencode/commands/`: `OpenRepoManager`
+- Code changes (feature/bugfix): `OpenCoder`
+- Documentation in `docs/` (and generated README flows): `OpenTechnicalWriter`
+
+Notes:
+
+- `@path/to/file` attaches file contents to the conversation; it does not execute a command file.
+- Slash commands are executed as `/command` (TUI) or `opencode run --command <name>` (CLI).
+- `README.md` is generated from templates; update `provision/generators/README.yaml` / `provision/templates/README.tpl.md` and run `task readme`.
+
 ### Delegating to a subagent
 
 Use the subagent’s frontmatter `name` as `subagent_type`:
@@ -138,6 +152,8 @@ task(
   prompt="Add tests for ...; follow project conventions."
 )
 ```
+
+See also: `docs/opencode/tasks.md`.
 
 ### Permissions & safety
 
