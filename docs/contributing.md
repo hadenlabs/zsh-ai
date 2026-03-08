@@ -354,7 +354,7 @@ Accepted format:
 Optional (if your tooling supports it):
 
 ```text
-<emoji> <type>(<scope>): <subject>
+<type>(<scope>): <emoji> <subject>
 ```
 
 Rules:
@@ -362,6 +362,7 @@ Rules:
 - Subject max length: 100 characters
 - Use one of the allowed scopes: `core`, `accounts`, `ci`
 - Sign-off is required (use `git commit -s` or ensure your commit tool adds it)
+- For GitHub/GitLab issue references, append the issue at the end: `(#123)`
 
 Types:
 
@@ -401,13 +402,13 @@ Types:
 
 Examples:
 
-- feat(core): IN-698 add opencode MCP docs
-- fix(core): IN-698 handle missing env var
+- feat(core): add opencode MCP docs (#123)
+- fix(core): handle missing env var (#123)
 - docs(core): update usage guide
 - refactor(core): extract install helper
 - style(core): format shell scripts
 - test(core): add coverage for patterns sync
-- ci(ci): run workflows on ubuntu-24.04
+- ci(ci): run workflows on ubuntu-24.04 (#123)
 - chore(core): bump action versions
 
 **Keep it short and simple!**

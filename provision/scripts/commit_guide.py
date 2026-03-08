@@ -53,24 +53,24 @@ def main():
         return 0
 
     if style == "github":
-        rx = providers.get("github", {}).get("issueRegex", "^#[0-9]+")
+        rx = providers.get("github", {}).get("issueRegex", "\\(#[0-9]+\\)$")
         brx = issue_branch.get("githubIssueNumberRegex", "(?:^|/)([0-9]+)(?:-|$)")
         print("GitHub style: subject may reference an issue number")
         print(f"- Regex: {rx}")
         print(f"- Branch extract regex: {brx}")
         print("- Branch example: feature/123-short-desc")
-        print("- Example: fix(core): #123 handle missing env var")
+        print("- Example: fix(core): handle missing env var (#123)")
         print("- Optional body line: Fixes #123")
         return 0
 
     if style == "gitlab":
-        rx = providers.get("gitlab", {}).get("issueRegex", "^#[0-9]+")
+        rx = providers.get("gitlab", {}).get("issueRegex", "\\(#[0-9]+\\)$")
         brx = issue_branch.get("gitlabIssueNumberRegex", "(?:^|/)([0-9]+)(?:-|$)")
         print("GitLab style: subject may reference an issue number")
         print(f"- Regex: {rx}")
         print(f"- Branch extract regex: {brx}")
         print("- Branch example: feature/123-short-desc")
-        print("- Example: fix(core): #123 handle missing env var")
+        print("- Example: fix(core): handle missing env var (#123)")
         print("- Optional body line: Closes #123")
         return 0
 
