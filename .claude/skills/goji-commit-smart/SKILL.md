@@ -31,7 +31,7 @@ license: MIT
 - Run `task validate` before creating any commit.
 - Inspect working tree and staged changes.
 - Group changes into 1..N commits using path heuristics (avoid mixing unrelated areas).
-- Create commits following goji conventions: `<emoji> <type>(<scope>): <subject>`.
+- Create commits following goji conventions: `<type>(<scope>): <emoji> <subject>`.
 - Derive issue key/id from the current branch name and inject it into the subject when required.
 - Create commits with `--signoff` when `signoff: true`.
 
@@ -46,27 +46,29 @@ Decide commit style from `infobot.toml` `[commit].style`.
     - Default extraction: `(<PROJECTKEY>-[0-9]+)` when `[issueTracking.branch].jiraKeyFromProjectKey = true`.
     - Override with `[issueTracking.branch].jiraKeyRegexOverride`.
 - `github`
-  - Allow referencing GitHub issues in the subject (example: `#123`).
+  - Allow referencing GitHub issues in the subject (example: `(#123)` at the end).
   - Optional commit body line: `Fixes #123`.
   - Derive `123` from the current branch name using `infobot.toml` `[issueTracking.branch].githubIssueNumberRegex`.
 - `gitlab`
-  - Allow referencing GitLab issues in the subject (example: `#123`).
+  - Allow referencing GitLab issues in the subject (example: `(#123)` at the end).
   - Optional commit body line: `Closes #123`.
   - Derive `123` from the current branch name using `infobot.toml` `[issueTracking.branch].gitlabIssueNumberRegex`.
 
 ## Commit format
 
-- Title: `<emoji> <type>(<scope>): <subject>`
+- Title: `<type>(<scope>): <emoji> <subject>`
   - `emoji` comes from `.goji.json` `types[].emoji` for the chosen type.
   - `type` must be one of `.goji.json` `types[].name`.
   - `scope` must be one of `.goji.json` `scopes[]`.
   - `subject` length must be `<= subjectmaxlength`.
 
+For `github`/`gitlab` styles, append the issue at the end of the subject: `(#<number>)`.
+
 Examples:
 
-- `📚 docs(ci): document MCP setup`
-- `👷 ci(ci): bump github actions runner`
-- `✨ feat(core): add release task include`
+- `docs(ci): 📚 document MCP setup (#123)`
+- `ci(ci): 👷 bump github actions runner (#123)`
+- `feat(core): ✨ add release task include (#123)`
 
 ## Heuristics (path -> type/scope)
 
@@ -75,7 +77,7 @@ Use these as defaults; ask only when ambiguous.
 - `docs/**` -> `docs(ci)`
 - `.github/workflows/**` -> `ci(ci)`
 - `.claude/**` -> `chore(core)`
-- `.opencode/**` -> `prompt(core)`
+- `.opencode/**` -> `chore(core)`
 - `Taskfile.yml` -> `build(core)`
 - `data/**` -> `chore(core)` (or `sample(core)` if clearly examples)
 - `pkg/**` or `internal/**` or `core/**` or `config/**` -> `feat(core)` (or `fix(core)` if bug)
@@ -147,20 +149,20 @@ git add <paths>
 - Keep `<subject>` within `.goji.json` `subjectmaxlength`.
 - Subject rules by style:
   - `jira`: include `<JIRA-KEY>` (e.g. `AR-123`) early in the subject.
-  - `github`/`gitlab`: include `#<number>` (e.g. `#123`) when relevant.
+  - `github`/`gitlab`: include `(#<number>)` (e.g. `(#123)`) at the end.
 
 6) Commit
 
 - If `.goji.json` `signoff` is `true`:
 
 ```bash
-git commit -s -m "<emoji> <type>(<scope>): <subject>"
+git commit -s -m "<type>(<scope>): <emoji> <subject>"
 ```
 
 - Else:
 
 ```bash
-git commit -m "<emoji> <type>(<scope>): <subject>"
+git commit -m "<type>(<scope>): <emoji> <subject>"
 ```
 
 7) Repeat for remaining groups until all intended commits are created.
