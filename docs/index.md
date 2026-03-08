@@ -5,5 +5,6 @@
 - Environment variables: `docs/env-vars.md`
 - OpenCode MCP servers: `docs/opencode/mcp/index.md`
 - OpenCode agents: `docs/opencode/agents.md`
+- OpenCode agents usage: `docs/opencode/agents/usage.md`
 - OpenCode slash commands: `docs/opencode/commands.md`
 - OpenCode tasks: `docs/opencode/tasks.md`

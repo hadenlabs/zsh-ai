@@ -46,3 +46,19 @@ This command:
 - Installs Python dependencies with `uv`
 - Sets up pre-commit hooks
 - Configures Git hooks
+
+## OpenCode tasks (optional)
+
+If you use OpenCode in this repository, you can scaffold a task template for a new feature under `.infobot/.tmp/tasks/`.
+
+From the OpenCode TUI:
+
+```bash
+/task-template readme-refresh
+```
+
+Or via CLI:
+
+```bash
+opencode run --command task-template readme-refresh
+```

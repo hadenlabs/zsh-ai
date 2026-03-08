@@ -7,7 +7,7 @@
 
 ## Overview
 
-This repository uses a simple task file convention under `.tmp/tasks/` to support agent-driven work (TaskManager -> CoderAgent) and lightweight parallel tracking.
+This repository uses a simple task file convention under `.infobot/.tmp/tasks/` to support agent-driven work (TaskManager -> CoderAgent) and lightweight parallel tracking.
 
 The task files are regular JSON. They are intended to be:
 
@@ -17,8 +17,8 @@ The task files are regular JSON. They are intended to be:
 
 ## Directory layout
 
-- Feature folder: `.tmp/tasks/<feature>/`
-- Subtasks: `.tmp/tasks/<feature>/subtask_XX.json`
+- Feature folder: `.infobot/.tmp/tasks/<feature>/`
+- Subtasks: `.infobot/.tmp/tasks/<feature>/subtask_XX.json`
 
 ## Subtask schema (minimal)
 
@@ -49,16 +49,31 @@ This repo ships a small router used by several agent prompts.
 
 Location:
 
-- `.opencode/skills/task-management/router.sh`
+- `.infobot/skills/task-management/router.sh`
 
 Commands:
 
 ```bash
-bash .opencode/skills/task-management/router.sh status <feature>
-bash .opencode/skills/task-management/router.sh next <feature>
-bash .opencode/skills/task-management/router.sh parallel <feature>
-bash .opencode/skills/task-management/router.sh complete <feature> <seq> "summary"
+bash .infobot/skills/task-management/router.sh init <feature>
+bash .infobot/skills/task-management/router.sh status <feature>
+bash .infobot/skills/task-management/router.sh start <feature> <seq> [agent_id]
+bash .infobot/skills/task-management/router.sh next <feature>
+bash .infobot/skills/task-management/router.sh parallel <feature>
+bash .infobot/skills/task-management/router.sh complete <feature> <seq> "summary"
 ```
+
+## Task template
+
+To scaffold a new feature folder with a starter `task.json` and `subtask_01.json`:
+
+```bash
+bash .infobot/skills/task-management/router.sh init <feature>
+```
+
+Then fill in:
+
+- `.infobot/.tmp/tasks/<feature>/task.json`
+- `.infobot/.tmp/tasks/<feature>/subtask_01.json`
 
 ## How agents use tasks
 
@@ -72,12 +87,12 @@ Typical flow:
 
 Create the files:
 
-- `.tmp/tasks/readme-refresh/subtask_01.json`
-- `.tmp/tasks/readme-refresh/subtask_02.json`
+- `.infobot/.tmp/tasks/readme-refresh/subtask_01.json`
+- `.infobot/.tmp/tasks/readme-refresh/subtask_02.json`
 
 Then:
 
 ```bash
-bash .opencode/skills/task-management/router.sh status readme-refresh
-bash .opencode/skills/task-management/router.sh next readme-refresh
+bash .infobot/skills/task-management/router.sh status readme-refresh
+bash .infobot/skills/task-management/router.sh next readme-refresh
 ```

@@ -112,3 +112,40 @@ Requirements:
 - `task`
 - `git`
 - `goji` (commit tool configured in `infobot.toml`)
+
+### `/task-template [feature]`
+
+Source: `.opencode/commands/task-template.md`
+
+Arguments:
+
+- `$1` (optional): feature name (kebab-case)
+
+What it does:
+
+1. Creates `.infobot/.tmp/tasks/<feature>/`.
+2. Generates a starter `task.json` and `subtask_01.json`.
+3. Prints next commands to list and progress tasks.
+
+Requirements:
+
+- `python3`
+
+### `/task-start [feature]`
+
+Source: `.opencode/commands/task-start.md`
+
+Arguments:
+
+- `$1` (optional): feature name (kebab-case)
+
+What it does:
+
+1. Shows task status for the feature.
+2. Finds the next ready `pending` subtask.
+3. Marks it as `in_progress` in the subtask JSON.
+4. Begins execution (delegates to the suggested agent).
+
+Requirements:
+
+- `python3`
