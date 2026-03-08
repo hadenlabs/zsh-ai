@@ -11,6 +11,7 @@ description: Push branch commits and update PR content
 5. Detect the PR for the current branch:
    - Prefer: `gh pr view --json number,url --jq '.number, .url'`
    - Fallback: `gh pr list --head "$(git rev-parse --abbrev-ref HEAD)" --json number,url --jq '.[0].number, .[0].url'`
+6. Load skill: update-pr
 6. Generate an updated PR body using `.github/PULL_REQUEST_TEMPLATE.md` as the base, and fill in:
    - Proposed changes (bullet list) derived from the _current_ branch changes:
      - Use `git diff main...HEAD --stat` + `git diff main...HEAD` to refresh the bullets with whatever is new
@@ -21,5 +22,4 @@ description: Push branch commits and update PR content
    - Screenshots placeholders
    - Types of changes (mark the right one)
    - Checklist (mark what is true)
-7. Update the PR content:
-   - `gh pr edit <PR_NUMBER> --body "$(cat <<'EOF' <filled template body> EOF )"`
+7. Update the PR content (follow the update-pr skill; prefer REST `gh api` and fallback to `gh pr edit`)
