@@ -169,6 +169,8 @@
       "mode": "subagent",
       "model": "openrouter/openai/gpt-5-image",
       "permission": {
+        "image-compression*": "allow",
+        "image_compression*": "allow",
         "bash": {
           "*": "ask",
           "ls *assets/images*": "allow",
@@ -192,6 +194,19 @@
     }
   },
   "mcp": {
+    "tinypng": {
+      "type": "remote",
+      "url": "https://mcp.pipedream.net/v2",
+      "enabled": false
+    },
+    "image-compression": {
+      "type": "local",
+      "command": ["npx", "-y", "@inhiblab-core/mcp-image-compression"],
+      "enabled": true,
+      "environment": {
+        "IMAGE_COMPRESSION_DOWNLOAD_DIR": "assets/images"
+      }
+    },
     "serena": {
       "type": "local",
       "command": ["uvx", "--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server"],
