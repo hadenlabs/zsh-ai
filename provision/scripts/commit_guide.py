@@ -19,8 +19,14 @@ def main():
 
     commit = cfg.get("commit", {})
     issue = cfg.get("issueTracking", {})
-    issue_branch = issue.get("branch", {}) if isinstance(issue.get("branch", {}), dict) else {}
-    providers = (commit.get("providers", {}) if isinstance(commit.get("providers", {}), dict) else {})
+    issue_branch = (
+        issue.get("branch", {}) if isinstance(issue.get("branch", {}), dict) else {}
+    )
+    providers = (
+        commit.get("providers", {})
+        if isinstance(commit.get("providers", {}), dict)
+        else {}
+    )
 
     style = commit.get("style", "jira")
     fmt = commit.get("format", "<emoji> <type>(<scope>): <subject>")

@@ -82,12 +82,11 @@ Use these as defaults; ask only when ambiguous.
 - `data/**` -> `chore(core)` (or `sample(core)` if clearly examples)
 - `pkg/**` or `internal/**` or `core/**` or `config/**` -> `feat(core)` (or `fix(core)` if bug)
 
-If only formatting changes, prefer `style(core)`.
-If only refactors with no behavior change, prefer `refactor(core)`.
+If only formatting changes, prefer `style(core)`. If only refactors with no behavior change, prefer `refactor(core)`.
 
 ## Process
 
-0) Validate first
+0. Validate first
 
 ```bash
 task validate
@@ -95,7 +94,7 @@ task validate
 
 - If `task validate` fails, do not commit. Fix issues, re-run `task validate`, then proceed.
 
-1) Collect context
+1. Collect context
 
 ```bash
 git status --porcelain
@@ -108,7 +107,7 @@ cat .goji.json
 cat infobot.toml
 ```
 
-2) Derive issue key/id from branch
+2. Derive issue key/id from branch
 
 - Determine `style` from `infobot.toml` `[commit].style`.
 - Parse the current branch name (`git rev-parse --abbrev-ref HEAD`) and extract:
@@ -116,7 +115,7 @@ cat infobot.toml
   - `github`/`gitlab`: `<number>`
 - If extraction fails (branch does not contain expected key/id), stop and ask the user for the key/id.
 
-3) Decide commit groups (intelligent split)
+3. Decide commit groups (intelligent split)
 
 - Prefer 1 commit if all changed files map to the same group.
 - Split into multiple commits when files span multiple groups, for example:
@@ -133,7 +132,7 @@ Default grouping by path:
 - `Taskfile.yml` -> group with CI/tooling changes (not docs)
 - `pkg/**|internal/**|core/**|config/**` -> one commit
 
-4) Stage and commit each group
+4. Stage and commit each group
 
 - If there are already staged changes, commit them first as a single coherent group.
 - Otherwise, for each computed group, stage only those files:
@@ -142,7 +141,7 @@ Default grouping by path:
 git add <paths>
 ```
 
-5) Draft commit title (use branch-derived key/id)
+5. Draft commit title (use branch-derived key/id)
 
 - Choose `type/scope` from heuristics.
 - Pick `emoji` from `.goji.json` for that `type`.
@@ -151,7 +150,7 @@ git add <paths>
   - `jira`: include `<JIRA-KEY>` (e.g. `AR-123`) early in the subject.
   - `github`/`gitlab`: include `(#<number>)` (e.g. `(#123)`) at the end.
 
-6) Commit
+6. Commit
 
 - If `.goji.json` `signoff` is `true`:
 
@@ -165,7 +164,7 @@ git commit -s -m "<type> <emoji> (<scope>): <subject>"
 git commit -m "<type> <emoji> (<scope>): <subject>"
 ```
 
-7) Repeat for remaining groups until all intended commits are created.
+7. Repeat for remaining groups until all intended commits are created.
 
 ## Safety rules
 

@@ -23,6 +23,7 @@ gh pr list --assignee @me --state open --json number,title,url,headRefName,baseR
 2. Ask: "Which PR do you want to validate? (number or URL)"
 
 Notes:
+
 - If the list is empty, fallback to:
 
 ```bash
@@ -77,6 +78,7 @@ If the API call returns 403/404, report that security alerts are not accessible 
 ### 5) Output
 
 Provide:
+
 - The failing checks (name + link) and the root cause from logs.
 - Any merge blockers (conflicts, required reviews, missing approvals).
 - Any open code-scanning alerts (if accessible) with severity.
