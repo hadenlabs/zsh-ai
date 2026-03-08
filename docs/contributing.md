@@ -343,31 +343,72 @@ Your commit messages should serve these 3 important purposes:
 - To provide the least amount of necessary documentation
 - To help the future maintainers.
 
-Follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0) to make `git log`{.interpreted-text role="command"} a little easier to follow. We use commitlint enforcing conventional commits (See more [here](https://github.com/conventional-changelog/commitlint))
+Follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0) to make `git log`{.interpreted-text role="command"} easier to follow. We use commitlint to enforce the format (See [commitlint](https://github.com/conventional-changelog/commitlint)).
 
-**chore**: something just needs to happen, e.g. versioning
+Accepted format:
 
-**docs**: documentation pages in `docs/` or docstrings
+```text
+<type>(<scope>): <subject>
+```
 
-**feat**: new code in `./`
+Optional (if your tooling supports it):
 
-**fix**: code improvement in `./`
+```text
+<emoji> <type>(<scope>): <subject>
+```
 
-**refactor**: code movement in `./`
+Rules:
 
-**style**: aesthetic changes
+- Subject max length: 100 characters
+- Use one of the allowed scopes: `core`, `accounts`, `ci`
+- Sign-off is required (use `git commit -s` or ensure your commit tool adds it)
 
-**test**: test case modifications in `test/`
+Types:
 
-Examples commit messages:
+**feat**: introduce a new feature
 
-- chore: IN-698 implement model devices
-- docs: IN-698 implement configuration settings
-- feat: IN-698 create lambda function
-- fix: IN-698 retry upload on failure
-- refactor: IN-698 extract duplicate code
-- style: IN-698 format files python
-- test: IN-698 coverage around add permissions
+**fix**: fix a bug
+
+**docs**: documentation-only change
+
+**refactor**: code restructure without behavior change
+
+**style**: formatting/linting/aesthetic changes (no behavior change)
+
+**test**: add or update tests
+
+**chore**: maintenance tasks (versioning, deps bumps, tooling)
+
+**ci**: CI configuration and pipelines
+
+**build**: build scripts/config
+
+**perf**: performance improvements
+
+**hotfix**: critical production fix
+
+**deprecate**: remove dead code / mark as deprecated
+
+**package**: add/update compiled artifacts or packages
+
+**sample**: add/update samples/examples
+
+**prompt**: add/update prompts (PDD/Fabric)
+
+**revert**: revert a previous change
+
+**wip**: work in progress (avoid merging to `main`)
+
+Examples:
+
+- feat(core): IN-698 add opencode MCP docs
+- fix(core): IN-698 handle missing env var
+- docs(core): update usage guide
+- refactor(core): extract install helper
+- style(core): format shell scripts
+- test(core): add coverage for patterns sync
+- ci(ci): run workflows on ubuntu-24.04
+- chore(core): bump action versions
 
 **Keep it short and simple!**
 
