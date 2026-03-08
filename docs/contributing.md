@@ -348,13 +348,7 @@ Follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0) to 
 Accepted format:
 
 ```text
-<type>(<scope>): <subject>
-```
-
-Optional (if your tooling supports it):
-
-```text
-<type>(<scope>): <emoji> <subject>
+<type> <emoji> (<scope>): <subject>
 ```
 
 Rules:
@@ -402,13 +396,13 @@ Types:
 
 Examples:
 
-- feat(core): add opencode MCP docs (#123)
-- fix(core): handle missing env var (#123)
+- feat ✨ (core): add opencode MCP docs (#123)
+- fix 🐛 (core): handle missing env var (#123)
 - docs(core): update usage guide
 - refactor(core): extract install helper
 - style(core): format shell scripts
 - test(core): add coverage for patterns sync
-- ci(ci): run workflows on ubuntu-24.04 (#123)
+- ci 👷 (ci): run workflows on ubuntu-24.04 (#123)
 - chore(core): bump action versions
 
 **Keep it short and simple!**

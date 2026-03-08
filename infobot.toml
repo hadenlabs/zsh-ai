@@ -10,12 +10,12 @@ flow = "auto"
 #
 # GitHub:
 # - Branch: feature/123-add-mcp-docs
-# - Commit: fix(core): 🐛 handle missing env var (#123)
+# - Commit: fix 🐛 (core): handle missing env var (#123)
 # - Optional body: Fixes #123
 #
 # GitLab:
 # - Branch: feature/123-add-mcp-docs
-# - Commit: chore(core): 🧹 bump tooling (#123)
+# - Commit: chore 🧹 (core): bump tooling (#123)
 # - Optional body: Closes #123
 
 [issueTracking]
@@ -44,7 +44,7 @@ gitlabIssueNumberRegex = "(?:^|/)([0-9]+)(?:-|$)"
 
 [commit]
 tool = "goji"
-format = "<type>(<scope>): <emoji> <subject>"
+format = "<type> <emoji> (<scope>): <subject>"
 style = "github"
 signoff = true
 subjectMaxLength = 100
