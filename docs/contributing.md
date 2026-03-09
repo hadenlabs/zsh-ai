@@ -248,6 +248,7 @@ Update the "Tools Implemented" section in `AGENTS.md`:
 - **Variables**: Use `AI_` prefix for global variables
 - **Error handling**: Use `return 1` for errors and `message_error` for error messages
 - **Language**: All code and documentation must be in English
+- **Docs language**: All files under `docs/` must be written in English. Use another language only for quoted user-facing text that must remain unchanged.
 
 ### Common Patterns
 

@@ -68,6 +68,7 @@ Key variables include:
 - Internal functions: `ai::internal::action`
 - Variables: `AI_VARIABLE_NAME`
 - Files: `lowercase.zsh`
+- Files under `docs/` must be written in English.
 
 ---
 

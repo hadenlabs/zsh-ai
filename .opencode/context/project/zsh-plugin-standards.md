@@ -7,3 +7,4 @@ Based on `AGENTS.md` in this repo.
 - Internal functions: `ai::internal::action`.
 - Variables: `AI_VARIABLE_NAME`.
 - `.zsh` files must start with `#!/usr/bin/env ksh`.
+- Files under `docs/` must be written in English.
