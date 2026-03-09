@@ -9,6 +9,7 @@ permission:
     "gh *": "allow"
     "task validate": "allow"
     "task validate *": "allow"
+    "git add *": "allow"
     "git status*": "allow"
     "git diff*": "allow"
     "git log*": "allow"
