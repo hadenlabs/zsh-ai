@@ -1,32 +1,24 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "openai/gpt-5.2",
+  "model": "openai/gpt-5.4",
   "small_model": "openai/gpt-4o-mini",
   "instructions": ["AGENTS.md"],
   "agent": {
-    "plan": {
-      "mode": "primary",
-      "model": "openai/gpt-5.2"
-    },
-    "build": {
-      "mode": "primary",
-      "model": "openai/gpt-5.2"
-    },
     "OpenAgent": {
       "mode": "primary",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "OpenCoder": {
       "mode": "primary",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "OpenSystemBuilder": {
       "mode": "primary",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "OpenRepoManager": {
       "mode": "primary",
-      "model": "openai/gpt-5.2",
+      "model": "openai/gpt-5.4",
       "permission": {
         "bash": {
           "*": "ask",
@@ -47,7 +39,7 @@
     },
     "OpenTechnicalWriter": {
       "mode": "primary",
-      "model": "openai/gpt-5.2",
+      "model": "openai/gpt-5.4",
       "permission": {
         "bash": {
           "*": "ask",
@@ -61,11 +53,11 @@
     },
     "OpenCopywriter": {
       "mode": "primary",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "OpenDataAnalyst": {
       "mode": "primary",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "CodeReviewer": {
       "mode": "subagent",
@@ -73,95 +65,95 @@
     },
     "BuildAgent": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "CoderAgent": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "TestEngineer": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "ContractManager": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "StoryMapper": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "ADRManager": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "ArchitectureAnalyzer": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "PrioritizationEngine": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "OpenFrontendSpecialist": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "OpenDevopsSpecialist": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "ContextScout": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "ExternalScout": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "DocWriter": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "ContextManager": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "BatchExecutor": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "Context Retriever": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "StageOrchestrator": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "TaskManager": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "WorkflowDesigner": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "ContextOrganizer": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "DomainAnalyzer": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "CommandCreator": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "AgentGenerator": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "Image Specialist": {
       "mode": "subagent",
@@ -184,11 +176,11 @@
     },
     "Eval Runner": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     },
     "Simple Responder": {
       "mode": "subagent",
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.4"
     }
   },
   "provider": {
@@ -198,8 +190,8 @@
         "apiKey": "{env:OPENCODE_OPENROUTER_API_KEY}"
       },
       "models": {
-        "openai/gpt-5-image": {
-          "name": "OpenAI: GPT-5 Image (OpenRouter)",
+        "openai/gpt-5-image-mini": {
+          "name": "OpenAI: GPT-5 Image Mini (OpenRouter)",
           "limit": {
             "context": 400000,
             "output": 128000
