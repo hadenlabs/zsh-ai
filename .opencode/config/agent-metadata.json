@@ -61,6 +61,10 @@
     "subagents/core/documentation": {
       "path": ".opencode/agent/subagents/core/documentation.md",
       "mode": "subagent"
+    },
+    "subagents/utils/image-specialist": {
+      "path": ".opencode/agent/subagents/utils/image-specialist.md",
+      "mode": "subagent"
     }
   }
 }

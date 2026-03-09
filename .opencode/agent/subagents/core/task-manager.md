@@ -256,7 +256,14 @@ WHY THIS MATTERS:
               2. Include `.opencode/context/ui/web/ui-styling-standards.md` and `.opencode/context/core/workflows/design-iteration-overview.md` in `context_files`.
               3. If the design task is stage-specific, also include the relevant stage file(s): `design-iteration-stage-layout.md`, `design-iteration-stage-theme.md`, `design-iteration-stage-animation.md`, `design-iteration-stage-implementation.md`.
               4. Ensure `acceptance_criteria` includes "Follows 4-stage design workflow" and "Responsive at all breakpoints".
-              5. **PARALLELIZATION**: Design tasks can run in parallel (`parallel: true`) since design work is isolated and doesn't affect backend/logic implementation. Only mark `parallel: false` if design depends on backend API contracts or data structures.
+               5. **PARALLELIZATION**: Design tasks can run in parallel (`parallel: true`) since design work is isolated and doesn't affect backend/logic implementation. Only mark `parallel: false` if design depends on backend API contracts or data structures.
+
+               **MEDIA RULE**: If a task involves generating/editing/analyzing media (image/video/audio):
+               1. Set `suggested_agent`: "Image Specialist"
+               2. Ensure `deliverables` include concrete output paths under `assets/images/` (for images/storyboards)
+               3. Ensure `acceptance_criteria` includes:
+                  - "If an image is generated, it is saved under assets/images/ and not overwritten"
+                  - "If video/audio is requested, provide a production-ready script + prompts; do not claim a file exists unless written"
 
          4. Validate with CLI:
            ```bash

@@ -72,6 +72,7 @@ CONSEQUENCE OF SKIPPING: Work that doesn't match project standards = wasted effo
 - `CoderAgent` - Execute individual coding subtasks (used by BatchExecutor for parallel execution)
 - `TestEngineer` - Testing after implementation
 - `DocWriter` - Documentation generation
+- `Image Specialist` - Generate/inspect media (image/video/audio routing)
 
 **Invocation syntax**:
 
