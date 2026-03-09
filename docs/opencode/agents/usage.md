@@ -86,8 +86,7 @@ opencode run --command task-start my-feature
 Directly (no OpenCode):
 
 ```bash
-bash .infobot/skills/task-management/router.sh next my-feature
-bash .infobot/skills/task-management/router.sh start my-feature 01 opencode
+bash .infobot/skills/task-management/router.sh execute my-feature
 ```
 
 Router commands and schema reference: `docs/opencode/tasks.md`.

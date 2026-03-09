@@ -29,6 +29,8 @@ The local router expects the following fields.
   "seq": "01",
   "title": "Implement X",
   "status": "pending",
+  "suggested_agent": "CoderAgent",
+  "prompt": "Implement X in this repository and update tests.",
   "parallel": true,
   "depends_on": ["00"],
   "deliverables": ["path/to/file"],
@@ -42,6 +44,10 @@ Notes:
 - `status`: `pending` | `in_progress` | `completed`.
 - `depends_on`: list of `seq` values that must be `completed` first.
 - `parallel`: if `true`, `parallel` command will list it when it is ready.
+- `suggested_agent`: OpenCode agent to use for the subtask.
+- `opencode_agent`: optional primary runtime agent for `opencode run` (defaults to `OpenAgent`).
+- `opencode_model`: optional explicit model override for `opencode run`; otherwise the router uses the model configured for `suggested_agent` in `opencode.json` when available.
+- `prompt`: optional direct prompt for the assigned agent.
 
 ## Router commands
 
@@ -57,6 +63,7 @@ Commands:
 bash .infobot/skills/task-management/router.sh init <feature>
 bash .infobot/skills/task-management/router.sh status <feature>
 bash .infobot/skills/task-management/router.sh start <feature> <seq> [agent_id]
+bash .infobot/skills/task-management/router.sh execute <feature> [seq] [agent_id]
 bash .infobot/skills/task-management/router.sh next <feature>
 bash .infobot/skills/task-management/router.sh parallel <feature>
 bash .infobot/skills/task-management/router.sh complete <feature> <seq> "summary"
@@ -82,6 +89,17 @@ Typical flow:
 1. A primary agent (usually `OpenCoder` or `OpenRepoManager`) asks `TaskManager` to break work into subtasks.
 2. `CoderAgent` implements one subtask at a time.
 3. On completion, `CoderAgent` marks the subtask complete using the router (`complete`).
+
+To start and delegate execution to OpenCode in one step:
+
+```bash
+bash .infobot/skills/task-management/router.sh execute <feature>
+```
+
+`execute` keeps going subtask by subtask while each one finishes and marks itself as `completed`.
+If a subtask exits without completing itself, the router stops on that item and leaves it `in_progress`.
+
+For image subtasks routed to `Image Specialist`, the execution prompt requires using the OpenRouter image API, decoding the base64 payload, and saving the PNG to the declared deliverable path before marking the task complete.
 
 ## Practical example
 

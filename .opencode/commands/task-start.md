@@ -10,8 +10,16 @@ agent: OpenCoder
    - Otherwise, show a numbered list (`1..N`) and ask the user to select one to start.
 3. Show current status:
    - Run `bash .infobot/skills/task-management/router.sh status <feature>`
-4. Determine the next ready subtask:
-   - Run `bash .infobot/skills/task-management/router.sh next <feature>`
-5. Mark that subtask as started:
-   - Run `bash .infobot/skills/task-management/router.sh start <feature> <seq> opencode`
-6. Read `.infobot/.tmp/tasks/<feature>/subtask_<seq>.json` and begin implementation (delegate to the `suggested_agent` if present).
+4. Execute the next ready subtask through OpenCode:
+   - Run `bash .infobot/skills/task-management/router.sh execute <feature>`
+5. The router must:
+    - resolve the next ready subtask,
+    - mark it as `in_progress`, and
+   - invoke `opencode run` through a primary runtime agent while passing the subtask's `suggested_agent` as the preferred executor in the prompt.
+6. Prompt selection rules:
+   - If the subtask has a `prompt`, use it as the primary execution prompt.
+   - Otherwise, synthesize a prompt from the subtask metadata (`title`, `execution_notes`, `run`, `deliverables`, `acceptance_criteria`).
+   - If `suggested_agent` has a configured model in `opencode.json`, pass that model to `opencode run`.
+7. Sequential behavior:
+   - If a subtask completes successfully and marks itself `completed`, continue automatically with the next ready subtask.
+   - Stop when there are no more ready subtasks or when the current subtask remains `in_progress`.
