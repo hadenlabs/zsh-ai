@@ -2,7 +2,7 @@
 name: goji-commit-smart
 description: Create git commits using goji rules from .goji.json (type/scope/emoji/signoff) with path-based heuristics.
 agent: OpenRepoManager
-license: MIT
+license: Proprietary
 ---
 
 # Goji Commit Smart Skill
@@ -24,7 +24,7 @@ license: MIT
 - `infobot.toml`
   - `[issueTracking] provider + projectKey`
   - `[issueTracking.branch]` extraction regexes (derive key/id from branch name)
-  - `[commit] style` (github|gitlab|jira)
+  - `[commit] style` (gitlab|jira)
   - `[commit.providers.*]` rules
 
 ## What I do
@@ -36,7 +36,7 @@ license: MIT
 - Derive issue key/id from the current branch name and inject it into the subject when required.
 - Create commits with `--signoff` when `signoff: true`.
 
-## Commit style (github|gitlab|jira)
+## Commit style (gitlab|jira)
 
 Decide commit style from `infobot.toml` `[commit].style`.
 
@@ -46,10 +46,6 @@ Decide commit style from `infobot.toml` `[commit].style`.
   - Derive `<JIRA-KEY>` from the current branch name using `infobot.toml` `[issueTracking].projectKey`.
     - Default extraction: `(<PROJECTKEY>-[0-9]+)` when `[issueTracking.branch].jiraKeyFromProjectKey = true`.
     - Override with `[issueTracking.branch].jiraKeyRegexOverride`.
-- `github`
-  - Allow referencing GitHub issues in the subject (example: `(#123)` at the end).
-  - Optional commit body line: `Fixes #123`.
-  - Derive `123` from the current branch name using `infobot.toml` `[issueTracking.branch].githubIssueNumberRegex`.
 - `gitlab`
   - Allow referencing GitLab issues in the subject (example: `(#123)` at the end).
   - Optional commit body line: `Closes #123`.
@@ -63,12 +59,12 @@ Decide commit style from `infobot.toml` `[commit].style`.
   - `scope` must be one of `.goji.json` `scopes[]`.
   - `subject` length must be `<= subjectmaxlength`.
 
-For `github`/`gitlab` styles, append the issue at the end of the subject: `(#<number>)`.
+For `gitlab` style, append the issue at the end of the subject: `(#<number>)`.
 
 Examples:
 
 - `docs 📚 (ci): document MCP setup (#123)`
-- `ci 👷 (ci): bump github actions runner (#123)`
+- `ci 👷 (ci): bump gitlab ci runner image (#123)`
 - `feat ✨ (core): add release task include (#123)`
 
 ## Heuristics (path -> type/scope)
@@ -76,7 +72,8 @@ Examples:
 Use these as defaults; ask only when ambiguous.
 
 - `docs/**` -> `docs(ci)`
-- `.github/workflows/**` -> `ci(ci)`
+- `.gitlab-ci.yml` -> `ci(ci)`
+- `.gitlab/**` -> `ci(ci)`
 - `.claude/**` -> `chore(core)`
 - `.opencode/**` -> `prompt(core)`
 - `Taskfile.yml` -> `build(core)`
@@ -113,7 +110,7 @@ cat infobot.toml
 - Determine `style` from `infobot.toml` `[commit].style`.
 - Parse the current branch name (`git rev-parse --abbrev-ref HEAD`) and extract:
   - `jira`: `<PROJECTKEY>-<number>` (default derived from `[issueTracking].projectKey`)
-  - `github`/`gitlab`: `<number>`
+  - `gitlab`: `<number>`
 - If extraction fails (branch does not contain expected key/id), stop and ask the user for the key/id.
 
 3. Decide commit groups (intelligent split)
@@ -121,13 +118,13 @@ cat infobot.toml
 - Prefer 1 commit if all changed files map to the same group.
 - Split into multiple commits when files span multiple groups, for example:
   - docs-only vs CI-only vs code/tooling
-  - `.github/workflows/**` separate from `docs/**`
+  - `.gitlab/**` separate from `docs/**`
   - `.claude/**` separate from runtime code
 
 Default grouping by path:
 
 - `docs/**` -> one commit
-- `.github/workflows/**` -> one commit
+- `.gitlab/**` -> one commit
 - `.claude/**` + `provision/**` -> one commit
 - `.opencode/**` + `data/**` -> one commit
 - `Taskfile.yml` -> group with CI/tooling changes (not docs)
@@ -149,7 +146,7 @@ git add <paths>
 - Keep `<subject>` within `.goji.json` `subjectmaxlength`.
 - Subject rules by style:
   - `jira`: include `<JIRA-KEY>` (e.g. `AR-123`) early in the subject.
-  - `github`/`gitlab`: include `(#<number>)` (e.g. `(#123)`) at the end.
+  - `gitlab`: include `(#<number>)` (e.g. `(#123)`) at the end.
 
 6. Commit
 
