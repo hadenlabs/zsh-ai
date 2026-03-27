@@ -109,6 +109,7 @@ repos:
           (?x)^(
             .+\.provision/git/hooks/prepare-commit-msg$|
             .+\.tpl.sh$|
+            .+\.envrc$|
           )$
         args:
           - --exclude=SC1072,SC1073,SC2068
