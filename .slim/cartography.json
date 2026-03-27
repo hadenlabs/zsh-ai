@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "last_run": "2026-03-27T18:02:49.260301Z",
+    "root": "/Users/luchomayta/Projects/src/github.com/hadenlabs/zsh-ai",
+    "include_patterns": [
+      "*.zsh",
+      "config/**/*.zsh",
+      "core/**/*.zsh",
+      "internal/**/*.zsh",
+      "pkg/**/*.zsh"
+    ],
+    "exclude_patterns": [
+      "**/*.test.zsh",
+      "tests/**",
+      "docs/**",
+      "data/**"
+    ],
+    "exceptions": []
+  },
+  "file_hashes": {
+    "config/base.zsh": "609dda0d9c4f6d11c70877f00c44c358",
+    "config/linux.zsh": "0eda71f59ad7c42b948e227799e0dc6e",
+    "config/main.zsh": "53fa7dbf888d6fd527e795592e3e299b",
+    "config/osx.zsh": "fa46151f4811520e9e4925840505cf82",
+    "core/base.zsh": "75600e8273569d23cf1f0dcc540ab761",
+    "core/linux.zsh": "75600e8273569d23cf1f0dcc540ab761",
+    "core/main.zsh": "fc1f813edd36e465284d2303091bdc0d",
+    "core/osx.zsh": "75600e8273569d23cf1f0dcc540ab761",
+    "internal/base.zsh": "33a9adac563508b57ece39831084afad",
+    "internal/helper.zsh": "25f0e899529a538e51027cd293b18f3f",
+    "internal/linux.zsh": "75600e8273569d23cf1f0dcc540ab761",
+    "internal/main.zsh": "c90b455cb41dc8be8f3fbc573f478047",
+    "internal/osx.zsh": "75600e8273569d23cf1f0dcc540ab761",
+    "pkg/alias.zsh": "75600e8273569d23cf1f0dcc540ab761",
+    "pkg/base.zsh": "b483b9adf1bf8f28f50330edf86e2ce9",
+    "pkg/helper.zsh": "bac8f6d72f89b1c6e0b646be93b9b449",
+    "pkg/linux.zsh": "19e83c9858d12c9a7b9a8fbd0223ace7",
+    "pkg/main.zsh": "be5160c4580379cb6428478b561385cd",
+    "pkg/osx.zsh": "75600e8273569d23cf1f0dcc540ab761",
+    "zsh-ai.zsh": "fbdad60c686b1a60eeca402c5c9eeef3"
+  },
+  "folder_hashes": {
+    "internal": "078405b7b633c828e20ca200ff5851d4",
+    "config": "3ba8d7c10209412ef0119c8f14aab815",
+    ".": "bf76f0e8aaf9cc6f00781ee948cf2779",
+    "core": "a9d0fccfc236e471fdf7ad23fafbb747",
+    "pkg": "0fce50ffb3dc59afb8b4403e3342e8ed"
+  }
+}
