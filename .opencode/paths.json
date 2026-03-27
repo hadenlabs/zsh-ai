@@ -1,5 +1,5 @@
 {
   "local": ".opencode/context",
-  "global": false,
+  "global": true,
   "custom_dir": ".opencode/context"
 }

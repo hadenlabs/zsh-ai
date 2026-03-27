@@ -1,3 +1,0 @@
-# Essential Patterns
-
-- `general.md`
