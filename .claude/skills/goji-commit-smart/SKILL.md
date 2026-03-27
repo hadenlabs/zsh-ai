@@ -1,7 +1,6 @@
 ---
 name: goji-commit-smart
 description: Create git commits using goji rules from .goji.json (type/scope/emoji/signoff) with path-based heuristics.
-agent: OpenRepoManager
 license: Proprietary
 ---
 

@@ -18,6 +18,8 @@ metadata:
 
 Usa este skill cuando quieras dejar un comentario estructurado en Jira con el resumen de lo implementado sin redactarlo manualmente. El skill detecta si el proyecto usa Jira desde `infobot.toml`, obtiene el `projectKey`, deriva el issue key desde el branch actual, toma como base el template `.jira/issue_templates/jira-work-report.md`, resume los commits recientes del branch y publica el resultado como comentario en el issue derivado.
 
+Importante: para publicar en Jira, usa las tools del servidor MCP `jira` disponibles en la sesion. No uses CLI (`jira ...`) ni scripts locales de otros skills.
+
 ## Overview
 
 1. Lee `infobot.toml` y valida que `issueTracking.provider = "jira"`.
@@ -26,7 +28,7 @@ Usa este skill cuando quieras dejar un comentario estructurado en Jira con el re
 4. Lee el template `.jira/issue_templates/jira-work-report.md`.
 5. Inspecciona los commits recientes del branch actual para construir un resumen fiel de lo implementado.
 6. Completa el template con la informacion derivada de los commits y cualquier evidencia verificable disponible.
-7. Publica el reporte como comentario en Jira sobre el issue derivado del branch.
+7. Publica el reporte como comentario en Jira sobre el issue derivado del branch usando MCP `jira`.
 
 Ejemplo de branch:
 
@@ -70,7 +72,7 @@ git rev-parse --abbrev-ref HEAD
 - Completa `## Notas Tecnicas` con decisiones tecnicas relevantes inferibles de los commits. Si no hay informacion util, usa una nota breve y explicita como `No se identificaron notas tecnicas explicitas en los commits revisados.`
 - Completa `## Referencias` reemplazando `{{merge_request}}` con una URL de Merge Request o Pull Request solo si puede resolverse de forma confiable; en caso contrario usa `No disponible`.
 - Si no hay commits utiles para construir un reporte fiel, informalo y pide al usuario un resumen manual en lugar de inventarlo.
-- Publica el comentario en Jira usando la tool de comentarios con:
+- Publica el comentario en Jira usando una tool del servidor MCP `jira` (no CLI ni scripts locales) con:
   - `issueIdOrKey = <ISSUE-KEY>`
   - `commentBody = <reporte final basado en template y commits>`
 
@@ -84,6 +86,7 @@ git rev-parse --abbrev-ref HEAD
 - No inventes una URL de Merge Request o Pull Request; si no puede resolverse, usa `No disponible`.
 - Si la working tree tiene cambios sin commit, puedes advertirlo, pero igual usa los commits existentes para el resumen.
 - Muestra al final el issue comentado y el contenido final publicado o una vista previa clara del comentario.
+- Usa exclusivamente el servidor MCP `jira` para la publicacion del comentario; no uses CLI ni scripts locales.
 
 ## Tu humano puede pedirte
 
