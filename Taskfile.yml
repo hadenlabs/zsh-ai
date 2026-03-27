@@ -32,6 +32,14 @@ includes:
     taskfile: "https://raw.githubusercontent.com/hadenlabs/tasks/refs/heads/main/src/version/Taskfile.yml"
   release:
     taskfile: "https://raw.githubusercontent.com/hadenlabs/tasks/refs/heads/main/src/release/Taskfile.yml"
+  opencode:
+    taskfile: "https://raw.githubusercontent.com/hadenlabs/tasks/refs/heads/main/src/opencode/Taskfile.yml"
+  biome:
+    taskfile: "https://raw.githubusercontent.com/hadenlabs/tasks/refs/heads/main/src/biomejs/Taskfile.yml"
+  bun:
+    taskfile: "https://raw.githubusercontent.com/hadenlabs/tasks/refs/heads/main/src/bun/Taskfile.yml"
+  skills:
+    taskfile: "https://raw.githubusercontent.com/hadenlabs/tasks/refs/heads/main/src/skills/Taskfile.yml"
   plantuml:
     taskfile: "https://raw.githubusercontent.com/hadenlabs/tasks/refs/heads/main/src/plantuml/Taskfile.yml"
   prettier:
@@ -65,8 +73,9 @@ env:
   README_YAML: provision/generators/README.yaml
   README_TEMPLATE: provision/templates/README.tpl.md
   README_INCLUDES: file://
-  TERRAFORM_PATH: ./
   PYTHON_PACKAGE_MANAGER: uv
+  SKILL_REPOS:
+    https://gitlab.infosisglobal.com/architecture/skills.git
 
 dotenv:
   - .env
@@ -74,7 +83,6 @@ dotenv:
 vars:
   PROJECT_NAME: zsh-ai
   ORGANIZATION: hadenlabs
-  USER: ubuntu
   DOCKER_PLATFORM: linux/amd64
   REVIEWERS: luismayta
   PYTHON_VERSION: 3.11.5
@@ -143,6 +151,9 @@ tasks:
       - changelog:check
       - git:check
       - docs:check
+      - opencode:check
+      - bun:check
+      - skills:check
 
   readme:
     desc: Generate Readme
@@ -153,25 +164,19 @@ tasks:
         --out {{.README_FILE}}
         --datasource config={{.README_YAML}}
         --datasource includes={{.README_INCLUDES}}
-      - task: prettier
+      - task: format
 
-  prettier:
-    desc: Execute prettier files
+  format:
+    desc: Execute format files
     cmds:
-      - task: prettier:all
+      - task: biome:fmt
       - task: uv:fmt
 
-  test:
-    desc: Execute of test
-    cmds:
-      - task: go:test
-
   upgrade:
-    run: once
     desc: Execute upgrade packages
     cmds:
       - uv update
-      - uv run pre-commit autoupdate
+      - task: pre-commit:update
 
   setup:
     desc: Setup dependences of project
@@ -179,35 +184,20 @@ tasks:
       - >-
         [ -e ".env" ] || cp -rf .env.example .env
       - task: uv:setup
-      - task: uv:precommit
       - task: git:setup
+      - task: skills:setup
 
   environment:
     desc: Setup environment of project
     cmds:
       - task: uv:environment
-
-  generate:
-    desc: Generate files
-    cmds:
-      - task: go:mockery
-      - task: go:generate
+      - task: bun:setup
+      - task: pre-commit:setup
 
   validate:
     desc: "Run validate on all files"
     cmds:
-      - uv run pre-commit run --all-files
-
-  commit:guide:
-    desc: "Show commit style conventions (goji)"
-    silent: true
-    cmds:
-      - cmd: |
-          if [ ! -f "infobot.toml" ]; then
-            echo "Missing infobot.toml (required)" >&2
-            exit 1
-          fi
-          python provision/scripts/commit_guide.py
+      - task: pre-commit:lint
 
   help:
     cmds:
