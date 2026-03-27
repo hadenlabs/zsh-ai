@@ -69,6 +69,7 @@ Key variables include:
 - Variables: `AI_VARIABLE_NAME`
 - Files: `lowercase.zsh`
 - Files under `docs/` must be written in English.
+- **For searches**: Always consult [codemap.md](codemap.md) first to understand the codebase architecture before performing searches.
 
 ---
 
@@ -360,6 +361,11 @@ ai::fabric::patterns::sync  # Local → ~/.config/fabric/patterns
 
 | File                                               | Purpose               |
 | -------------------------------------------------- | --------------------- |
+| [codemap.md](codemap.md)                           | Repository atlas & architecture |
+| [config/codemap.md](config/codemap.md)             | Configuration module map |
+| [core/codemap.md](core/codemap.md)                 | Core utilities map    |
+| [internal/codemap.md](internal/codemap.md)         | Internal implementation map |
+| [pkg/codemap.md](pkg/codemap.md)                   | Public API map        |
 | [docs/functions.md](docs/functions.md)             | Function reference    |
 | [docs/usage.md](docs/usage.md)                     | Usage guide           |
 | [docs/contributing.md](docs/contributing.md)       | Contribution guide    |
