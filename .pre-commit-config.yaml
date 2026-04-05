@@ -40,11 +40,13 @@ repos:
           go.sum|
           openapi.yaml|
           provision/prompts\/.*$|
+          openspec\/.*$|
           .+\.lock$|
           .+\.mdx$|
           .+\.node_modules\/.*$|
           .+\.sops.*$|
           .+\.vendor\/.*$|
+          src/context/humans\.md$|
           )$
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
     rev: v9.24.0
@@ -77,6 +79,11 @@ repos:
       - id: check-yaml
         args:
           - --allow-multiple-documents
+        exclude: >
+          (?x)^(
+            .*\.tpl\.yaml$
+          )$
+      - id: fix-byte-order-marker
       - id: check-ast
       - id: debug-statements
       - id: check-docstring-first
@@ -104,6 +111,7 @@ repos:
     rev: 0.6.0
     hooks:
       - id: do-not-commit
+
       - id: shellcheck
         exclude: >
           (?x)^(
