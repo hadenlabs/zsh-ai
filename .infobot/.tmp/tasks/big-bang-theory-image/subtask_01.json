@@ -1,0 +1,20 @@
+{
+  "id": "big-bang-theory-image-01",
+  "seq": "01",
+  "title": "Generate Big Bang Theory inspired image asset",
+  "status": "in_progress",
+  "depends_on": [],
+  "parallel": true,
+  "suggested_agent": "Image Specialist",
+  "context_files": [],
+  "reference_files": [],
+  "acceptance_criteria": [
+    "Generates an original image inspired by a geeky apartment hangout sitcom vibe (no actor likeness)",
+    "No visible text, captions, or watermarks",
+    "Saved to assets/images/the-big-bang-theory.png (do not overwrite; use suffix if needed)",
+    "Report final prompt and the output file size in bytes"
+  ],
+  "deliverables": ["assets/images/the-big-bang-theory.png"],
+  "started_at": "2026-03-09T00:32:15Z",
+  "agent_id": "opencode"
+}

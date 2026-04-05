@@ -1,0 +1,22 @@
+{
+  "id": "hackers-3-image-01",
+  "seq": "01",
+  "title": "Generate Hackers 3 poster image",
+  "status": "in_progress",
+  "depends_on": [],
+  "parallel": true,
+  "suggested_agent": "Image Specialist",
+  "context_files": [],
+  "reference_files": [],
+  "acceptance_criteria": [
+    "Generates an original image for a fictional Hackers 3 concept without copying real actors or copyrighted characters",
+    "Uses a neon cyberpunk visual language with 90s hacker nostalgia and modern cinematic polish",
+    "Saves the final PNG to assets/images/hackers-3.png or a suffixed variant if the file already exists",
+    "Contains no visible text, logos, captions, or watermarks",
+    "Reports the final output path and a short visual description"
+  ],
+  "deliverables": ["assets/images/hackers-3.png"],
+  "prompt": "Create an original movie-poster style image for a fictional 'Hackers 3'. Use a neon cyberpunk aesthetic with 90s hacker nostalgia and modern cinematic polish. Show a central hacker silhouette, glowing monitors, code reflections, city lights, cables, and a high-energy digital atmosphere. Keep it original and non-identifiable; do not copy real actors or copyrighted characters. No visible text, logos, captions, or watermarks. Save as a PNG.",
+  "started_at": "2026-03-09T02:28:51Z",
+  "agent_id": "opencode"
+}
