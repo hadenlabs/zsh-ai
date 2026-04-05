@@ -4,17 +4,17 @@ This directory provides the task-management router used by Infobot.
 
 Commands:
 
-- `bash .infobot/skills/task-management/router.sh init <feature>`
-- `bash .infobot/skills/task-management/router.sh status <feature>`
-- `bash .infobot/skills/task-management/router.sh start <feature> <seq> [agent_id]`
-- `bash .infobot/skills/task-management/router.sh execute <feature> [seq] [agent_id]`
-- `bash .infobot/skills/task-management/router.sh next <feature>`
-- `bash .infobot/skills/task-management/router.sh parallel <feature>`
-- `bash .infobot/skills/task-management/router.sh complete <feature> <seq> "summary"`
+- `bash .jasper/skills/task-management/router.sh init <feature>`
+- `bash .jasper/skills/task-management/router.sh status <feature>`
+- `bash .jasper/skills/task-management/router.sh start <feature> <seq> [agent_id]`
+- `bash .jasper/skills/task-management/router.sh execute <feature> [seq] [agent_id]`
+- `bash .jasper/skills/task-management/router.sh next <feature>`
+- `bash .jasper/skills/task-management/router.sh parallel <feature>`
+- `bash .jasper/skills/task-management/router.sh complete <feature> <seq> "summary"`
 
 Task files live under:
 
-- `.infobot/.tmp/tasks/{feature}/subtask_XX.json`
+- `.jasper/.tmp/tasks/{feature}/subtask_XX.json`
 
 Execution behavior:
 

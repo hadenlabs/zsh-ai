@@ -25,7 +25,7 @@ def _die(msg: str, code: int = 2) -> NoReturn:
 
 
 def _tasks_dir(feature: str) -> str:
-    return os.path.join(".infobot", ".tmp", "tasks", feature)
+    return os.path.join(".jasper", ".tmp", "tasks", feature)
 
 
 def _list_subtasks(feature: str):
@@ -327,7 +327,7 @@ def _subtask_prompt(feature: str, seq: str, task_obj, subtask_obj) -> str:
             "- Verify the deliverables and acceptance criteria.",
             (
                 f"- When finished, mark the subtask complete with "
-                f'`bash .infobot/skills/task-management/router.sh complete {feature} {seq} "<summary>"`.'
+                f'`bash .jasper/skills/task-management/router.sh complete {feature} {seq} "<summary>"`.'
             ),
             "- If blocked, explain the blocker and leave the subtask in_progress.",
         ]
