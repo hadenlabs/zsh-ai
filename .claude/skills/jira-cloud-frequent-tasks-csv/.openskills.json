@@ -1,7 +1,7 @@
 {
-  "source": "https://gitlab.infosisglobal.com/architecture/skills.git",
+  "source": "https://github.com/hadenlabs/jasper",
   "sourceType": "git",
-  "repoUrl": "https://gitlab.infosisglobal.com/architecture/skills.git",
-  "subpath": "skills/jira-cloud-frequent-tasks-csv",
-  "installedAt": "2026-03-27T16:42:21.943Z"
+  "repoUrl": "https://github.com/hadenlabs/jasper",
+  "subpath": ".claude/skills/jira-cloud-frequent-tasks-csv",
+  "installedAt": "2026-04-05T03:54:56.308Z"
 }
