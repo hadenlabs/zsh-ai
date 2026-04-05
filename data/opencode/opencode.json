@@ -1,66 +1,16 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "agent": {
+    "explore": {
+      "disable": true
+    },
+    "general": {
+      "disable": true
+    }
+  },
   "autoupdate": false,
-  "plugin": [
-    "opencode-gemini-auth@latest",
-    "opencode-openai-codex-auth@latest",
-    "opencode-antigravity-auth@latest",
-    "opencode-dynamic-context-pruning@latest",
-    "opencode-websearch-cited@latest",
-    "opencode-type-inject@latest",
-    "@franlol/opencode-md-table-formatter@0.0.3",
-    "@mohak34/opencode-notifier@latest",
-    "opencode-devcontainers@latest",
-    "@tarquinen/opencode-dcp@latest",
-    "tokenscope-opencode-plugin@latest",
-    "opencode-ignore@latest",
-    "opencode-pty@0.2.1",
-    "@architecture/infosis-opencode-slim@1.1.0"
-  ],
   "instructions": ["AGENTS.md"],
   "mcp": {
-    "notebooklm": {
-      "type": "local",
-      "command": ["npx", "-y", "notebooklm-mcp@latest"]
-    },
-    "image-compression": {
-      "type": "local",
-      "command": ["bunx", "-y", "@inhiblab-core/mcp-image-compression"],
-      "enabled": true,
-      "environment": {
-        "IMAGE_COMPRESSION_DOWNLOAD_DIR": "assets/images"
-      }
-    },
-    "serena": {
-      "type": "local",
-      "command": ["uvx", "--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server"],
-      "enabled": false
-    },
-    "chrome-devtools": {
-      "type": "local",
-      "command": ["npx", "-y", "chrome-devtools-mcp@latest", "--no-usage-statistics", "--headless", "true"],
-      "enabled": false
-    },
-    "playwright": {
-      "type": "local",
-      "command": ["npx", "@playwright/mcp@latest"],
-      "enabled": true
-    },
-    "context7": {
-      "type": "local",
-      "command": ["npx", "-y", "@upstash/context7-mcp", "--api-key", "{env:CONTEXT7_API_KEY}"],
-      "enabled": true
-    },
-    "grep": {
-      "type": "remote",
-      "url": "https://mcp.grep.app",
-      "enabled": true
-    },
-    "sequential-thinking": {
-      "type": "local",
-      "command": ["bunx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
-      "enabled": true
-    },
     "awslabs.aws-knowledge": {
       "type": "remote",
       "url": "https://knowledge-mcp.global.api.aws",
@@ -74,19 +24,45 @@
       },
       "enabled": false
     },
-    "hashicorp.terraform": {
+    "bitbucket": {
       "type": "local",
-      "command": ["docker", "run", "-i", "--rm", "hashicorp/terraform-mcp-server:latest"],
+      "command": ["bunx", "-y", "bitbucket-mcp@latest"],
+      "enabled": false,
+      "environment": {
+        "BITBUCKET_URL": "https://api.bitbucket.org/2.0",
+        "BITBUCKET_WORKSPACE": "{env:BITBUCKET_WORKSPACE}",
+        "BITBUCKET_USERNAME": "{env:BITBUCKET_USERNAME}",
+        "BITBUCKET_PASSWORD": "{env:BITBUCKET_PASSWORD}",
+        "BITBUCKET_TOKEN": "{env:BITBUCKET_TOKEN}"
+      }
+    },
+    "chrome-devtools": {
+      "type": "local",
+      "command": ["npx", "-y", "chrome-devtools-mcp@latest", "--no-usage-statistics", "--headless", "true"],
+      "enabled": false
+    },
+    "context7": {
+      "type": "local",
+      "command": ["npx", "-y", "@upstash/context7-mcp", "--api-key", "{env:CONTEXT7_API_KEY}"],
       "enabled": true
     },
-    "grafana": {
+    "docker": {
       "type": "local",
-      "command": ["uvx", "mcp-grafana"],
+      "command": ["bunx", "-y", "docker-mcp"],
+      "enabled": false,
       "environment": {
-        "GRAFANA_URL": "{env:GRAFANA_URL}",
-        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "{env:GRAFANA_SERVICE_ACCOUNT_TOKEN}"
-      },
-      "enabled": true
+        "DOCKER_MCP_LOCAL": "true",
+        "DOCKER_MCP_HOST": "{env:DOCKER_MCP_HOST}",
+        "DOCKER_MCP_USERNAME": "{env:DOCKER_MCP_USERNAME}",
+        "DOCKER_MCP_PRIVATE_KEY": "{env:DOCKER_MCP_PRIVATE_KEY}",
+        "DOCKER_MCP_PORT": "{env:DOCKER_MCP_PORT}",
+        "DOCKER_MCP_PASSPHRASE": "{env:DOCKER_MCP_PASSPHRASE}"
+      }
+    },
+    "engram": {
+      "command": ["/opt/homebrew/Cellar/engram/1.10.10/bin/engram", "mcp", "--tools=agent"],
+      "enabled": true,
+      "type": "local"
     },
     "filesystem": {
       "type": "local",
@@ -113,38 +89,38 @@
         "GITLAB_API_URL": "https://gitlab.com/api/v4"
       }
     },
-    "bitbucket": {
+    "grafana": {
       "type": "local",
-      "command": ["bunx", "-y", "bitbucket-mcp@latest"],
-      "enabled": false,
+      "command": ["uvx", "mcp-grafana"],
       "environment": {
-        "BITBUCKET_URL": "https://api.bitbucket.org/2.0",
-        "BITBUCKET_WORKSPACE": "{env:BITBUCKET_WORKSPACE}",
-        "BITBUCKET_USERNAME": "{env:BITBUCKET_USERNAME}",
-        "BITBUCKET_PASSWORD": "{env:BITBUCKET_PASSWORD}",
-        "BITBUCKET_TOKEN": "{env:BITBUCKET_TOKEN}"
+        "GRAFANA_URL": "{env:GRAFANA_URL}",
+        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "{env:GRAFANA_SERVICE_ACCOUNT_TOKEN}"
+      },
+      "enabled": true
+    },
+    "grep": {
+      "type": "remote",
+      "url": "https://mcp.grep.app",
+      "enabled": true
+    },
+    "hashicorp.terraform": {
+      "type": "local",
+      "command": ["docker", "run", "-i", "--rm", "hashicorp/terraform-mcp-server:latest"],
+      "enabled": true
+    },
+    "image-compression": {
+      "type": "local",
+      "command": ["bunx", "-y", "@inhiblab-core/mcp-image-compression"],
+      "enabled": true,
+      "environment": {
+        "IMAGE_COMPRESSION_DOWNLOAD_DIR": "assets/images"
       }
     },
-    "notion": {
-      "type": "local",
-      "command": ["bunx", "-y", "@notionhq/notion-mcp-server"],
-      "enabled": false,
-      "environment": {
-        "NOTION_TOKEN": "{env:NOTION_TOKEN}"
-      }
-    },
-    "docker": {
-      "type": "local",
-      "command": ["bunx", "-y", "docker-mcp"],
-      "enabled": false,
-      "environment": {
-        "DOCKER_MCP_LOCAL": "true",
-        "DOCKER_MCP_HOST": "{env:DOCKER_MCP_HOST}",
-        "DOCKER_MCP_USERNAME": "{env:DOCKER_MCP_USERNAME}",
-        "DOCKER_MCP_PRIVATE_KEY": "{env:DOCKER_MCP_PRIVATE_KEY}",
-        "DOCKER_MCP_PORT": "{env:DOCKER_MCP_PORT}",
-        "DOCKER_MCP_PASSPHRASE": "{env:DOCKER_MCP_PASSPHRASE}"
-      }
+    "jira": {
+      "type": "remote",
+      "url": "{env:JIRA_MCP_URL}",
+      "enabled": true,
+      "oauth": {}
     },
     "kubernetes": {
       "type": "local",
@@ -154,6 +130,31 @@
         "ALLOW_ONLY_NON_DESTRUCTIVE_TOOLS": "true"
       }
     },
+    "notebooklm": {
+      "type": "local",
+      "command": ["npx", "-y", "notebooklm-mcp@latest"]
+    },
+    "notion": {
+      "type": "local",
+      "command": ["bunx", "-y", "@notionhq/notion-mcp-server"],
+      "enabled": false,
+      "environment": {
+        "NOTION_TOKEN": "{env:NOTION_TOKEN}"
+      }
+    },
+    "obsidian": {
+      "type": "local",
+      "command": ["uvx", "mcp-obsidian"],
+      "enabled": true,
+      "environment": {
+        "OBSIDIAN_API_KEY": "{env:OBSIDIAN_API_KEY}"
+      }
+    },
+    "playwright": {
+      "type": "local",
+      "command": ["npx", "@playwright/mcp@latest"],
+      "enabled": true
+    },
     "sentry": {
       "type": "local",
       "command": ["uvx", "mcp-server-sentry"],
@@ -161,6 +162,16 @@
       "environment": {
         "SENTRY_AUTH_TOKEN": "{env:SENTRY_AUTH_TOKEN}"
       }
+    },
+    "sequential-thinking": {
+      "type": "local",
+      "command": ["bunx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "enabled": true
+    },
+    "serena": {
+      "type": "local",
+      "command": ["uvx", "--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server"],
+      "enabled": false
     },
     "supabase": {
       "type": "local",
@@ -172,14 +183,27 @@
         "SUPABASE_SERVICE_ROLE_KEY": "{env:SUPABASE_SERVICE_ROLE_KEY}",
         "MCP_API_KEY": "{env:SUPABASE_MCP_API_KEY}"
       }
-    },
-    "jira": {
-      "type": "remote",
-      "url": "{env:JIRA_MCP_URL}",
-      "enabled": true,
-      "oauth": {}
     }
   },
+  "permission": {
+    "external_directory": {
+      "*": "ask",
+      "~/.config/opencode/skills/*": "allow",
+      "~/.config/opencode/.jira-config.json": "allow",
+      "/var/tmp/*": "allow",
+      "/tmp/*": "allow"
+    }
+  },
+  "plugin": [
+    "opencode-gemini-auth@latest",
+    "opencode-openai-codex-auth@latest",
+    "opencode-antigravity-auth@latest",
+    "opencode-websearch-cited@latest",
+    "@mohak34/opencode-notifier@latest",
+    "@tarquinen/opencode-dcp@latest",
+    "opencode-pty@0.2.1",
+    "@architecture/infosis-opencode-slim@1.2.1"
+  ],
   "provider": {
     "openai": {
       "name": "OpenAI"
@@ -434,21 +458,6 @@
           "name": "qwen3-coder"
         }
       }
-    }
-  },
-  "permission": {
-    "external_directory": {
-      "*": "ask",
-      "~/.config/opencode/skills/*": "allow",
-      "/tmp/*": "allow"
-    }
-  },
-  "agent": {
-    "explore": {
-      "disable": true
-    },
-    "general": {
-      "disable": true
     }
   }
 }
