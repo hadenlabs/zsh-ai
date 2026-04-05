@@ -565,17 +565,16 @@ TMP_CHANGELOG.md
 .terraform.lock.hcl
 build
 .task
+.terraform.lock.hcl
 *.lock
 *.lock.hcl
 .cq/
-.tmp
-*.lock
 *.zip
-*.iml
+package-lock.json
+provision/ansible/*/roles/contrib
 .external_modules
-.pmd
 vendor
-!uv.lock
-/.react-router/
-.dev.vars
+charts
+.DS_Store
+.turbo
 
