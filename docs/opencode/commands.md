@@ -104,14 +104,14 @@ What it does:
 1. Loads skill: `goji-commit-smart` (`.claude/skills/goji-commit-smart/SKILL.md`).
 2. Runs `task validate`.
 3. Groups local changes into 1..N commits.
-4. Derives issue key/id from the current branch name (rules in `infobot.toml`).
+4. Derives issue key/id from the current branch name (rules in `jasper.toml`).
 5. Creates commits using goji conventions and sign-off.
 
 Requirements:
 
 - `task`
 - `git`
-- `goji` (commit tool configured in `infobot.toml`)
+- `goji` (commit tool configured in `jasper.toml`)
 
 ### `/task-template [feature]`
 
@@ -123,7 +123,7 @@ Arguments:
 
 What it does:
 
-1. Creates `.infobot/.tmp/tasks/<feature>/`.
+1. Creates `.jasper/.tmp/tasks/<feature>/`.
 2. Generates a starter `task.json` and `subtask_01.json`.
 3. Prints next commands to list and progress tasks.
 

@@ -169,7 +169,7 @@ This command:
 
 ## OpenCode tasks (optional)
 
-If you use OpenCode in this repository, you can scaffold a task template for a new feature under `.infobot/.tmp/tasks/`.
+If you use OpenCode in this repository, you can scaffold a task template for a new feature under `.jasper/.tmp/tasks/`.
 
 From the OpenCode TUI:
 
