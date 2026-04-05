@@ -11,7 +11,7 @@
 # jira-sync-components
 
 
-Skill para sincronizar componentes de Jira con un archivo markdown. Crea, actualiza y reconcilia components (incluyendo description).
+Skill para sincronizar componentes de Jira con un archivo markdown. Crea, actualiza y reconcilia componentes (incluyendo description).
 
 
 
@@ -19,9 +19,9 @@ Skill para sincronizar componentes de Jira con un archivo markdown. Crea, actual
 
 - Usa el skill `jira-sync-components`
 
-- Sincroniza components de Jira con este archivo
+- Sincroniza componentes de Jira con este archivo
 
-- Crea components desde markdown
+- Crea componentes desde markdown
 
 
 

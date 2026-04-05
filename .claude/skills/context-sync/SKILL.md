@@ -52,7 +52,7 @@ If a scope hint is provided (`context`, `agents`, `commands`, `skills`, `config`
 3. Verify task names against `Taskfile.yml` and its includes; do not assume local tasks must be declared inline when they are provided through `includes:`.
 4. Keep repo naming aligned with this checkout: `architecture/infrastructure`.
 5. Keep `.opencode/context/project/*.md` aligned with the actual repo layout, active workflows, and local skill locations.
-6. Treat references to the removed `.jasper/...` task backend as stale unless a current repo file explicitly restores that workflow.
+6. Treat references to the removed `.infobot/...` task backend as stale unless a current repo file explicitly restores that workflow.
 7. Keep agent/config metadata aligned with actual files under `.opencode/agent/` and the agent registry in `opencode.json`.
 
 ## Fix Policy
