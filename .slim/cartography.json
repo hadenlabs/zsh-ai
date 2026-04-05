@@ -1,7 +1,7 @@
 {
   "metadata": {
     "version": "1.0.0",
-    "last_run": "2026-03-27T18:02:49.260301Z",
+    "last_run": "2026-04-05T04:44:17.227104Z",
     "root": "/Users/luchomayta/Projects/src/github.com/hadenlabs/zsh-ai",
     "include_patterns": ["*.zsh", "config/**/*.zsh", "core/**/*.zsh", "internal/**/*.zsh", "pkg/**/*.zsh"],
     "exclude_patterns": ["**/*.test.zsh", "tests/**", "docs/**", "data/**"],
@@ -30,10 +30,10 @@
     "zsh-ai.zsh": "fbdad60c686b1a60eeca402c5c9eeef3"
   },
   "folder_hashes": {
-    "internal": "078405b7b633c828e20ca200ff5851d4",
-    "config": "3ba8d7c10209412ef0119c8f14aab815",
     ".": "bf76f0e8aaf9cc6f00781ee948cf2779",
-    "core": "a9d0fccfc236e471fdf7ad23fafbb747",
-    "pkg": "0fce50ffb3dc59afb8b4403e3342e8ed"
+    "pkg": "0fce50ffb3dc59afb8b4403e3342e8ed",
+    "config": "3ba8d7c10209412ef0119c8f14aab815",
+    "internal": "078405b7b633c828e20ca200ff5851d4",
+    "core": "a9d0fccfc236e471fdf7ad23fafbb747"
   }
 }
