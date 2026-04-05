@@ -121,6 +121,8 @@ vars:
     charts
     .DS_Store
     .turbo
+    .infobot
+    .jasper
   AI_IGNORE_CUSTOM: |
     # Block specific paths
     /secrets/**
