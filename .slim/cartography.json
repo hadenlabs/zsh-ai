@@ -3,19 +3,8 @@
     "version": "1.0.0",
     "last_run": "2026-03-27T18:02:49.260301Z",
     "root": "/Users/luchomayta/Projects/src/github.com/hadenlabs/zsh-ai",
-    "include_patterns": [
-      "*.zsh",
-      "config/**/*.zsh",
-      "core/**/*.zsh",
-      "internal/**/*.zsh",
-      "pkg/**/*.zsh"
-    ],
-    "exclude_patterns": [
-      "**/*.test.zsh",
-      "tests/**",
-      "docs/**",
-      "data/**"
-    ],
+    "include_patterns": ["*.zsh", "config/**/*.zsh", "core/**/*.zsh", "internal/**/*.zsh", "pkg/**/*.zsh"],
+    "exclude_patterns": ["**/*.test.zsh", "tests/**", "docs/**", "data/**"],
     "exceptions": []
   },
   "file_hashes": {

@@ -47,6 +47,7 @@
       "!**/charts",
       "!.claude/skills/*",
       "!.agents/skills/*",
+      "!.skills/*",
       "!.opencode/skills/*"
     ]
   },

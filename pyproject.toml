@@ -2,7 +2,7 @@
 # https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
 [project]
 name = "zsh-ai"
-description = "base template"
+description = "zsh ai"
 version = "0.0.0"
 license = "LGPL-3.0"
 readme = "README.md"
@@ -10,7 +10,9 @@ requires-python = ">=3.9"
 keywords = []
 authors = [{ name = "Luis Mayta", email = "luis@hadenlabs.com" }]
 
-dependencies = ["boto3>=1.26.130"]
+dependencies = [
+  "boto3>=1.26.130",
+]
 
 [project.urls]
 Source = "https://github.com/hadenlabs/zsh-ai"
