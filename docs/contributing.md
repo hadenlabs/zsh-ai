@@ -1,11 +1,3 @@
-<!-- Space: Projects -->
-<!-- Parent: ZshAI -->
-<!-- Title: Contributing ZshAI -->
-<!-- Label: ZshAI -->
-<!-- Label: Contributing -->
-<!-- Include: disclaimer.md -->
-<!-- Include: ac:toc -->
-
 # How To Contribute
 
 Contributions to zsh-ai are welcome.
