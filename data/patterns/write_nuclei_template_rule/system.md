@@ -34,9 +34,7 @@ Nuclei templates are the cornerstone of the Nuclei scanning engine. Nuclei templ
 
 Review details on matchers for Nuclei Matchers allow different type of flexible comparisons on protocol responses. They are what makes nuclei so powerful, checks are very simple to write and multiple checks can be added as per need for very effective scanning.
 
-​
-
-### Types
+​### Types
 
 Multiple matchers can be specified in a request. There are basically 7 types of matchers:
 
@@ -137,9 +135,7 @@ matchers:
 
 Similarly, matchers can be written to match anything that you want to find in the response body allowing unlimited creativity and extensibility.
 
-​
-
-### Negative Matchers
+​### Negative Matchers
 
 All types of matchers also support negative conditions, mostly useful when you look for a match with an exclusions. This can be used by adding negative: true in the matchers block.
 
@@ -154,9 +150,7 @@ matchers:
     negative: true
 ```
 
-​
-
-### Multiple Matchers
+​### Multiple Matchers
 
 Multiple matchers can be used in a single template to fingerprint multiple conditions with a single request.
 
@@ -186,9 +180,7 @@ matchers:
     part: header
 ```
 
-​
-
-### Matchers Condition
+​### Matchers Condition
 
 While using multiple matchers the default condition is to follow OR operation in between all the matchers, AND operation can be used to make sure return the result if all matchers returns true.
 
@@ -212,9 +204,7 @@ While using multiple matchers the default condition is to follow OR operation in
 
 Review details on extractors for Nuclei Extractors can be used to extract and display in results a match from the response returned by a module.
 
-​
-
-### Types
+​### Types
 
 Multiple extractors can be specified in a request. As of now we support five type of extractors.
 
@@ -711,9 +701,7 @@ path: \"{{BaseURL}}/.git/config\"
 
 Multiple paths can also be specified in one request which will be requested for the target.
 
-​
-
-### Headers
+​### Headers
 
 Headers can also be specified to be sent along with the requests. Headers are placed in form of key/value pairs. An example header configuration looks like this:
 
@@ -726,9 +714,7 @@ headers:
   Origin: https://google.com
 ```
 
-​
-
-### Body
+​### Body
 
 Body specifies a body to be sent along with the request. For instance:
 
@@ -1320,9 +1306,7 @@ exclude-ports: 80,443
 
 When exclude-ports is used, the default reserved ports list will be overwritten. This means that if you want to run a network template on port 80, you will have to explicitly specify it in the port field.
 
-​
-
-# Matchers / Extractor Parts
+​# Matchers / Extractor Parts
 
 Valid part values supported by Network protocol for Matchers / Extractor are:
 
