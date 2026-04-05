@@ -577,4 +577,6 @@ vendor
 charts
 .DS_Store
 .turbo
+.infobot
+.jasper
 
