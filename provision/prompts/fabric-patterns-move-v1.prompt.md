@@ -10,7 +10,7 @@ No asumas convenciones fuera de ese archivo. No introduzcas cambios que rompan c
 
 ## Objetivo
 
-En nuestro proyecto, la carpeta `patterns/` contiene templates, scripts y prompts.  
+En nuestro proyecto, la carpeta `patterns/` contiene templates, scripts y prompts.
 Se requiere moverla a `data/patterns/` para mantener consistencia en la estructura y que todos los módulos apunten a la nueva ruta.
 
 Actualizar todos los templates, prompts y scripts dentro de Fabric que referencian `patterns/` para que apunten a `data/patterns/`.
