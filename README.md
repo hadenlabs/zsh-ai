@@ -22,7 +22,7 @@
 
 
 
-zsh-ai for project 
+zsh-ai is a Zsh plugin that provides installation and management for AI development tools including OpenCode, Fabric, Ollama, and more. 
 
 
 
@@ -518,7 +518,7 @@ File a GitHub [issue](https://github.com/hadenlabs/zsh-ai/issues).
 
 ## Contributing
 
-See [Contributing](./docs/contributing.md).
+See [Contributing](./docs/contribute/index.md).
 
 ## Module Versioning
 

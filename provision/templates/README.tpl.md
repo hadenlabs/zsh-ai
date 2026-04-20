@@ -155,7 +155,7 @@ File a GitLab [issue]({{ printf "https://gitlab.com/%s/-/issues" (ds "config").g
 
 ## Contributing
 
-See [Contributing](./docs/contributing.md).
+See [Contributing](./docs/contribute/index.md).
 
 ## Module Versioning
 

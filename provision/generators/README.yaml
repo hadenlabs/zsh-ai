@@ -55,7 +55,7 @@ requirements: |-
 
 # Short description of this project
 description: |-
-  zsh-ai for project
+  zsh-ai is a Zsh plugin that provides installation and management for AI development tools including OpenCode, Fabric, Ollama, and more.
 
 screenshots:
   - name: Project hero

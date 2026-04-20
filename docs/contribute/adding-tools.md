@@ -1,0 +1,305 @@
+# Adding New AI Tools
+
+This guide explains how to add support for a new AI tool to the zsh-ai plugin. For a quick reference, see [AGENTS.md](../../AGENTS.md) which provides a condensed version for AI agents.
+
+## Overview
+
+The zsh-ai plugin follows a modular architecture with clear separation between:
+
+- **Configuration** (`config/`): Variables and OS-specific settings
+- **Internal logic** (`internal/`): Installation functions
+- **Public API** (`pkg/`): User-facing functions
+- **Patterns** (`data/patterns/`): Custom patterns for fabric
+
+## Step-by-Step Guide
+
+### 1. Update Base Configuration
+
+Add the new tool to the `AI_TOOLS` array in `config/base.zsh`:
+
+```zsh
+#!/usr/bin/env ksh
+AI_TOOLS=(
+    opencode
+    fabric
+    ollama
+    shimmy
+    hf
+    newtool  # Add your new tool here
+)
+```
+
+### 2. Define Configuration Variables
+
+Add tool-specific configuration variables in `config/base.zsh`:
+
+```zsh
+# NewTool configuration
+AI_NEWTOOL_BIN_PATH="${HOME}/.local/bin"
+AI_INSTALL_URL_NEWTOOL="https://github.com/org/newtool/releases/latest/download/newtool"
+```
+
+### 3. Add OS-Specific Configuration
+
+Update OS-specific configuration files:
+
+**For macOS** (`config/osx.zsh`):
+
+```zsh
+#!/usr/bin/env ksh
+AI_INSTALL_URL_NEWTOOL="https://github.com/org/newtool/releases/latest/download/newtool-darwin-arm64.tar.gz"
+```
+
+**For Linux** (`config/linux.zsh`):
+
+```zsh
+#!/usr/bin/env ksh
+AI_INSTALL_URL_NEWTOOL="https://github.com/org/newtool/releases/latest/download/newtool-linux-x64.tar.gz"
+```
+
+### 4. Implement Internal Installation Function
+
+Create the installation function in `internal/base.zsh`:
+
+```zsh
+#!/usr/bin/env ksh
+
+function ai::internal::newtool::install {
+    message_info "Installing newtool..."
+
+    # Check for required dependencies
+    if ! core::exists curl; then
+        message_error "curl is required to install newtool"
+        return 1
+    fi
+
+    local install_path="${AI_NEWTOOL_BIN_PATH}/newtool"
+
+    # Download the binary
+    if ! curl -L "${AI_INSTALL_URL_NEWTOOL}" -o "${install_path}"; then
+        message_error "Failed to download newtool"
+        return 1
+    fi
+
+    # Make it executable
+    if ! chmod +x "${install_path}"; then
+        message_error "Failed to make newtool executable"
+        return 1
+    fi
+
+    message_success "newtool installed successfully at ${install_path}"
+}
+```
+
+### 5. Update Package Installation Dispatcher
+
+Add a case for your new tool in `ai::internal::packages::install` function in `internal/base.zsh`:
+
+```zsh
+function ai::internal::packages::install {
+    local package="$1"
+
+    case "${package}" in
+        opencode)
+            ai::internal::opencode::install
+            ;;
+        fabric)
+            ai::internal::fabric::install
+            ;;
+        ollama)
+            ai::internal::ollama::install
+            ;;
+        shimmy)
+            ai::internal::shimmy::install
+            ;;
+        hf)
+            ai::internal::hf::install
+            ;;
+        newtool)
+            ai::internal::newtool::install
+            ;;
+        *)
+            message_error "Unknown package: ${package}"
+            return 1
+            ;;
+    esac
+}
+```
+
+### 6. Create Public API Function
+
+Add a public wrapper function in `pkg/helper.zsh`:
+
+```zsh
+#!/usr/bin/env ksh
+
+function ai::newtool::install {
+    ai::internal::packages::install "newtool"
+}
+```
+
+### 7. Update Package List
+
+Ensure your tool is included in the `AI_PACKAGES` array (if needed) in `config/base.zsh`:
+
+```zsh
+AI_PACKAGES=(
+    opencode
+    fabric
+    ollama
+    shimmy
+    hf
+    newtool
+)
+```
+
+### 8. Document the Function
+
+Add documentation in `docs/functions.md`:
+
+````markdown
+### ai::newtool::install
+
+Installs newtool CLI by downloading the binary from GitHub Releases.
+
+**Example:**
+
+```zsh
+ai::newtool::install
+```
+````
+
+### 9. Update Supported Tools List
+
+Update the "Tools Implemented" section in `AGENTS.md`:
+
+```markdown
+### Currently Supported:
+
+1. **opencode** - CLI for code generation
+2. **fabric** - AI patterns framework
+3. **ollama** - Local LLM execution
+4. **shimmy** - Interface for AI models
+5. **hf** (Hugging Face) - CLI for Hugging Face models
+6. **newtool** - Description of your new tool
+```
+
+## Testing Your Implementation
+
+1. Source the plugin:
+
+   ```bash
+   source zsh-ai.zsh
+   ```
+
+2. Test the function exists:
+
+   ```bash
+   type ai::newtool::install
+   ```
+
+3. Run the installation:
+
+   ```bash
+   ai::newtool::install
+   ```
+
+4. Verify the tool is installed:
+   ```bash
+   which newtool
+   ```
+
+## Code Conventions
+
+- **Shebang**: All `.zsh` files must start with `#!/usr/bin/env ksh`
+- **Function naming**:
+  - Public functions: `ai::toolname::action`
+  - Internal functions: `ai::internal::toolname::action`
+- **Variables**: Use `AI_` prefix for global variables
+- **Error handling**: Use `return 1` for errors and `message_error` for error messages
+- **Language**: All code and documentation must be in English
+- **Docs language**: All files under `docs/` must be written in English. Use another language only for quoted user-facing text that must remain unchanged.
+
+## Common Patterns
+
+### Binary Installation Pattern
+
+Most tools follow this pattern:
+
+1. Check for `curl` dependency
+2. Download binary from GitHub releases
+3. Make it executable
+4. Place in appropriate bin directory
+
+### Python Package Pattern
+
+For tools installed via pip:
+
+```zsh
+function ai::internal::pytool::install {
+    message_info "Installing pytool..."
+
+    if ! core::exists pip3; then
+        message_error "pip3 is required to install pytool"
+        return 1
+    fi
+
+    if ! pip3 install pytool; then
+        message_error "Failed to install pytool via pip"
+        return 1
+    fi
+
+    message_success "pytool installed successfully"
+}
+```
+
+## Adding Additional Functions
+
+For tools that need more than just installation (like model management, configuration, etc.):
+
+1. Add additional internal functions in `internal/base.zsh`:
+
+   ```zsh
+   function ai::internal::newtool::configure {
+       # Configuration logic here
+   }
+   ```
+
+2. Add corresponding public functions in `pkg/helper.zsh`:
+   ```zsh
+   function ai::newtool::configure {
+       ai::internal::newtool::configure
+   }
+   ```
+
+## Adding Custom Patterns (Fabric)
+
+If your tool works with fabric patterns:
+
+1. Create pattern directory in `data/patterns/`:
+
+   ```
+   data/patterns/
+   └── newtool-pattern/
+       ├── system.md
+       └── user.md
+   ```
+
+2. Update pattern synchronization:
+   ```bash
+   ai::fabric::patterns::sync
+   ```
+
+## Troubleshooting
+
+- **Tool not found after installation**: Ensure the installation path is in `$PATH`
+- **Permission denied**: Check that `chmod +x` succeeded
+- **Download fails**: Verify the URL is correct and accessible
+- **Function not available**: Ensure you sourced the plugin correctly
+
+## References
+
+- [AGENTS.md](../../AGENTS.md) - Quick reference for AI agents
+- [functions.md](../functions.md) - Complete function reference
+- [usage.md](../usage.md) - Usage guide
+- [testing.md](./testing.md) - Testing guide
