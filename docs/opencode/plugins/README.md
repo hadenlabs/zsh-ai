@@ -23,3 +23,23 @@ This directory documents the plugins configured in `opencode.json`.
 - **`opencode-devcontainers@latest`**: Improves integration with VS Code Dev Containers for a more consistent development environment.
 - **`opencode-direnv@latest`**: Automatically loads environment variables managed with `direnv`.
 - **`oh-my-opencode@latest`**: Starter package that includes a set of preconfigured agents and tools to speed up setup.
+
+### Notifier
+
+- **`@mohak34/opencode-notifier@latest`**: Plugin de OpenCode para notificaciones.
+
+### Wakelock
+
+- **`opencode-wakelock@latest`**: Plugin para mantener activo el sistema.
+
+### Architecture
+
+- **`@architecture/infosis-opencode-slim@1.2.1`**: Plugin de arquitectura Infosis para OpenCode.
+
+## Documentación Individual
+
+- [opencode-gemini-auth](./opencode-gemini-auth.md)
+- [mohak34-opencode-notifier](./mohak34-opencode-notifier.md)
+- [opencode-wakelock](./opencode-wakelock.md)
+- [opencode-antigravity-auth](./opencode-antigravity-auth.md)
+- [infosis-opencode-slim](./infosis-opencode-slim.md)
