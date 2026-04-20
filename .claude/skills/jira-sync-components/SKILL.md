@@ -2,6 +2,8 @@
 name: jira-sync-components
 description: Skill para sincronizar componentes de Jira con un archivo markdown. Crea, actualiza y reconcilia componentes (incluyendo description).
 metadata:
+  author: "hadenlabs"
+  version: "0.0.0"
   opencode:
     emoji: "🔄"
     tags:
@@ -30,7 +32,7 @@ Formatos soportados:
 
 ```bash
 jira-sync-components ./docs/jira/components.md
-````
+```
 
 ### 2. JSON
 
@@ -141,6 +143,7 @@ Acción:
 - Componentes con `jiraId` que existen en Jira.
 
 Comparar:
+
 - `name`
 - `description`
 
@@ -233,6 +236,7 @@ El agente debe registrar acciones con claridad:
   - No ejecutar
 - Todas las solicitudes implican:
   - Sincronización completa (no parcial)
+
 ---
 
 ## Ejemplo de uso

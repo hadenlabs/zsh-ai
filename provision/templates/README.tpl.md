@@ -42,6 +42,14 @@
 {{ printf "![%s](%s)\n*%s*" $screenshot.name $screenshot.url $screenshot.description }}
 {{ end }}{{ end }}
 
+{{ if has (ds "config") "workflows" }}
+
+## Workflows
+
+{{ range $workflow := (ds "config").workflows }}{{ printf "- [%s](%s) - %s\n" $workflow.name $workflow.url $workflow.description }}{{ end }}
+
+{{ end }}
+
 {{ if has (ds "config") "features" }}
 
 ## Features

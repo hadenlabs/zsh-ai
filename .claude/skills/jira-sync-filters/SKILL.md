@@ -2,6 +2,8 @@
 name: jira-sync-filters
 description: Skill para sincronizar filtros de Jira con un archivo markdown. Crea, actualiza y reconcilia filtros (incluyendo JQL, description y favourite).
 metadata:
+  author: "hadenlabs"
+  version: "0.0.0"
   opencode:
     emoji: "🔍"
     tags:
@@ -52,6 +54,7 @@ jira-sync-filters ./docs/jira/filters.md
 
 ```markdown
 ## Filter: HAD | Critical
+
 - name: HAD | Critical
 - jql: project = HAD AND priority = Highest AND status != Done
 - description: Critical issues across HAD

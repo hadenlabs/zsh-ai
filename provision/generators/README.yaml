@@ -17,6 +17,7 @@ email:
 license: "LGPL-3.0"
 
 # Canonical GitHub repo
+github_host: github.com
 github_repo: hadenlabs/zsh-ai
 
 # Badges to display

@@ -6,6 +6,8 @@ triggers:
   - "Registra tiempo en Jira usando el issue del branch actual"
   - "Agrega un worklog a la tarea de Jira actual tomando la descripcion de los commits"
 metadata:
+  author: "hadenlabs"
+  version: "0.0.0"
   opencode:
     emoji: "🧾"
     tags:

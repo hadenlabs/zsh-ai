@@ -121,6 +121,7 @@ vars:
     charts
     .DS_Store
     .turbo
+    .jira-config.json
     .infobot
     .jasper
   AI_IGNORE_CUSTOM: |
@@ -183,8 +184,8 @@ tasks:
   format:
     desc: Execute format files
     cmds:
-      - task: biome:fmt
       - task: uv:fmt
+      - task: biome:fmt
 
   upgrade:
     desc: Execute upgrade packages
@@ -198,7 +199,6 @@ tasks:
       - >-
         [ -e ".env" ] || cp -rf .env.example .env
       - task: uv:setup
-      - task: git:setup
       - task: skills:setup
 
   environment:
@@ -207,6 +207,8 @@ tasks:
       - task: uv:environment
       - task: bun:setup
       - task: pre-commit:setup
+      - task: git:setup
+      - task: bun:setup
 
   fix:
     desc: "Run fix on all files"

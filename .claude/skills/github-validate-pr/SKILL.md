@@ -6,6 +6,9 @@ triggers:
   - "Validate a pull request for checks and blockers"
   - "Review PR CI status and merge blockers"
 license: Proprietary
+metadata:
+  author: "hadenlabs"
+  version: "0.0.0"
 ---
 
 ## What I do

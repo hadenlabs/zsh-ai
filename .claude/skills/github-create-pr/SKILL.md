@@ -6,6 +6,9 @@ triggers:
   - "Create a GitHub pull request from this branch"
   - "Open a PR and push the current branch"
 license: Proprietary
+metadata:
+  author: "hadenlabs"
+  version: "0.0.0"
 ---
 
 ## What I do

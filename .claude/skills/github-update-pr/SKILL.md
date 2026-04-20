@@ -6,6 +6,9 @@ triggers:
   - "Refresh the existing pull request description"
   - "Update the PR body to match the latest diff"
 license: Proprietary
+metadata:
+  author: "hadenlabs"
+  version: "0.0.0"
 ---
 
 ## What I do

@@ -6,6 +6,8 @@ triggers:
   - "Genera un reporte de implementacion para la tarea Jira actual y publcalo como comentario"
   - "Completa el template de reporte Jira usando los commits del branch y subelo al issue"
 metadata:
+  author: "hadenlabs"
+  version: "0.0.0"
   opencode:
     emoji: "📝"
     tags:

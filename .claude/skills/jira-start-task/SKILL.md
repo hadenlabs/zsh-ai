@@ -1,83 +1,288 @@
 ---
 name: jira-start-task
-description: Skill para listar issues no terminadas asignadas al usuario en Jira usando `jasper.toml`, elegir una y crear un branch `feature/<ISSUE-KEY>`.
-triggers:
-  - "Usa el skill `jira-start-task`"
-  - "Quiero empezar una tarea de Jira y crear el branch automáticamente"
-  - "Lista las tareas pendientes del proyecto configurado y crea un feature branch"
+description: Selecciona un issue de Jira, genera un prompt OpenSpec usando el template local del skill y crea/usa un branch feature/<ISSUE-KEY>.
+license: Proprietary
 metadata:
+  author: "hadenlabs"
+  version: "0.0.0"
   opencode:
     emoji: 🎯
+    triggers:
+      - "usa el skill jira-start-task"
+      - "empezar tarea jira"
+      - "trabajar en issue"
+      - "generar prompt openspec"
     tags:
       - jira-cloud
       - git
-      - branch
       - workflow
+      - openspec
     mcp:
       preferredServer: jira
 ---
 
-# Jira Start Task
+# jira-start-task
 
-Usa este skill cuando quieras empezar trabajo en una tarea de Jira sin buscar manualmente el ticket ni escribir el branch a mano. El skill toma el `projectKey` desde `jasper.toml`, lista las issues no terminadas asignadas al usuario actual, deja que el usuario seleccione una y crea un branch con prefijo `feature/`.
+Inicia el trabajo sobre un issue de Jira seleccionándolo o proporcionando su clave, genera un prompt para OpenSpec usando el template local del skill y prepara el branch correspondiente en git.
 
-## Overview
+---
 
-1. Lee `jasper.toml` y obtiene `issueTracking.projectKey`.
-2. Consulta Jira para identificar el usuario actual y listar issues del proyecto que:
-   - estén asignadas al usuario actual,
-   - no estén terminadas,
-   - pertenezcan al proyecto configurado.
-3. Muestra una lista numerada con al menos:
-   - issue key,
-   - summary,
-   - status,
-   - priority (si está disponible).
-4. Pide al usuario que seleccione una opción por número.
-5. Crea el branch con este formato:
+## Trigger phrases
 
-```text
+El humano puede invocar este skill usando frases como:
+
+- "usa el skill jira-start-task"
+- "quiero empezar una tarea de Jira"
+- "trae mis issues pendientes"
+- "genera el prompt para OpenSpec desde Jira"
+- "crea el branch para este issue"
+- "trabajar en issue AR-123"
+
+## Inputs
+
+- `issueKey` (string, optional)
+
+---
+
+## Template Resolution
+
+El template SIEMPRE vive junto al skill:
+
+```
+<skill_root>/prompt.md.tpl
+```
+
+Donde `<skill_root>` es el directorio donde se encuentra este archivo.
+
+### Reglas
+
+- El archivo es obligatorio
+- No existe fallback
+- No se buscan otros paths
+
+Si no existe:
+
+```
+prompt.md.tpl not found in skill directory.
+```
+
+---
+
+## Flow
+
+### 1. Resolve Issue
+
+#### Si `issueKey` es proporcionado
+
+- Fetch directo vía MCP (Jira)
+
+#### Si NO (modo interactivo)
+
+- Validar `jasper.toml`
+- Leer `issueTracking.projectKey`
+
+Si no existe:
+
+```
+
+jasper.toml not found. Provide issueKey or configure projectKey.
+
+```
+
+- Ejecutar JQL:
+
+```sql
+project = <PROJECT_KEY>
+AND assignee = currentUser()
+AND statusCategory != Done
+ORDER BY updated DESC
+```
+
+- Mostrar lista
+- Usuario selecciona issue
+
+---
+
+### 2. Fetch Issue
+
+Obtener:
+
+- key
+- title
+- description (markdown)
+
+Si falla:
+
+```
+Jira issue <ISSUE-KEY> could not be fetched.
+```
+
+---
+
+### 3. Parsing
+
+Buscar headings (case-insensitive):
+
+- Scenario
+- Acceptance Tests
+- Acceptance Criteria
+- Sources
+
+Si no se encuentran headings claros:
+
+- usar `raw_description` como fallback
+- no fallar el flujo
+
+---
+
+### 4. Extracción de contenido (NO transformación rígida)
+
+Extraer contenido sin imponer semántica de especificación.
+
+#### Scenario
+
+- Extraer texto bajo heading
+- Mantener estructura original (párrafos, bullets)
+
+Fallback:
+
+- usar toda la descripción
+
+---
+
+#### Acceptance Tests
+
+- Extraer lista de ítems
+- Mantener formato original (Gherkin, bullets, etc.)
+
+---
+
+#### Sources
+
+- Extraer links o referencias
+- Sin transformación
+
+---
+
+### 5. Data Contract (RAW, orientado a prompt)
+
+```yaml
+issue:
+  key: string
+  title: string
+
+content:
+  scenario: string
+  acceptance_tests: string[]
+  sources: string[]
+  raw_description: string
+```
+
+---
+
+### 6. Git
+
+Branch:
+
+```
 feature/<ISSUE-KEY>
 ```
 
-Ejemplo:
+Reglas:
 
-```text
-feature/AR-123
+- No existe → crear + checkout
+- Existe → solo checkout
+
+---
+
+### 7. Render Template
+
+- Leer:
+
+```
+<skill_root>/prompt.md.tpl
 ```
 
-## Implementación esperada
+- Renderizar usando el contrato `content`
+- Sintaxis tipo mustache
 
-- Lee `jasper.toml` antes de consultar Jira. Si falta `issueTracking.projectKey`, detente y explícalo.
-- Usa Jira Cloud mediante MCP.
-- Para detectar el usuario autenticado, usa la tool de identidad disponible antes de filtrar o usa JQL con `assignee = currentUser()` si aplica.
-- Usa una consulta equivalente a:
+Si falla el render:
 
-```jql
-project = AR AND assignee = currentUser() AND statusCategory != Done ORDER BY updated DESC
+- mostrar error
+- NO generar archivo
+- NO continuar flujo
+
+---
+
+### 8. Output
+
+```
+docs/prompts/openspec/<ISSUE-KEY>.md
 ```
 
-- Sustituye `AR` por el valor real de `issueTracking.projectKey`.
-- Si no hay resultados, informa que no hay tareas pendientes asignadas en ese proyecto y no crees ningún branch.
-- Si el usuario elige una opción inválida, vuelve a pedir una selección válida en lugar de asumir una por defecto.
-- Antes de crear el branch, revisa el branch actual y confirma si ya existe uno con ese nombre.
-- Si el branch ya existe, informa el nombre exacto y evita recrearlo.
-- Si no existe, crea el branch con git usando una forma equivalente a:
+---
 
-```bash
-git checkout -b "feature/<ISSUE-KEY>"
+### 9. Idempotencia
+
+- Si existe:
+  - comparar contenido
+  - igual → no escribir
+  - distinto → overwrite
+
+---
+
+### 10. Working Tree
+
+- Si está dirty:
+  - warning
+  - no bloquear
+
+---
+
+## Validation
+
+El archivo generado debe:
+
+- Ser un prompt válido (no una spec)
+- Respetar el template
+- Contener información suficiente del issue
+- Permitir que OpenSpec genere requerimientos en inglés usando:
+  - MUST
+  - SHOULD
+  - MAY
+
+---
+
+## Debug
+
+Mostrar:
+
+- issue seleccionado
+- path del template
+- path del output
+
+---
+
+## Output Final
+
+- Issue seleccionado
+- Prompt generado
+- Branch activo `feature/<ISSUE-KEY>`
+
+---
+
+## Warnings
+
+```
+Warning: Could not fully parse structured sections. Using fallback extraction.
 ```
 
-## Reglas de comportamiento
+---
 
-- No inventes el `projectKey`; siempre léelo desde `jasper.toml`.
-- No incluyas issues en estado terminado.
-- No crees branch si el usuario no ha seleccionado una tarea.
-- No uses un prefijo distinto de `feature/` salvo que el humano lo pida explícitamente.
-- Si la working tree tiene cambios sin commit, puedes advertirlo, pero no bloquees la creación del branch a menos que git falle.
+## Notas
 
-## Tu humano puede pedirte
-
-- "Usa el skill `jira-start-task`"
-- "Quiero empezar una tarea de Jira y crear el branch automáticamente"
-- "Lista las tareas pendientes del proyecto configurado y crea un feature branch"
+- No inventar datos
+- No incluir issues en Done
+- Parsing best-effort pero consistente
+- El template define completamente la estructura del prompt
+- El output final de OpenSpec debe estar en inglés (MUST/SHOULD/MAY)

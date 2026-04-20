@@ -1,6 +1,6 @@
 ---
 name: skills-readme-generator
-description: Genera archivos readme.yaml para cada skill en el directorio skills/. Usa IA para extraer metadata de SKILL.md y llena el template `readme.tpl.yaml` desde la carpeta del skill.
+description: Genera archivos readme.yaml para cada skill en el directorio skills/. Usa IA para extraer metadata de SKILL.md y llena el template `readme.yaml.tpl` desde la carpeta del skill.
 license: Proprietary
 metadata:
   opencode:
@@ -29,7 +29,7 @@ metadata:
 
 ## What I do
 
-- Determino la **carpeta base del skill** (puede ser `.agents/skills`, `.claude/skills`, `.opencode/skills` u otra según instalación) para localizar `readme.tpl.yaml`.
+- Determino la **carpeta base del skill** (puede ser `.agents/skills`, `.claude/skills`, `.opencode/skills` u otra según instalación) para localizar `readme.yaml.tpl`.
 - Busco todas las carpetas que contienen `SKILL.md` (`skills/**/SKILL.md`) para generar los `readme.yaml`.
 - Por cada skill (o solo el indicado):
   1. Verifico que exista `SKILL.md`.
@@ -40,7 +40,7 @@ metadata:
      - `triggers`
      - `what_i_do`
      - `usage_examples`
-  4. Cargo el template `readme.tpl.yaml` desde la **carpeta base del skill**.
+   4. Cargo el template `readme.yaml.tpl` desde la **carpeta base del skill**.
      - Si no existe, se reporta un error.
   5. Lleno el template con la metadata extraída.
   6. Genero `readme.yaml` dentro de la carpeta del skill (`skills/<skill_name>/readme.yaml`) **solo si no existe**.
@@ -51,7 +51,7 @@ metadata:
 - No sobrescribo archivos existentes.
 - Se crean solo los archivos que faltan.
 - `SKILL.md` es la fuente de verdad y no se modifica.
-- La estructura de `readme.yaml` siempre sigue el template `readme.tpl.yaml`.
+   - La estructura de `readme.yaml` siempre sigue el template `readme.yaml.tpl`.
 
 ## Process
 
@@ -60,7 +60,7 @@ metadata:
 3. Para cada skill (o solo el indicado):
    - Leer `SKILL.md`.
    - Extraer metadata usando IA.
-   - Cargar el template `readme.tpl.yaml` desde la carpeta base del skill.
+   - Cargar el template `readme.yaml.tpl` desde la carpeta base del skill.
    - Generar `readme.yaml` en la carpeta del skill **solo si no existe**.
 4. Reportar resultados de generación por skill.
 

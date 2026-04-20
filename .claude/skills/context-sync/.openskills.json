@@ -2,6 +2,6 @@
   "source": "https://github.com/hadenlabs/jasper",
   "sourceType": "git",
   "repoUrl": "https://github.com/hadenlabs/jasper",
-  "subpath": ".opencode/skills/context-sync",
-  "installedAt": "2026-04-05T04:58:23.058Z"
+  "subpath": ".claude/skills/context-sync",
+  "installedAt": "2026-04-20T04:02:31.512Z"
 }

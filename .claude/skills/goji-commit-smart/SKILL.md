@@ -1,167 +1,324 @@
 ---
 name: goji-commit-smart
-description: Create git commits using goji rules from .goji.json (type/scope/emoji/signoff) with path-based heuristics.
+description: Orchestrates deterministic multi-commit generation from git working tree. Uses jasper.toml as policy layer and .goji.json (or bootstrap template) for domain model. Performs semantic grouping of changes before commit execution.
 license: Proprietary
+metadata:
+  author: "hadenlabs"
+  version: "0.0.0"
+  opencode:
+    emoji: 🧠
+    triggers:
+      - "goji commit"
+      - "commit smart"
+      - "crear commits"
+      - "organizar commits"
+    tags:
+      - git
+      - commits
+      - grouping
+      - deterministic
+    mcp:
+      preferredServer: git
 ---
 
-# Goji Commit Smart Skill
+# goji-commit-smart
 
-## Trigger phrases
+Skill de partición semántica de commits desde working tree.
 
-- "haz un commit goji"
-- "goji commit"
-- "commit smart"
-- "crea commits con goji"
+---
 
-## Source of truth
+# Trigger phrases
 
-- `.goji.json`
-  - `types[]` (name + emoji)
-  - `scopes[]`
-  - `subjectmaxlength`
-  - `signoff`
-- `infobot.toml`
-  - `[issueTracking] provider + projectKey`
-  - `[issueTracking.branch]` extraction regexes (derive key/id from branch name)
-  - `[commit] style` (gitlab|jira)
-  - `[commit.providers.*]` rules
+- goji commit
+- commit smart
+- organizar commits
+- crear commits
 
-## What I do
+---
 
-- Run `task validate` before creating any commit.
-- Inspect working tree and staged changes.
-- Group changes into 1..N commits using path heuristics (avoid mixing unrelated areas).
-- Create commits following goji conventions: `<type> <emoji> (<scope>): <subject>`.
-- Derive issue key/id from the current branch name and inject it into the subject when required.
-- Create commits with `--signoff` when `signoff: true`.
+# Inputs
 
-## Commit style (gitlab|jira)
+- No inputs
+- Input = git working tree
+- --skip-validate → skip pre-commit validation (default: skip for speed)
 
-Decide commit style from `infobot.toml` `[commit].style`.
+---
 
-- `jira`
-  - Require a Jira key in the subject (example: `AR-123`).
-  - Prefer: `<type>(<scope>): <JIRA-KEY> <subject>`.
-  - Derive `<JIRA-KEY>` from the current branch name using `infobot.toml` `[issueTracking].projectKey`.
-    - Default extraction: `(<PROJECTKEY>-[0-9]+)` when `[issueTracking.branch].jiraKeyFromProjectKey = true`.
-    - Override with `[issueTracking.branch].jiraKeyRegexOverride`.
-- `gitlab`
-  - Allow referencing GitLab issues in the subject (example: `(#123)` at the end).
-  - Optional commit body line: `Closes #123`.
-  - Derive `123` from the current branch name using `infobot.toml` `[issueTracking.branch].gitlabIssueNumberRegex`.
+# Source of truth
 
-## Commit format
+## 1. jasper.toml (policy layer)
 
-- Title: `<type> <emoji> (<scope>): <subject>`
-  - `emoji` comes from `.goji.json` `types[].emoji` for the chosen type.
-  - `type` must be one of `.goji.json` `types[].name`.
-  - `scope` must be one of `.goji.json` `scopes[]`.
-  - `subject` length must be `<= subjectmaxlength`.
+Define:
 
-For `gitlab` style, append the issue at the end of the subject: `(#<number>)`.
+- commit style
+- format
+- provider rules
+- issue extraction
+- branch parsing
+- signoff
+- subject length
 
-Examples:
+---
 
-- `docs 📚 (ci): document MCP setup (#123)`
-- `ci 👷 (ci): bump gitlab ci runner image (#123)`
-- `feat ✨ (core): add release task include (#123)`
+## 2. .goji.json (domain layer)
 
-## Heuristics (path -> type/scope)
-
-Use these as defaults; ask only when ambiguous.
-
-- `docs/**` -> `docs(ci)`
-- `.gitlab-ci.yml` -> `ci(ci)`
-- `.gitlab/**` -> `ci(ci)`
-- `.claude/**` -> `chore(core)`
-- `.opencode/**` -> `prompt(core)`
-- `Taskfile.yml` -> `build(core)`
-- `data/**` -> `chore(core)` (or `sample(core)` if clearly examples)
-- `pkg/**` or `internal/**` or `core/**` or `config/**` -> `feat(core)` (or `fix(core)` if bug)
-
-If only formatting changes, prefer `style(core)`. If only refactors with no behavior change, prefer `refactor(core)`.
-
-## Process
-
-0. Validate first
+### Bootstrap
 
 ```bash
-task validate
+if [ ! -f .goji.json ]; then
+  cp <skill_root>/goji.json.tpl .goji.json
+fi
 ```
 
-- If `task validate` fails, do not commit. Fix issues, re-run `task validate`, then proceed.
+---
 
-1. Collect context
+## 3. goji.json.tpl (skill asset)
+
+- emoji map
+- types
+- scopes
+- subject rules
+
+---
+
+# 🔄 Flow
+
+- Validation is optional (skipped by default for speed)
+- Use `--validate` flag to enable full pre-commit validation
+
+---
+
+## STEP 0 — Read format from jasper.toml (NEW)
+
+Before any commit generation, extract the commit policy from `jasper.toml`:
+
+### Extract configuration
+
+```bash
+# Read commit.format (e.g., "<type> <emoji> (<scope>): <subject>")
+FORMAT=$(grep -E "^format\s*=" jasper.toml | cut -d'=' -f2 | tr -d ' "')
+
+# Read commit.style (jira, github, or gitlab)
+STYLE=$(grep -E "^style\s*=" jasper.toml | cut -d'=' -f2 | tr -d ' "')
+
+# Read provider-specific rules
+PROVIDER_CONFIG="jasper.toml[commit.providers.$STYLE]"
+```
+
+### Provider format patterns
+
+| Provider | Example Format                                 | Issue Pattern                            |
+| -------- | ---------------------------------------------- | ---------------------------------------- |
+| Jira     | `feat ✨ (core): AR-3748 add mcp docs`         | `^<PROJECTKEY>-[0-9]+` prefix in subject |
+| GitHub   | `fix 🐛 (core): handle missing env var (#123)` | `\(#[0-9]+\)$` suffix in subject         |
+| GitLab   | `chore 🧹 (core): bump tooling (#123)`         | `\(#[0-9]+\)$` suffix in subject         |
+
+### Extract from .goji.json
+
+- Load emoji map for each commit type
+- Validate types against allowed types
+- Get scope options
+
+---
+
+## STEP 0b — Validate commit format (NEW)
+
+Before executing commits, validate each message against the extracted format:
+
+### Validation rules
+
+1. **Type validation**: Must match types from `.goji.json` (feat, fix, docs, chore, etc.)
+2. **Emoji validation**: Emoji must match the type in `.goji.json`
+3. **Scope validation**: Must be in `scopes` array from `.goji.json` (or no scope)
+4. **Subject validation**:
+   - Max length from `jasper.toml[commit].subjectMaxLength`
+   - Must not be empty
+   - Must be lowercase (except proper nouns)
+5. **Issue pattern validation** (provider-specific):
+   - Jira: Must include `<PROJECTKEY>-<number>` pattern
+   - GitHub: Must include `(#<number>)` suffix
+   - GitLab: Must include `(#<number>)` suffix
+
+### Validation regex patterns (by style)
+
+```ts
+// Jira style: <type> <emoji> (<scope>): <PROJECTKEY>-<number> <subject>
+JIRA_PATTERN =
+  "^([a-z]+) ([✨🐛📚🎨💄🧹🧪🚑⚡⚰🛠📦🔍⏪👷📝])( \([a-z]+\))?: [A-Z]+-[0-9]+ .+";
+
+// GitHub style: <type> <emoji> (<scope>): <subject> (#<number>)
+GITHUB_PATTERN =
+  "^([a-z]+) ([✨🐛📚🎨💄🧹🧪🚑⚡⚰🛠📦🔍⏪👷📝])( \([a-z]+\))?: .+ \(#[0-9]+\)$";
+
+// GitLab style: <type> <emoji> (<scope>): <subject> (#<number>)
+GITLAB_PATTERN =
+  "^([a-z]+) ([✨🐛📚🎨💄🧹🧪🚑⚡⚰🛠📦🔍⏪👷📝])( \([a-z]+\))?: .+ \(#[0-9]+\)$";
+```
+
+### Validation script
+
+```bash
+validate_commit() {
+  local msg="$1"
+  local style="$2"
+  local pattern
+
+  case "$style" in
+    jira) pattern="$JIRA_PATTERN" ;;
+    github) pattern="$GITHUB_PATTERN" ;;
+    gitlab) pattern="$GITLAB_PATTERN" ;;
+  esac
+
+  if ! echo "$msg" | grep -Eq "$pattern"; then
+    echo "ERROR: Commit message does not match $style format"
+    echo "Expected: $FORMAT"
+    echo "Got: $msg"
+    return 1
+  fi
+}
+```
+
+### Provider-specific examples
+
+**Jira style** (from jasper.toml style="jira"):
+
+```
+feat ✨ (core): AR-3748 add mcp docs
+fix 🐛 (core): AR-3755 handle missing env var
+docs 📚 (core): AR-3760 update readme
+```
+
+**GitHub style** (from jasper.toml style="github"):
+
+```
+feat ✨ (core): add mcp docs (#123)
+fix 🐛 (core): handle missing env var (#456)
+```
+
+**GitLab style** (from jasper.toml style="gitlab"):
+
+```
+feat ✨ (core): add mcp docs (#123)
+fix 🐛 (core): handle missing env var (#456)
+```
+
+---
+
+## STEP 1 — Validate (optional)
+
+# Default: skip validation for speed. Use --validate to run full validation.
+
+if [ "$VALIDATE" = "true" ]; then
+task validate
+else
+echo "Validación omitida (use --validate para ejecutar)"
+fi
+
+---
+
+## STEP 2 — Inspect working tree
 
 ```bash
 git status --porcelain
-git diff
-git diff --cached
 git diff --name-only
-git diff --cached --name-only
 git rev-parse --abbrev-ref HEAD
-cat .goji.json
-cat infobot.toml
 ```
 
-2. Derive issue key/id from branch
+---
 
-- Determine `style` from `infobot.toml` `[commit].style`.
-- Parse the current branch name (`git rev-parse --abbrev-ref HEAD`) and extract:
-  - `jira`: `<PROJECTKEY>-<number>` (default derived from `[issueTracking].projectKey`)
-  - `gitlab`: `<number>`
-- If extraction fails (branch does not contain expected key/id), stop and ask the user for the key/id.
+## STEP 3 — Bootstrap config
 
-3. Decide commit groups (intelligent split)
+- ensure `.goji.json` exists
 
-- Prefer 1 commit if all changed files map to the same group.
-- Split into multiple commits when files span multiple groups, for example:
-  - docs-only vs CI-only vs code/tooling
-  - `.gitlab/**` separate from `docs/**`
-  - `.claude/**` separate from runtime code
+---
 
-Default grouping by path:
+## STEP 4 — Semantic grouping engine (CRITICAL)
 
-- `docs/**` -> one commit
-- `.gitlab/**` -> one commit
-- `.claude/**` + `provision/**` -> one commit
-- `.opencode/**` + `data/**` -> one commit
-- `Taskfile.yml` -> group with CI/tooling changes (not docs)
-- `pkg/**|internal/**|core/**|config/**` -> one commit
+### Default grouping heuristics
 
-4. Stage and commit each group
+```text
+docs/**              → docs commit
+.gitlab/**           → ci commit
+.claude/**           → chore/core commit
+.opencode/**         → prompt/core commit
+Taskfile.yml         → build/ci commit
+data/**              → chore/core
+pkg/internal/core    → core domain commit
+config/**            → core commit
+tests/**             → test commit
+```
 
-- If there are already staged changes, commit them first as a single coherent group.
-- Otherwise, for each computed group, stage only those files:
+### Rule
+
+```text
+group by domain coherence, not config
+```
+
+---
+
+## STEP 5 — Type inference
+
+- docs → docs
+- ci → ci
+- test → test
+- core → feat or fix
+- tooling → chore
+
+---
+
+## STEP 6 — Issue resolution (from jasper.toml)
+
+- Jira → PROJECTKEY-123
+- GitLab → #123
+- GitHub → #123
+
+---
+
+## STEP 7 — Build commit model (per group)
+
+```ts
+Commit {
+  type
+  scope
+  emoji (from goji.json)
+  subject
+  issue
+  files[]
+}
+```
+
+---
+
+## STEP 8 — Format resolution (delegated)
+
+```text
+jasper.toml[commit].format
+jasper.toml[commit].style
+```
+
+---
+
+## STEP 9 — Provider enrichment
+
+- jira → prefix issue key
+- github → append (#id) + Fixes
+- gitlab → append (#id) + Closes
+
+---
+
+## STEP 10 — Execution loop
 
 ```bash
-git add <paths>
+for each group:
+  # Validate commit format before execution (STEP 0b)
+  validate_commit "$message" "$STYLE"
+  if [ $? -ne 0 ]; then
+    echo "Aborting commit due to format validation failure"
+    exit 1
+  fi
+  git add <files>
+  git commit -m "<message>" [-s]
 ```
-
-5. Draft commit title (use branch-derived key/id)
-
-- Choose `type/scope` from heuristics.
-- Pick `emoji` from `.goji.json` for that `type`.
-- Keep `<subject>` within `.goji.json` `subjectmaxlength`.
-- Subject rules by style:
-  - `jira`: include `<JIRA-KEY>` (e.g. `AR-123`) early in the subject.
-  - `gitlab`: include `(#<number>)` (e.g. `(#123)`) at the end.
-
-6. Commit
-
-- If `.goji.json` `signoff` is `true`:
-
-```bash
-git commit -s -m "<type> <emoji> (<scope>): <subject>"
-```
-
-- Else:
-
-```bash
-git commit -m "<type> <emoji> (<scope>): <subject>"
-```
-
-7. Repeat for remaining groups until all intended commits are created.
 
 ## Safety rules
 
