@@ -20,7 +20,7 @@ flow = "auto"
 
 [issueTracking]
 provider = "jira"
-projectKey= "HAD"
+projectKey = "HAD"
 
 # Optional. If omitted, agents should derive as: ^<projectKey>-[0-9]+$
 # keyRegexOverride = "^AR-[0-9]+$"
@@ -60,4 +60,4 @@ closingBodyLine = "Closes #<number>"
 
 [commit.providers.jira]
 # Optional. If omitted, agents should derive as: ^<projectKey>-[0-9]+$
-# keyRegexOverride = "^AR-[0-9]+$"
+# keyRegexOverride = "^HAD-[0-9]+$"
