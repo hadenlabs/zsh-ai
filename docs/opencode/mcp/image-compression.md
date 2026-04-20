@@ -1,30 +1,14 @@
 <!-- Space: Projects -->
 <!-- Parent: ZshAI -->
-<!-- Title: MCP: Image Compression -->
+<!-- Title: MCP - image-compression -->
 <!-- Label: OpenCode -->
 <!-- Include: docs/disclaimer.md -->
-<!-- Include: ac:toc -->
 
 # `image-compression`
 
-Local MCP server for compressing images.
-
-## Configuration
-
-This repository configures the server under the MCP id `image-compression`.
-
-- Type: `local`
-- Command: `npx -y @inhiblab-core/mcp-image-compression`
-
-Environment:
-
-- `IMAGE_COMPRESSION_DOWNLOAD_DIR`: `assets/images`
-
-## Requirements
-
-- Node.js
-- `npx`
-
-## Notes
-
-- Output is written under `assets/images/`.
+- Type: local
+- How it runs: `bunx -y @inhiblab-core/mcp-image-compression`
+- What it does: Image compression and optimization tools.
+- Requirements:
+  - Bun runtime.
+  - Environment variable `IMAGE_COMPRESSION_DOWNLOAD_DIR` set to `assets/images`.

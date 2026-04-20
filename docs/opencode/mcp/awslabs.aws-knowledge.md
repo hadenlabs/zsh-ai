@@ -4,9 +4,11 @@
 <!-- Label: OpenCode -->
 <!-- Include: docs/disclaimer.md -->
 
-# `awslabs.aws-knowledge` (disabled)
+# `awslabs.aws-knowledge`
 
 - Type: remote
 - URL: `https://knowledge-mcp.global.api.aws`
-- What it does: access to AWS knowledge/documentation via an MCP endpoint.
-- Status: `enabled: false`.
+- What it does: AWS knowledge base queries via AWS Labs MCP server.
+- Requirements: internet connectivity.
+- Notes:
+  - Currently disabled in configuration.

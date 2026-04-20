@@ -6,7 +6,9 @@
 
 # `context7`
 
-- Type: remote
-- URL: `https://mcp.context7.com/mcp`
+- Type: local
+- How it runs: `npx -y @upstash/context7-mcp --api-key {env:CONTEXT7_API_KEY}`
 - What it does: provides up-to-date, on-demand documentation for libraries/frameworks (useful for current API examples).
-- Requirements: internet connectivity.
+- Requirements:
+  - Node.js + `npx`.
+  - Environment variable `CONTEXT7_API_KEY`.

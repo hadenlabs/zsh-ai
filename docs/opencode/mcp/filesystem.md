@@ -7,9 +7,8 @@
 # `filesystem`
 
 - Type: local
-- How it runs: `npx -y @modelcontextprotocol/server-filesystem`
-- What it does: allows OpenCode to read/write files through MCP.
-- Environment:
-  - `ROOT=.` limits server access to the current directory (workspace) when launched.
-- Security notes:
-  - Keep `ROOT` as restricted as possible.
+- How it runs: `bunx -y @modelcontextprotocol/server-filesystem`
+- What it does: Filesystem read/write operations (scoped by `ROOT` environment variable).
+- Requirements:
+  - Bun runtime.
+  - Environment variable `ROOT` set to `.` (current directory).

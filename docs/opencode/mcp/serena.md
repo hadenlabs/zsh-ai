@@ -8,8 +8,9 @@
 
 - Type: local
 - How it runs: `uvx --from git+https://github.com/oraios/serena serena start-mcp-server`
-- What it does: exposes MCP tools to work with the local repository (for example: understand project structure, navigate symbols/files, and perform server-assisted actions).
+- What it does: Code indexing/navigation and repo-local automations via Serena.
 - Requirements:
-  - `uvx` (UV) and a Python runtime.
+  - `uvx` (uv package runner) + Python.
+  - Git repository for indexing.
 - Notes:
-  - As a local server, it inherits the permissions of the user running it.
+  - Currently disabled in configuration.

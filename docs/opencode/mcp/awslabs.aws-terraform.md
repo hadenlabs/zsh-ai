@@ -4,11 +4,13 @@
 <!-- Label: OpenCode -->
 <!-- Include: docs/disclaimer.md -->
 
-# `awslabs.aws-terraform` (disabled)
+# `awslabs.aws-terraform`
 
 - Type: local
 - How it runs: `uvx awslabs.terraform-mcp-server@latest`
-- What it does: Terraform-focused MCP tools (analysis/help with configurations, patterns, etc.).
-- Status: `enabled: false`.
-- Environment:
-  - `FASTMCP_LOG_LEVEL=ERROR` (reduces log verbosity).
+- What it does: AWS Terraform assistance via AWS Labs MCP server.
+- Requirements:
+  - `uvx` (uv package runner) + Python.
+  - Environment variable `FASTMCP_LOG_LEVEL` set to `ERROR`.
+- Notes:
+  - Currently disabled in configuration.
